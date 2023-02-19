@@ -228,11 +228,14 @@ fyc19x_demo_gg1 <- fyc19x_age_sex %>%
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Number of Married Individuals by Marriage Classification and Sex",
+  labs(title="Estimated Number of Married Individuals",
+       subtitle="By Marriage Classification and Sex",
        x = "Age Grouping",
        y = "Estimate of Individuals (Survey Weighted)",
        fill = "Sex",
-       caption = "MEPS 2019 Full Year Consolidated Data File\n(https://meps.ahrq.gov/)") 
+       caption = "MEPS 2019 Full Year Consolidated Data File\n(https://meps.ahrq.gov/)") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 3))
 
 fyc19x_demo_gg1
 
@@ -249,11 +252,14 @@ fyc19x_demo_gg2 <- fyc19x_age_cov %>%
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Number of Married Individuals by Marriage Classification and Health Plan Coverage",
+  labs(title="Estimated Number of Married Individuals",
+       subtitle=" By Marriage Classification and Health Plan Coverage",
        x = "Age Grouping",
        y = "Estimate of Individuals (Survey Weighted)",
        fill = "Health Plan Coverage",
-       caption = "MEPS 2019 Full Year Consolidated Data File\n(https://meps.ahrq.gov/)") 
+       caption = "MEPS 2019 Full Year Consolidated Data File\n(https://meps.ahrq.gov/)") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 3))
 
 fyc19x_demo_gg2
 
@@ -270,7 +276,8 @@ fyc19x_demo_gg3 <- fyc19x_age_race %>%
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Number of Married Individuals by Marriage Classification and Race, Ethnicity",
+  labs(title="Estimated Number of Married Individuals",
+       subtitle="By Marriage Classification and Race, Ethnicity",
        x = "Age Grouping",
        y = "Estimate of Individuals (Survey Weighted)",
        fill = "Race and Ethnicity",
@@ -281,7 +288,6 @@ fyc19x_demo_gg3 <- fyc19x_age_race %>%
 fyc19x_demo_gg3
 
 fyc19x_age_povcat <- svyby(~unwt_persons, by = ~AGE_GRP_5 + POVCAT_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn) 
-
 
 fyc19x_demo_gg4 <- fyc19x_age_povcat %>% 
   mutate(povcat_ordered = fct_relevel(POVCAT_DSC, "High Income", "Middle Income", "Low Income", "Near Poor", "Poor / Negative")) %>% 
@@ -295,7 +301,8 @@ fyc19x_demo_gg4 <- fyc19x_age_povcat %>%
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Number of Married Individuals by Marriage Classification and Income",
+  labs(title="Estimated Number of Married Individuals",
+       subtitle="By Marriage Classification and Income",
        x = "Age Grouping",
        y = "Estimate of Individuals (Survey Weighted)",
        fill = "Income Level",
@@ -332,11 +339,14 @@ fyc19x_demo_gg1e <- fyc19x_age_sex_exp %>%
   theme_bw() +
   scale_y_continuous(labels = scales::dollar) +
   facet_wrap(~ SSC_DSC, ncol = 2, labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Healthcare Expenditures by Marriage Classification and Sex",
+  labs(title="Estimated Healthcare Expenditures",
+       subtitle="By Marriage Classification and Sex",
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Sex",
-       caption = "MEPS 2019 Full Year Consolidated Data File\n(https://meps.ahrq.gov/)") 
+       caption = "MEPS 2019 Full Year Consolidated Data File\n(https://meps.ahrq.gov/)") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 3))
 
 fyc19x_demo_gg1e
 
@@ -353,11 +363,14 @@ fyc19x_demo_gg2e <- fyc19x_age_cov_exp %>%
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Healthcare Expenditures by Marriage Classification and Health Plan Coverage",
+  labs(title="Estimated Healthcare Expenditures",
+       subtitle="By Marriage Classification and Health Plan Coverage",
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Health Plan Coverage",
-       caption = "MEPS 2019 Full Year Consolidated Data File\n(https://meps.ahrq.gov/)") 
+       caption = "MEPS 2019 Full Year Consolidated Data File\n(https://meps.ahrq.gov/)") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(nrow = 3))
 
 fyc19x_demo_gg2e
 
@@ -374,7 +387,8 @@ fyc19x_demo_gg3e <- fyc19x_age_race_exp %>%
   theme_bw() +
   scale_y_continuous(labels = scales::dollar) +
   facet_wrap(~ SSC_DSC, ncol = 2, labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Healthcare Expenditures by Marriage Classification and Race, Ethnicity",
+  labs(title="Estimated Healthcare Expenditures",
+       subtitle="By Marriage Classification and Race, Ethnicity",
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Race and Ethnicity",
@@ -398,7 +412,8 @@ fyc19x_demo_gg4e <- fyc19x_age_povcat_exp %>%
   theme_bw() +
   scale_y_continuous(labels = scales::dollar) +
   facet_wrap(~ SSC_DSC, ncol = 2, labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Healthcare Expenditures by Marriage Classification and Income",
+  labs(title="Estimated Healthcare Expenditures",
+       subtitle="By Marriage Classification and Income",
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Income Level",
@@ -407,8 +422,6 @@ fyc19x_demo_gg4e <- fyc19x_age_povcat_exp %>%
   guides(fill = guide_legend(nrow = 3))
 
 fyc19x_demo_gg4e
-
-
 
 ```
 
