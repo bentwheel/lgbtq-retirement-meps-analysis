@@ -27,7 +27,7 @@ It is therefore reasonable to suspect that disparities in retirement-related out
 
 In order to investigate this idea, I set out to explore the publicly-available [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS) datasets to determine if there were useful data available for distilling connections between retirement-related outcomes, many of which depend extensively on healthcare outcomes, and the lived socioeconomic experiences often encountered by LGBTQ+ individuals.
 
-#About MEPS
+# About MEPS
 The Medical Expenditure Panel Survey has been administered since 1996, and according the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ), which is the government agency at MEPS’ helm, MEPS is a collection of “data on the specific health services that Americans use, how frequently they use them, the cost of these services, and how they are paid for, as well as data on the cost, scope, and breadth of health insurance held by and available to U.S. workers” ([Survey Background, MEPS Homepage](https://meps.ahrq.gov/mepsweb/about_meps/survey_back.jsp)).
 
 On the [MEPS Github page](https://github.com/HHS-AHRQ/MEPS), you’ll find several excellent code examples written in both SAS and R which I used to familiarize myself with the layout of the data. Furthermore, the MEPS staff regularly conducts well-crafted online training seminars.
@@ -54,8 +54,6 @@ For consistency’s sake, I continue to refer to the variable in the context of 
 
 # Exploring the Demographic Composition of Same-Sex Marriages in the US
 In the following infographics, I attempt to better understand the demographic composition of individuals in same-sex marriages by exploring the relationships between age, sex, income level, race, and insurance coverage status between the same-sex and non-same-sex marriage cohorts.
-
-You can include R code in the document as follows:
 
 ```{r preprocessing, include=FALSE}
 
