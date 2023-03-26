@@ -72,8 +72,10 @@ retirement-related outcomes, many of which depend extensively on
 healthcare outcomes, and the lived socioeconomic experiences often
 encountered by LGBTQ+ individuals.
 
-\#About MEPS The Medical Expenditure Panel Survey has been administered
-since 1996, and according the [Agency for Healthcare Research and
+# About MEPS
+
+The Medical Expenditure Panel Survey has been administered since 1996,
+and according the [Agency for Healthcare Research and
 Quality](https://www.ahrq.gov/) (AHRQ), which is the government agency
 at MEPS’ helm, MEPS is a collection of “data on the specific health
 services that Americans use, how frequently they use them, the cost of
@@ -161,15 +163,16 @@ exploring the relationships between age, sex, income level, race, and
 insurance coverage status between the same-sex and non-same-sex marriage
 cohorts.
 
-You can include R code in the document as follows:
+![](README_files/figure-gfm/Demographic_Plots-1.png)<!-- -->![](README_files/figure-gfm/Demographic_Plots-2.png)<!-- -->![](README_files/figure-gfm/Demographic_Plots-3.png)<!-- -->![](README_files/figure-gfm/Demographic_Plots-4.png)<!-- -->
 
-![](README_files/figure-gfm/pressure-1.png)<!-- -->![](README_files/figure-gfm/pressure-2.png)<!-- -->![](README_files/figure-gfm/pressure-3.png)<!-- -->![](README_files/figure-gfm/pressure-4.png)<!-- -->
-
-One surprising piece of information I was able to learn from these
-images is precisely how stark the difference is between the percentage
-of non-Hispanic white individuals in same-sex marriages vs. non-same-sex
-marriages, which potentially could indicate a greater deal of social
-acceptance of same-sex marriages among non-Hispanic white populations.
+One finding I took away from these visualization exercises that was
+surprising to me is that marriage by race/ethnicity appears to be
+proportionally similar between same-sex and different-sex marriages,
+with the exception of Hispanic and non-Hispanic Asian groups, where
+there appears to be less adoption of same-sex marriages in the 18-65 age
+ranges in these race and ethnicity groupings. This could potentially
+could indicate a greater deal of social acceptance of same-sex marriages
+among non-Hispanic white populations.
 
 This is an important point of discussion as it illustrates the need for
 researchers and policymakers to better understand the idea of
@@ -196,14 +199,118 @@ prepared the following series of visualizations below that examine the
 average individual expenditures broken out on the same demographic
 features as the visualizations above.
 
-![](README_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-1-2.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-1-3.png)<!-- -->![](README_files/figure-gfm/unnamed-chunk-1-4.png)<!-- -->
+![](README_files/figure-gfm/Expenditure_Plots-1.png)<!-- -->![](README_files/figure-gfm/Expenditure_Plots-2.png)<!-- -->![](README_files/figure-gfm/Expenditure_Plots-3.png)<!-- -->![](README_files/figure-gfm/Expenditure_Plots-4.png)<!-- -->
+
+# Drug Costs are a Large Part of Healthcare Costs for Seniors
+
+In the 2022 Inflation Reduction Act signed into law by President Biden,
+[several reforms to the Medicare Part D
+program](https://www.milliman.com/en/insight/inflation-reduction-act-health-plans-and-part-d-sponsors-need-to-know)
+are set to be implemented in the coming years. While the overall bill
+was passed on a party-line vote, the legislated Part D reforms reflect a
+genuinely bipartisan perception of political urgency around reducing the
+cost burden of access to low-cost and lifesaving pharmaceutical
+therapies for seniors, many of whom are living with one or more chronic
+and behavioral health conditions.
+
+A substantial portion of the total medical expenditures incurred by
+individuals in retirement are attributable to pharmacy spend, as we are
+able to see in the visualizations of total healthcare spend above, which
+include breakout estimates of total individual healthcare spend as well
+as RX spend alone. Across most socioeconomic strata, racial/ethnicity
+boundaries, and other demographic classifiers, individuals age 65 and up
+appear to spend more money on pharmaceutical therapies than their
+younger counterparts who are in their working years of adulthood.
+
+# Healthcare Expenditures Broken out by Presence of Chronic Conditions
+
+Senior citizens often make use of low-cost generic medications to manage
+their chronic health conditions such as diabetes, hyperlipidemia (high
+cholesterol), or hypertension (high blood pressure). Some examples of
+very common drugs include non-insulin blood glucose reducing agents like
+[metformin](https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=metformin)
+used for treating Type 2 Diabetes, statins like
+[atorvastatin](https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=atorvastatin)
+(brand name “Lipitor”) used for treating high cholesterol, or ACE
+inhibitors like
+[lisinopril](https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=lisinopril)
+(brand names “Prinivil” or “Zestril”) to treat hypertension.
+
+Type 2 diabetes, high cholesterol, and hypertension are three of the
+leading causes of many other high-cost and potentially avoidable medical
+complications. Therefore, if senior citizens are able to manage these
+conditions with regular visits to their primary care providers and by
+adherence to low-cost drug therapies such as the drugs discussed above,
+then seniors are less likely to incur potentially avoidable medical
+costs down the line, which can ultimately help safeguard their their
+financial security and well-being in retirement.
+
+![](README_files/figure-gfm/Exp_Chronic_Cond-1.png)<!-- -->![](README_files/figure-gfm/Exp_Chronic_Cond-2.png)<!-- -->
+
+The two charts above present a comparison that show differences in
+individual healthcare expenditures amongst individuals who have been
+diagnosed with potentially high-cost chronic conditions. Due to the fact
+that further stratifying the data presents an obligation to display a
+wider error bar on the plots, I have tried to minimally stratify the
+data to yield plots with error bars that allow the reader to access
+meaningful conclusions about disparities explored.
+
+In the first comparison of married individuals with and without chronic
+conditions that can lead to potentially high-cost chronic conditions, it
+is difficult to discern any meaningful difference between the magnitude
+of individual healthcare expenditures incurred between married
+invidivudals in same-sex marriages and married individuals not in
+same-sex marriages. This visualization does seem to hint at what is
+already known about the desparities in healthcare costs between members
+with chronic conditions such as diabetes, hypertension, or
+hyperlipidemia.
+
+The second comparison is presented in order to show that there is likely
+a statistically significant disparity in individual healthcare spend
+across race and ethnicity distinctions, when broken out across age
+groups as well as chronic disease status. Naturally, the statistical
+significance depends on the analyst’s selection of p-value threshold,
+but it is fairly uncontroversial to state that non-Hispanic white
+individuals tend to have a greater individual healthcare spend spend
+than individuals who identify as other than non-Hispanic white. The
+reasons for this disparity, whether due to systemic issues inhibiting
+access to healthcare services for some populations or some other reason
+are the subject of ample research initiatives and not further discussed
+here.
+
+However it is important to note, again, that when exploring disparities
+in access to preventative healthcare services across LGBTQ+ and
+non-LGBTQ+ populations, an intersectional lens is required. Owing to the
+small sample size of individuals in same-sex marriages in the MEPS data,
+it is difficult to explore the issue further without veering into the
+realm of “data torture.”
+
+# Family Size Can Impact Healthcare Outcomes for Seniors
+
+One feature that can drive the total cost of care at the individual
+level is family size. Larger families within the same dwelling unit can
+help take care of one another when sick, coordinate transportation to
+and from sites where healthcare is provided, manage childcare duties so
+that adults are able to arrange for healthcare services, and so on.
+Several studies have shown a linkage between medication adherence and
+family size, particularly among families in low-income socioeconmic
+strata.
+
+For a number of reasons not discussed further here, the family size of
+families that include individuals within same-sex marriages is likely to
+be smaller than that of their counterparts in marriages not regarded as
+same-sex. As such, it is worth exploring how family size can impact the
+total individual healthcare spend across age groups.
+
+![](README_files/figure-gfm/Exp_Vs_FamSize-1.png)<!-- -->
 
 # Conclusion
 
-Due to the lack of data currently available, we must continue to be
-creative about how we source information that helps build policy and
-products to better strengthen the lives of LGBTQ+ individuals who are
-currently enjoying retirement, as well as those who will be retiring
+Due to the lack of data currently available that describes the
+healthcare experiences specific to LGBTQ+ populations, we must continue
+to be creative about how we source information that helps build policy
+and products to better strengthen the lives of LGBTQ+ individuals who
+are currently enjoying retirement, as well as those who will be retiring
 soon.
 
 While we’ve only just skimmed the surface of what MEPS has to offer,
@@ -216,9 +323,8 @@ Some examples of other potentially interesting variables in the context
 of examining retirement-related outcomes alongside the ones I’ve shown
 in this paper include:
 
-    MILDIF31    DIFFICULTY WALKING A MILE - RD 3/1 
-    MIAGED      AGE OF DIAGNOSIS-HEART ATTACK(MI) 
-    FAMSZEYR        SIZE OF RESPONDING ANNUALIZED FAMILY 
+    MILDIF31        DIFFICULTY WALKING A MILE - RD 3/1 
+    MIAGED          AGE OF DIAGNOSIS-HEART ATTACK(MI) 
     WHTLGSPK        WHAT LANGUAGE SPOKEN OTHER THAN ENGLISH 
     DDNWRK19        # DAYS MISSED WORK DUE TO ILL/INJ 2019 
     ADRESP42        SAQ 12 MOS: DR SHOWED RESPECT 
@@ -228,7 +334,7 @@ And while the particular method I’ve demonstrated in this paper for
 identifying LGBTQ+ individuals and experiences certainly does have its
 flaws, we have to do the best we can with the information we have – and
 publicly available data on the needs of LGBTQ+ individuals at or near
-retirement age is frustratingly scarce.
+retirement age is, at times, frustratingly scarce.
 
 Finally, this sort of work encourages discussions that broaden our
 understanding of how systemic disparities act with intersectionality
