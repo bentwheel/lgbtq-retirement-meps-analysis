@@ -171,8 +171,8 @@ proportionally similar between same-sex and different-sex marriages,
 with the exception of Hispanic and non-Hispanic Asian groups, where
 there appears to be less adoption of same-sex marriages in the 18-65 age
 ranges in these race and ethnicity groupings. This could potentially
-could indicate a greater deal of social acceptance of same-sex marriages
-among non-Hispanic white populations.
+indicate a greater deal of social acceptance of same-sex marriages among
+non-Hispanic white populations.
 
 This is an important point of discussion as it illustrates the need for
 researchers and policymakers to better understand the idea of
@@ -259,9 +259,9 @@ In the first comparison of married individuals with and without chronic
 conditions that can lead to potentially high-cost chronic conditions, it
 is difficult to discern any meaningful difference between the magnitude
 of individual healthcare expenditures incurred between married
-invidivudals in same-sex marriages and married individuals not in
+individuals in same-sex marriages and married individuals not in
 same-sex marriages. This visualization does seem to hint at what is
-already known about the desparities in healthcare costs between members
+already known about the disparities in healthcare costs between members
 with chronic conditions such as diabetes, hypertension, or
 hyperlipidemia.
 
@@ -293,7 +293,7 @@ help take care of one another when sick, coordinate transportation to
 and from sites where healthcare is provided, manage childcare duties so
 that adults are able to arrange for healthcare services, and so on.
 Several studies have shown a linkage between medication adherence and
-family size, particularly among families in low-income socioeconmic
+family size, particularly among families in low-income socioeconomic
 strata.
 
 For a number of reasons not discussed further here, the family size of
