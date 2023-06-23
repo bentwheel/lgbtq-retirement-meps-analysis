@@ -1,18 +1,40 @@
 ---
-title: "Social Determinants of Health… and Wealth?"
+title: "Comparing and Contrasting Individual Healthcare Expenditures among Subpopulations of LGBTQ+ Individuals Over Age 65"
 
-author: C. Seth Lester, ASA (<a href="mailto:cslester@gmail.com">cslester@gmail.com</a>)<br>
-date: 14 February 2023
-output: github_document
+author: C. Seth Lester, ASA, MAAA (<a href="mailto:seth.lester@milliman.com">seth.lester@milliman.com</a>)<br>
+date: 30 May 2023
+#output: github_document
+output: word_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+```{r Initial_Setup, include=FALSE}
+knitr::opts_chunk$set(include = FALSE)
 
+# This chunk consists of all package installs and other environment setup considerations that should be run only once. The use of if statements below ensures that packages which are already installed are not re-installed - however, if you have a very old version of these packages, you might need to reinstall with a newer version.
+
+# Install packages from source.
+
+# Specific source versions are specified in order to maintain compatibility with the code 
+# in this project. Please note that running the following lines of code 
+
+# Invoke required libraries - install them in the User package library if not already installed.
+if(!require(devtools)) { install.packages("devtools"); library(devtools) }
+if(!require(survey)) { install.packages("survey"); library(survey) }
+if(!require(foreign)) { install.packages("foreign"); library(foreign) }
+if(!require(haven)) { install.packages("haven"); library(haven) }
+if(!require(tidyverse)) { install.packages("tidyverse"); library(tidyverse) }
+if(!require(kableExtra)) { install.packages("kableExtra"); library(kableExtra) }
+if(!require(scales)) { install.packages("scales"); library(scales) }
+if(!require(here)) { install.packages("here"); library(here) }
+
+# Use devtools to download custom MEPS dataset interface package from Github if it is not already installed.
+# Fore more information on the MEPS package and how to use it, refer to the following URL:
+# https://github.com/HHS-AHRQ/MEPS/tree/master/R#all-data-years-using-the-meps-package
+if(!require(MEPS)) { devtools::install_github("e-mitchell/meps_r_pkg/MEPS") }
+
+```
 _The following paper is a submission in reply to the [Society of Actuaries' Call for Papers](https://www.soa.org/research/opportunities/call-for-papers-list/) under the heading "[Aging and Retirement Issues for LGBTQ+ People – Second Invitation](https://www.soa.org/research/opportunities/call-for-essay-aging-retire-lgbtq/)"._
 
-# Health and Wealth Are Heavily Socially Determined
 For many years, people who identify as LGBTQ+ have endured discrimination from a wide variety of sources, such as from laws and regulations at all levels of government, or as a result of the ebb and flow of occupational attitudes over time, and even from members in our own community. 
 
 For some LGBTQ+-identifying subpopulations, the level of discrimination we face in society is rapidly waning; for others, such as transgender individuals, there are still impactful and endemic stigmas in play which act as a barrier to these individuals from living full and rewarding lives. Barriers such as these have likely inhibited the ability of many people who identify as LGBTQ+ from enjoying the same protections of our social safety net – such as healthcare and retirement security systems – that are enjoyed by non-LGBTQ+-identifying people.
@@ -55,29 +77,39 @@ For consistency’s sake, I continue to refer to the variable in the context of 
 # Exploring the Demographic Composition of Same-Sex Marriages in the US
 In the following infographics, I attempt to better understand the demographic composition of individuals in same-sex marriages by exploring the relationships between age, sex, income level, race, and insurance coverage status between the same-sex and non-same-sex marriage cohorts.
 
-```{r preprocessing, include=FALSE}
+```{r Preprocessing, include=FALSE}
 
-# Invoke required libraries
-library(survey)
-library(foreign)
-library(haven)
-library(viridis)
-library(tidyverse)
-library(MEPS)
+# Set options to deal with lonely PSUs. A PSU is a Primary Sampling Unit. Primary Sampling Units are divided among several sampling strata. The MEPS survey design package provides appropriate sampling weights for each strata in order for each sampling unit to be reweighted in proportion to the POI (Population of Interest - in this case ,the entire US).
 
-# Set options to deal with lonely psu
+# In some cases, our analysis might necessitate drilling down to very small subpopulations, which will whittle down the membership of some strata to 1 or fewer members. In this case, we might encounter some strata with a single member - a "lonely PSU" - at which point the Survey package will error out when computing the sample variance to determine the standard error for a particular statistic (mean, total sum, etc.) in our analyses. Setting this option will adjust the data in the single-PSU stratum so that it is centered at the entire sample mean instead of the particular stratum mean, which tends to be a more conservative computation of the variance and has the effect of contributing to a wider standard error estimate for any statistic of interest in the analysis.
+
+# In short, the following line will conservatively recenter certain data points so that a standard error for statistics of interest (mean, total sum, etc.) are computable for all strata - even those containing a single PSU, with the tradeoff of a larger (and more conservative) magnitude of standard error.
+
+# An excellent article that goes into more detail about this process (and expresses some concern about the magnitude of overconservatism that R's survey package employs in recentering the lonely PSU mean) can be read here:
+# https://www.practicalsignificance.com/posts/bugs-with-singleton-strata/
+
 options(survey.lonely.psu='adjust')
 
-# Read in data from FYC file --------------------------------------------------
+# The following lines of code make use of the custom MEPS R package developed by the MEPS staff. This package is not on CRAN and must be downloaded via Github using the "devtools" package, which is done in the "Initial_Setup" chunk of code, above.
 
-# fyc20 = read_MEPS(year = 2020, type = "FYC") # 2020 FYC
-fyc19 = read_MEPS(year = 2019, type = "FYC") # 2019 FYC
-fyc18 = read_MEPS(year = 2018, type = "FYC") # 2018 FYC
-linkage = read_MEPS(type = "Pooled linkage") # Pooled Linkage file
+# Download the 2019 Full Year Consolidated Data File
+# https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-216
+fyc19 = MEPS::read_MEPS(year = 2019, type = "FYC")
 
+# Download the 2018 Full Year Consolidated Data File
+# https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-209
+fyc18 = MEPS::read_MEPS(year = 2018, type = "FYC")
 
-# Identify SSCs - follow instructions in section 3.5 to create one family per record, but 
-# consolidate tibbles within each record to have individual-level details.
+# Download the 2017 Full Year Consolidated Data File
+# https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-201
+fyc17 = MEPS::read_MEPS(year = 2017, type = "FYC")
+
+# From the MEPS website at https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp:
+
+# "The pooled linkage file contains the standardized variance strata and PSU variables for a pooled analysis of multiple years of MEPS data. The pooled replicates file contains 128 half sample indicators needed to calculate standard errors using balanced repeated replication (BRR) method either for a single year analysis or a pooled analysis of multiple years of MEPS data."
+linkage = MEPS::read_MEPS(type = "Pooled linkage")
+
+# Next, we will define some custom functions. These functions will be explained in subsequent documentation below at the time they are invoked.
 
 count_family_size <- function(df) {
   # First get list of PIDs
@@ -86,10 +118,16 @@ count_family_size <- function(df) {
     nrow()
 }
 
-identify_same_sex_spouses <- function(df) {
-  # Join PIDs table onto itself by SPOUIDs to determine spousal match-ups at the PID level
-  # Then you can identify if the "left hand" and "right hand" sexes match.
+check_family_size <- function(df) {
+  # Retain only DUIDFAMY reference person
+  rfpyr <- df %>% 
+    filter(FAMRFPYR == 1) %>% 
+    select(FAMSZEYR)
   
+  rfpyr$FAMSZEYR
+}
+
+identify_same_sex_spouses <- function(df) {
   pid_list <- df %>% 
     distinct(PID, SEX, SPOUIDYY)
   
@@ -115,10 +153,16 @@ count_married_individuals_in_ssc <- function(df) {
     nrow()
 }
 
+# First, we must do some preprocessing with the MEPS FYC files we have downloaded. The following block of code performs the following steps for the 2019 FYC file.
+
+# 3. Per section 3.5.2 of the MEPS FYC 2019 documentation manual linked above, a family consists of two or more persons living together in the same household who are related by blood, marriage, or adoption. As we want to use same-sex marriage as a means to identify same-sex individuals, we're going to first make sure we isolate our cohort of individuals to those who are part of a family, as defined by MEPS. This requires that we perform the following steps:
+#     a. Restrict records to FAMWT19F (now renamed to FAMWTYYF) to positive nonzero weights only.
+#     b. Concatenate DUID (Dwelling Unit ID) and FAMIDYR (eligible members of eligible annualized families within a single Dwelling Unit ID) into a single variable known as DUIDFAMY.
+
 fyc19x  <- fyc19 %>% 
+  # 1. Subsets only relevant columns out of the over roughly 1500 columns available.
   select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV19, REGION19, RACETHX, POVCAT19, RXEXP19, TOTEXP19, TOTSLF19, VARSTR, VARPSU, PERWT19F, MARRY19X, SPOUID19, FAMIDYR, FAMWT19F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX_M18) %>% 
-  filter(FAMWT19F > 0) %>%      # Per instruction in section 3.5
-  mutate(DUIDFAMY = stringr::str_c(DUID, FAMIDYR)) %>% # Per instruction in section 3.5
+  # 2. As we will be pooling the FYC 2019 and 2018 files, we wish to rename fields with a '19' to a more general (e.g., 'YY') label. We will do the same with 2018 fields with names that include '18'. Note that the field DIABDX_M18 contains responses to a survey question which is only administered to respondents aged 18 or over, so this field is renamed entirely for the sake of convenience and the '18' has nothing to do with the year 2018.
   rename(PERWTYYF=PERWT19F,
          MARRYYYX=MARRY19X,
          SPOUIDYY=SPOUID19,
@@ -132,17 +176,39 @@ fyc19x  <- fyc19 %>%
          POVCATYY=POVCAT19,
          PROBPYYY=PROBPY42,
          DIABDX=DIABDX_M18) %>% 
+  # 3. Per section 3.5.2 of the MEPS FYC 2019 documentation manual linked above, a family consists of two or more persons living together in the same household who are related by blood, marriage, or adoption. As we want to use same-sex marriage as a means to identify same-sex individuals, we're going to first make sure we isolate our cohort of individuals to those who are part of a family, as defined by MEPS. This requires that we perform the following steps:
+  #     a. Restrict records to FAMWT19F (now renamed to FAMWTYYF) to positive nonzero weights only.
+  filter(FAMWTYYF > 0) %>%
+  #     b. Concatenate DUID (Dwelling Unit ID) and FAMIDYR (eligible members of eligible annualized families within a single Dwelling Unit ID) into a single variable known as DUIDFAMY.
+  mutate(DUIDFAMY = stringr::str_c(DUID, FAMIDYR)) %>% 
+  # 4. Next we will group by this new variable and use the "nest" function to create a dataset of datasets, so that the resulting dataset will contain a single unique DUIDFAMY value in one column and the second column will consist of a table of all the individual PSUs which are members of that combination of Dwelling Unit ID and Family ID
   group_by(DUIDFAMY) %>%  
   tidyr::nest() %>% 
-  mutate(family_size = purrr::map_int(data, count_family_size)) %>% 
+  # 5. Finally, we will compute some summary statistics on each DUIDFAMY row into new columns, including:
+  #   5a. 'family_size_check': A quality check that computes the number of PSUs within each DUIDFAMY and subtracts that value from the value FAMSZEYR for the unique DUIDFAMY reference person (FAMRFPYR=1). This number should be zero in the vast majority of cases.
+  #   5b. 'married_individuals': A count of married individuals within that DUIDFAMY - in the vast majority of cases, this should be 0 or 2. Other values can exist, such as 1 for a married individual within a family that does not occupy the same Dwelling Unit as their spouse, or 3 for such a person who resides in a Dwelling Unit / Family as another married couple, etc. We will look at a quality check of this.
+  #   5c. 'spouse_matrix': another column containing a dataset consisting of each PID within that DUIDFAMY, their sex, their spouse's sex, and a logical variable indicating whether or not those sexes are identical.
+  #   5d. 'married_individuals_in_ssc': a conditional sum variable that sums up all individuals who are both married (using the column described in b, above) and in same-sex marriages (using the column described in c, above) %>% 
+  mutate(family_size_count = purrr::map_int(data, count_family_size)) %>% 
+  mutate(family_size_check = purrr::map_int(data, check_family_size) - family_size_count) %>% 
   mutate(married_individuals = purrr::map_int(data, count_married_individuals)) %>% 
   mutate(spouse_matrix = purrr::map(data, identify_same_sex_spouses)) %>% 
   mutate(married_individuals_in_ssc = purrr::map_int(spouse_matrix, count_married_individuals_in_ssc))
 
+# Per the 2019 FYC documentation file Table 3.3, we should expect the above code to construct a data table that has 11,924 records.
+
+# We want to explore some one-way frequency tables to make sure these data quality checks are coming in as expected.
+# Reported family size minus Count of unique PIDs within each DUIDFAMY - we expect the vast majority of responses to be zero.
+table(fyc19x$family_size_check)
+# Count of married individuals within each DUIDFAMY - expecting the vast majority of responses to be 0 or 2
+table(fyc19x$married_individuals)
+# Count of married individuals in Same-Sex marriages within each DUIDFAMY - again expecting the vast majority of responses to be 0 or 2
+table(fyc19x$married_individuals_in_ssc)
+
+# Now we will perform exactly the same steps in the same order to the 2018 and 2017 FYC files retrieved using the MEPS package.
+
 fyc18x  <- fyc18 %>% 
   select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV18, REGION18, RACETHX, POVCAT18, RXEXP18, TOTEXP18, TOTSLF18, VARSTR, VARPSU, PERWT18F, MARRY18X, SPOUID18, FAMIDYR, FAMWT18F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX_M18) %>% 
-  filter(FAMWT18F > 0) %>%      # Per instruction in section 3.5
-  mutate(DUIDFAMY = stringr::str_c(DUID, FAMIDYR)) %>% # Per instruction in section 3.5
   rename(PERWTYYF=PERWT18F,
          MARRYYYX=MARRY18X,
          SPOUIDYY=SPOUID18,
@@ -156,30 +222,90 @@ fyc18x  <- fyc18 %>%
          POVCATYY=POVCAT18,
          PROBPYYY=PROBPY42,
          DIABDX=DIABDX_M18) %>% 
+  filter(FAMWTYYF > 0) %>%      
+  mutate(DUIDFAMY = stringr::str_c(DUID, FAMIDYR)) %>%
   group_by(DUIDFAMY) %>%  
   tidyr::nest() %>% 
-  mutate(family_size = purrr::map_int(data, count_family_size)) %>% 
+  mutate(family_size_count = purrr::map_int(data, count_family_size)) %>% 
+  mutate(family_size_check = purrr::map_int(data, check_family_size) - family_size_count) %>% 
   mutate(married_individuals = purrr::map_int(data, count_married_individuals)) %>% 
   mutate(spouse_matrix = purrr::map(data, identify_same_sex_spouses)) %>% 
   mutate(married_individuals_in_ssc = purrr::map_int(spouse_matrix, count_married_individuals_in_ssc))
 
-fyc18_19x_flat <- fyc19x %>% 
+# Per the 2018 FYC documentation file Table 3.3, we should expect the above code to construct a data table that has 12,475 records.
+
+# We want to explore some one-way frequency tables to make sure these data quality checks are coming in as expected.
+# Reported family size minus Count of unique PIDs within each DUIDFAMY - we expect the vast majority of responses to be zero.
+table(fyc18x$family_size_check)
+# Count of married individuals within each DUIDFAMY - expecting the vast majority of responses to be 0 or 2
+table(fyc18x$married_individuals)
+# Count of married individuals in Same-Sex marriages within each DUIDFAMY - again expecting the vast majority of responses to be 0 or 2
+table(fyc18x$married_individuals_in_ssc)
+
+# In this final step, we wish to take the horizontal join (union) of the 2018 and 2019 data files so that we can pool 2018 and 2019 data in this analysis. Since we are ultimately performing an analysis on cohorts of married individuals within the same DU and FAMID, we will also want to "flatten" our family-level datasets back into individual DUPERSIDs and then apply the Pooled Linkage file appropriately as described in the MEPS documentation.
+
+fyc17x  <- fyc17 %>% 
+  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV17, REGION17, RACETHX, POVCAT17, RXEXP17, TOTEXP17, TOTSLF17, VARSTR, VARPSU, PERWT17F, MARRY17X, SPOUID17, FAMIDYR, FAMWT17F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX) %>% 
+  rename(PERWTYYF=PERWT17F,
+         MARRYYYX=MARRY17X,
+         SPOUIDYY=SPOUID17,
+         FAMWTYYF=FAMWT17F,
+         AGEYYX=AGELAST,
+         REGIONYY=REGION17,
+         INSCOVYY=INSCOV17,
+         TOTEXPYY=TOTEXP17,
+         RXEXPYY=RXEXP17,
+         TOTSLFYY=TOTSLF17,
+         POVCATYY=POVCAT17,
+         PROBPYYY=PROBPY42) %>% 
+  filter(FAMWTYYF > 0) %>%      
+  mutate(DUIDFAMY = stringr::str_c(DUID, FAMIDYR)) %>%
+  group_by(DUIDFAMY) %>%  
+  tidyr::nest() %>% 
+  mutate(family_size_count = purrr::map_int(data, count_family_size)) %>% 
+  mutate(family_size_check = purrr::map_int(data, check_family_size) - family_size_count) %>% 
+  mutate(married_individuals = purrr::map_int(data, count_married_individuals)) %>% 
+  mutate(spouse_matrix = purrr::map(data, identify_same_sex_spouses)) %>% 
+  mutate(married_individuals_in_ssc = purrr::map_int(spouse_matrix, count_married_individuals_in_ssc))
+
+# Per the 2017 FYC documentation file Table 3.3, we should expect the above code to construct a data table that has 12,756 records.
+
+# We want to explore some one-way frequency tables to make sure these data quality checks are coming in as expected.
+# Reported family size minus Count of unique PIDs within each DUIDFAMY - we expect the vast majority of responses to be zero.
+table(fyc17x$family_size_check)
+# Count of married individuals within each DUIDFAMY - expecting the vast majority of responses to be 0 or 2
+table(fyc17x$married_individuals)
+# Count of married individuals in Same-Sex marriages within each DUIDFAMY - again expecting the vast majority of responses to be 0 or 2
+table(fyc17x$married_individuals_in_ssc)
+
+# In this final step, we wish to take the horizontal join (union) of the 2017, 2018 and 2019 data files so that we can pool 2017, 2018 and 2019 data in this analysis. Since we are ultimately performing an analysis on cohorts of married individuals within the same DU and FAMID, we will also want to "flatten" our family-level datasets back into individual DUPERSIDs and then apply the Pooled Linkage file appropriately as described in the MEPS documentation.
+
+fyc17_18_19x_flat <- fyc19x %>% 
+  # First horizontally merge (using UNION ALL) the three datasets
   union_all(fyc18x) %>% 
+  union_all(fyc17x) %>% 
+  # Next, we want to retain all the originally nested data at the individual person level alongside any custom same-sex marriage indicators that we computed in the previous step in one combined nested dataset for each DUFAMYID row in our combined 2017 - 2019 family-level dataset.
   mutate(final_data = purrr::map2(data, spouse_matrix, ~ .x %>% left_join(.y, by=c("PID"="PID")))) %>% 
+  # Next we will delete two dataset columns since they are redundant after the last line, to save on memory.
   select(-data, -spouse_matrix) %>% 
-  group_by(DUIDFAMY, family_size, married_individuals, married_individuals_in_ssc) %>% 
+  # Finally we will group by all fields which are non-nested dataset columns and call the unnest function, which will unnest the dataset columns and flatten our table.
+  group_by(DUIDFAMY, family_size_count, family_size_check, married_individuals, married_individuals_in_ssc) %>% 
   tidyr::unnest(final_data) %>% 
+  # Ungroup merely ungroups the group_by statement called earlier.
   ungroup() %>% 
-  tidyr::replace_na(list(same_sex_lgl=F)) %>% 
-  filter(AGEYYX > 0) %>% 
+  # In some cases, sex_of_spouse is NA because none of the individuals within the Dwelling Unit or Family Unit are married to one another. We wish to remove these individuals from the analysis. Additionally, we want to only include only married individuals, since same-sex marriage is our "clue" which suggests potential LGBTQ+ status. Since marriage status is very likely a confounding variable for many of the subsequent visualizations we will prepare, we wish to restrict our analysis to only individuals which are married.
   filter(MARRYYYX == 1 & !is.na(sex_of_spouse)) %>% 
-  mutate(unwt_persons = 1) %>% 
-  mutate(AGE_GRP_2 = if_else(AGEYYX >= 65, "65 and up", "18 - 65")) %>% 
+  # In some cases, respondents do not include age and it cannot be imputed using other data sources. These respondents are coded with a -1 for age. We do not wish to include these responses in our analysis.
+  filter(AGEYYX > 0) %>% 
+  # This is a variable to simply provide a sample weighting for when we aggregate
+  mutate(Individuals = 1) %>% 
+  # Finally we will define some categorical variables for labeling visualizations
+  mutate(AGE_GRP_2 = if_else(AGEYYX >= 65, "65 and over", "18 - 64")) %>% 
   mutate(AGE_GRP_5 = case_when(AGEYYX < 5 ~ "Under 5",
                                AGEYYX >= 5 & AGEYYX <= 17 ~ "5 - 17",
                                AGEYYX >= 18 & AGEYYX <= 44 ~ "18 - 44",
                                AGEYYX >= 45 & AGEYYX <= 64 ~ "45 - 64",
-                               AGEYYX >= 65 ~ "65+",
+                               AGEYYX >= 65 ~ "65 and over",
                                T ~ as.character(AGEYYX))) %>%
     mutate(AGE_GRP_8 = case_when(AGEYYX < 5 ~ "Under 5",
                                AGEYYX >= 5 & AGEYYX <= 17 ~ "5 - 17",
@@ -188,7 +314,7 @@ fyc18_19x_flat <- fyc19x %>%
                                AGEYYX >= 40 & AGEYYX <= 49 ~ "40 - 49",
                                AGEYYX >= 50 & AGEYYX <= 59 ~ "50 - 59",
                                AGEYYX >= 60 & AGEYYX <= 69 ~ "60 - 69",
-                               AGEYYX >= 70 ~ "70+",
+                               AGEYYX >= 70 ~ "70 and over",
                                T ~ as.character(AGEYYX))) %>%
   mutate(INSCOV_DSC = case_when(INSCOVYY == 1 ~ "Any Private",
                                 INSCOVYY == 2 ~ "Public Only",
@@ -209,11 +335,11 @@ fyc18_19x_flat <- fyc19x %>%
                               RACETHX == 4 ~ "Non-Hispanic Asian Only",
                               RACETHX == 5 ~ "Non-Hispanic Other Race or Multiple Race",
                               T ~ as.character(RACETHX))) %>% 
-  mutate(POVCAT_DSC = case_when(POVCATYY == 1 ~ "Poor / Negative",
-                                POVCATYY == 2 ~ "Near Poor",
-                                POVCATYY == 3 ~ "Low Income",
-                                POVCATYY == 4 ~ "Middle Income",
-                                POVCATYY == 5 ~ "High Income",
+  mutate(POVCAT_DSC = case_when(POVCATYY == 1 ~ "less than 100%",
+                                POVCATYY == 2 ~ "100% to less than 125%",
+                                POVCATYY == 3 ~ "125% to less than 200%",
+                                POVCATYY == 4 ~ "200% to less than 400%",
+                                POVCATYY == 5 ~ "400% or more",
                                 T ~ as.character(POVCATYY))) %>% 
   mutate(HAS_EXP = if_else(TOTEXPYY > 0, "Had Healthcare Expenses", "Did Not Have Healthcare Expenses")) %>% 
   mutate(DIABDX_DSC = case_when(DIABDX == 1 ~ "Diagnosed with Diabetes", 
@@ -232,135 +358,290 @@ fyc18_19x_flat <- fyc19x %>%
                                   FAMSZEYR >= 5 & FAMSZEYR <= 6 ~ "5 - 6 persons",
                                   FAMSZEYR >= 7 ~ "7+ persons")) 
 
-# Two additional pooling considerations to pool 2018 with 2019 data follow: 
+# Two additional pooling considerations to pool 2017 - 2019 data follow: 
 
-# Divide survey weights by two and store in a new "pooled weight" column so that we can still use only 2018 or 2019 data if needed.
+# Divide survey weights by two and store in a new "pooled weight" column so that we can still use only 2017, 2018 or 2019 data only, if needed. Directions to adjust the analytic weight variable (PERWTYYF) by division by 3 (the number of pooled years) are in section 4.0 of the Pooled Linkage file documentation, here:
+# https://meps.ahrq.gov/data_stats/download_data/pufs/h036/h36u20doc.shtml#2
 
-fyc18_19x_flat <- fyc18_19x_flat %>% 
-  mutate(POOLWTYY = PERWTYYF / 2)
+fyc17_18_19x_flat <- fyc17_18_19x_flat %>% 
+  mutate(POOLWTYY = PERWTYYF / 3)
 
-# Join to Pooled Linkages file - this file ensures we are not "double counting" in our standard error calculations from panel participants sampled across multiple years. More info here: 
+# Join to Pooled Linkages file - this file ensures we are not "double counting" in our standard error calculations from panel participants sampled across multiple years. More info on the linkage process can be found at the following URL, in section "3.0 Linking Instructions":
 # https://meps.ahrq.gov/data_stats/download_data/pufs/h036/h36u20doc.shtml#CTechnical
 
 linkage_sub <- linkage %>% 
   select(DUPERSID, PANEL, STRA9620, PSU9620)
 
-fyc18_19x_flat <- fyc18_19x_flat %>% 
+fyc17_18_19x_flat <- fyc17_18_19x_flat %>% 
   left_join(linkage_sub, by = c("DUPERSID", "PANEL"))
 
-# Define the survey design
-
+# Define the survey design - here we are using the pooled weights which were divided by two, and pooled ID/STRATA variables that were joined into our dataset, from the previous steps.
 mepsdsgn = svydesign(
   id = ~PSU9620,
   strata = ~STRA9620,
   weights = ~POOLWTYY,
-  data = fyc18_19x_flat,
+  data = fyc17_18_19x_flat,
   nest = TRUE)
-
 
 ```
 
+```{r Marriage_Class_And_Sex, echo=FALSE}
 
-```{r Demographic_Plots, echo=FALSE}
+# Import the Milliman color palette for visualizations:
+custom_palette <- c("#0078D4", "#00A562", "#FFA100", "#50BDFF", "#74BF60", "#FFC800")
 
-fyc18_19x_age_sex <- svyby(~unwt_persons, by = ~AGE_GRP_2 + SEX_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn) 
+# Set table output format to HTML for easier rendering for data table presentations:
+options(knitr.table.format = "html") 
 
-# visualize these demos to make sure we're comparing apples-to-apples
+# Visualizations appear in several steps. 
 
-fyc18_19x_demo_gg1 <- fyc18_19x_age_sex %>% 
+# First, the title:
+fyc17_18_19x_age_sex.title <- "Estimated Number of Married Individuals"
+fyc17_18_19x_age_sex.subtitle <- "By Marriage Classification and Sex"
+
+# Next, we compute the data table for the underlying visualizations using the Survey package and remove the rownames as they are clunky and make the underlying data table less pretty when that is produced.
+
+# By using the Svyby function in the Survey package, supplying the ENTIRE population of interest file (all married individuals) and applying a formula of subsetting variables, we are conforming to the caveat provided in the Pooled Linkage documentation in section "5.0 Subpopulation Analysis Caveat" at the following URL:
+# https://meps.ahrq.gov/data_stats/download_data/pufs/h036/h36u20doc.shtml#2
+fyc17_18_19x_age_sex.data <- svyby(~Individuals, by = ~AGE_GRP_2 + SEX_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn)
+
+rownames(fyc17_18_19x_age_sex.data) <- NULL
+
+# Next we create the visualization based on the data table
+fyc17_18_19x_age_sex.plot <- fyc17_18_19x_age_sex.data %>% 
   ggplot(mapping = aes(x = AGE_GRP_2,
                        fill = SEX_DSC,
-                       y = unwt_persons)) +
-  scale_fill_viridis(discrete=T, begin=0.5, end = 1) +
+                       y = Individuals)) +
+  scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin=unwt_persons-se, ymax=unwt_persons+se), width=.2,
+  geom_errorbar(aes(ymin=Individuals-1.96*se, ymax=Individuals+1.96*se), width=.2,
                 position=position_dodge(.9)) +
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Number of Married Individuals",
-       subtitle="By Marriage Classification and Sex",
+  labs(title=fyc17_18_19x_age_sex.title,
+       subtitle=fyc17_18_19x_age_sex.subtitle,
        x = "Age Grouping",
        y = "Estimate of Individuals (Survey Weighted)",
-       fill = "Sex",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       fill = "Gender",
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
-fyc18_19x_demo_gg1
+# Next, we render the visualization
+fyc17_18_19x_age_sex.plot
 
-fyc18_19x_age_cov <- svyby(~unwt_persons, by = ~AGE_GRP_2 + INSCOV_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn) 
+# Then, we create the publication table object for displaying the underlying data:
+fyc17_18_19x_age_sex.table <- fyc17_18_19x_age_sex.data %>% 
+  arrange(SSC_DSC, AGE_GRP_2, SEX_DSC) %>% 
+  rename(`Standard Error`=se,
+         Estimate=Individuals,
+         `Marriage Classification`=SSC_DSC,
+         `Age Group`=AGE_GRP_2,
+         `Gender`=SEX_DSC) %>% 
+  mutate(rse = `Standard Error`/Estimate,
+         rse_flag = case_when(rse > .5 ~ "†", 
+                              rse >= .3 & rse <= .5 ~ "*", 
+                              T ~ ""),
+         `95% CI Lower Bound` = Estimate-1.96*`Standard Error`,
+         `95% CI Upper Bound` = Estimate+1.96*`Standard Error`,
+         `Relative Standard Error`= paste(scales::percent(`Standard Error`/Estimate), rse_flag)) %>% 
+  select(-rse, -rse_flag) %>%  
+  kbl(format.args = list(big.mark = ",", digits=3),
+      caption = paste0("Data Table for '", fyc17_18_19x_age_sex.title, " ", fyc17_18_19x_age_sex.subtitle, "'")) %>% 
+    kable_classic_2(full_width = F, html_font = "Arial") %>% 
+    footnote(general = "From MEPS' Precision Standards Guidelines:",
+             symbol = c("Estimate can be reported but flagged with an * to indicate that its precision is questionable.", "Estimate should not be reported or displayed in tables due to extremely large sampling error."))
 
-fyc18_19x_demo_gg2 <- fyc18_19x_age_cov %>% 
+fyc17_18_19x_age_sex.table
+```
+
+```{r Marriage_Class_And_Plan_Coverage, echo=FALSE}
+
+# First, the title:
+fyc17_18_19x_age_cov.title <- "Estimated Number of Married Individuals"
+fyc17_18_19x_age_cov.subtitle <- "By Marriage Classification and Health Plan Coverage"
+
+# Next, the data:
+fyc17_18_19x_age_cov.data <- svyby(~Individuals, by = ~AGE_GRP_2 + INSCOV_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn) 
+
+rownames(fyc17_18_19x_age_cov.data) <- NULL
+
+# Next, the plot:
+fyc17_18_19x_age_cov.plot <- fyc17_18_19x_age_cov.data %>% 
   ggplot(mapping = aes(x = AGE_GRP_2,
                        fill = INSCOV_DSC,
-                       y = unwt_persons)) +
-  scale_fill_viridis(discrete=T, begin=0.5, end = 1) +
+                       y = Individuals)) +
+  scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin=unwt_persons-se, ymax=unwt_persons+se), width=.2,
+  geom_errorbar(aes(ymin=Individuals-1.96*se, ymax=Individuals+1.96*se), width=.2,
                 position=position_dodge(.9)) +
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Number of Married Individuals",
-       subtitle=" By Marriage Classification and Health Plan Coverage",
+  labs(title=fyc17_18_19x_age_cov.title,
+       subtitle=fyc17_18_19x_age_cov.subtitle,
        x = "Age Grouping",
        y = "Estimate of Individuals (Survey Weighted)",
        fill = "Health Plan Coverage",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
-fyc18_19x_demo_gg2
+fyc17_18_19x_age_cov.plot
 
-fyc18_19x_age_race <- svyby(~unwt_persons, by = ~AGE_GRP_2 + RACE_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn) 
+# Finally, the table:
+fyc17_18_19x_age_cov.table <- fyc17_18_19x_age_cov.data %>% 
+  arrange(SSC_DSC, AGE_GRP_2, INSCOV_DSC) %>% 
+  rename(`Standard Error`=se,
+         Estimate=Individuals,
+         `Marriage Classification`=SSC_DSC,
+         `Age Group`=AGE_GRP_2,
+         `Health Plan Coverage`=INSCOV_DSC) %>% 
+  mutate(rse = `Standard Error`/Estimate,
+         rse_flag = case_when(rse > .5 ~ "†", 
+                              rse >= .3 & rse <= .5 ~ "*", 
+                              T ~ ""),
+         `95% CI Lower Bound` = Estimate-1.96*`Standard Error`,
+         `95% CI Upper Bound` = Estimate+1.96*`Standard Error`,
+         `Relative Standard Error`= paste(scales::percent(`Standard Error`/Estimate), rse_flag)) %>% 
+  select(-rse, -rse_flag) %>%  
+  kbl(format.args = list(big.mark = ",", digits=3),
+      caption = paste0("Data Table for '", fyc17_18_19x_age_cov.title, " ", fyc17_18_19x_age_cov.subtitle, "'")) %>% 
+    kable_classic_2(full_width = F, html_font = "Arial") %>% 
+    footnote(general = "From MEPS' Precision Standards Guidelines:",
+             symbol = c("Estimate can be reported but flagged with an * to indicate that its precision is questionable.", "Estimate should not be reported or displayed in tables due to extremely large sampling error."))
 
-fyc18_19x_demo_gg3 <- fyc18_19x_age_race %>% 
+fyc17_18_19x_age_cov.table
+
+```
+
+```{r Marriage_Class_And_Race_Ethnicity, echo=FALSE}
+
+# First, the title:
+fyc17_18_19x_age_race.title <- "Estimated Number of Married Individuals"
+fyc17_18_19x_age_race.subtitle <- "By Marriage Classification and Race, Ethnicity"
+
+# Next, the data:
+fyc17_18_19x_age_race.data <- svyby(~Individuals, by = ~AGE_GRP_2 + RACE_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn) 
+
+rownames(fyc17_18_19x_age_race.data) <- NULL
+
+# Next, the plot:
+fyc17_18_19x_age_race.plot <- fyc17_18_19x_age_race.data %>% 
   ggplot(mapping = aes(x = AGE_GRP_2,
                        fill = RACE_DSC,
-                       y = unwt_persons)) +
-  scale_fill_viridis(discrete=T, begin=0.5, end = 1) +
+                       y = Individuals)) +
+  scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin=unwt_persons-se, ymax=unwt_persons+se), width=.2,
+  geom_errorbar(aes(ymin=Individuals-1.96*se, ymax=Individuals+1.96*se), width=.2,
                 position=position_dodge(.9)) +
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Number of Married Individuals",
-       subtitle="By Marriage Classification and Race, Ethnicity",
+  labs(title=fyc17_18_19x_age_race.title,
+       subtitle=fyc17_18_19x_age_race.subtitle,
        x = "Age Grouping",
        y = "Estimate of Individuals (Survey Weighted)",
        fill = "Race and Ethnicity",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
-fyc18_19x_demo_gg3
+fyc17_18_19x_age_race.plot
 
-fyc18_19x_age_povcat <- svyby(~unwt_persons, by = ~AGE_GRP_2 + POVCAT_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn) 
+# Finally, the table:
+fyc17_18_19x_age_race.table <- fyc17_18_19x_age_race.data %>% 
+  arrange(SSC_DSC, AGE_GRP_2, RACE_DSC) %>% 
+  rename(`Standard Error`=se,
+         Estimate=Individuals,
+         `Marriage Classification`=SSC_DSC,
+         `Age Group`=AGE_GRP_2,
+         `Race & Ethnicity`=RACE_DSC) %>% 
+  mutate(rse = `Standard Error`/Estimate,
+         rse_flag = case_when(rse > .5 ~ "†", 
+                              rse >= .3 & rse <= .5 ~ "*", 
+                              T ~ ""),
+         `95% CI Lower Bound` = Estimate-1.96*`Standard Error`,
+         `95% CI Upper Bound` = Estimate+1.96*`Standard Error`,
+         `Relative Standard Error`= paste(scales::percent(`Standard Error`/Estimate), rse_flag)) %>% 
+  select(-rse, -rse_flag) %>%  
+  kbl(format.args = list(big.mark = ",", digits=3),
+      caption = paste0("Data Table for '", fyc17_18_19x_age_race.title, " ", fyc17_18_19x_age_race.subtitle, "'")) %>% 
+    kable_classic_2(full_width = F, html_font = "Arial") %>% 
+    footnote(general = "From MEPS' Precision Standards Guidelines:",
+             symbol = c("Estimate can be reported but flagged with an * to indicate that its precision is questionable.", "Estimate should not be reported or displayed in tables due to extremely large sampling error."))
 
-fyc18_19x_demo_gg4 <- fyc18_19x_age_povcat %>% 
-  mutate(povcat_ordered = fct_relevel(POVCAT_DSC, "High Income", "Middle Income", "Low Income", "Near Poor", "Poor / Negative")) %>% 
+# Render table
+fyc17_18_19x_age_race.table
+
+```
+
+```{r Marriage_Class_And_Income, echo=FALSE}
+
+# First, the title:
+fyc18_19x_age_povcat.title <- "Estimated Number of Married Individuals"
+fyc18_19x_age_povcat.subtitle <- "By Marriage Classification and Income"
+
+# Next, the data:
+fyc18_19x_age_povcat.data <- svyby(~Individuals, by = ~AGE_GRP_2 + POVCAT_DSC + SSC_DSC, FUN = svytotal, design = mepsdsgn) 
+
+rownames(fyc18_19x_age_povcat.data) <- NULL
+
+# Reorder the factors in the plot
+fyc18_19x_age_povcat.data <- fyc18_19x_age_povcat.data %>% 
+  mutate(POVCAT_DSC = fct_relevel(POVCAT_DSC, 
+                                  "less than 100%",
+                                  "100% to less than 125%",
+                                  "125% to less than 200%",
+                                  "200% to less than 400%",
+                                  "400% or more"))
+
+# Next, the plot:
+fyc18_19x_age_povcat.plot <- fyc18_19x_age_povcat.data %>% 
   ggplot(mapping = aes(x = AGE_GRP_2,
-                       fill = povcat_ordered,
-                       y = unwt_persons)) +
-  scale_fill_viridis(discrete=T, begin=0.5, end = 1) +
+                       fill = POVCAT_DSC,
+                       y = Individuals)) +
+  scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin=unwt_persons-se, ymax=unwt_persons+se), width=.2,
+  geom_errorbar(aes(ymin=Individuals-1.96*se, ymax=Individuals+1.96*se), width=.2,
                 position=position_dodge(.9)) +
   theme_bw() +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ SSC_DSC, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Number of Married Individuals",
-       subtitle="By Marriage Classification and Income",
+  labs(title=fyc18_19x_age_povcat.title,
+       subtitle=fyc18_19x_age_povcat.subtitle,
        x = "Age Grouping",
        y = "Estimate of Individuals (Survey Weighted)",
-       fill = "Income Level",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       fill = "Income as % of FPL",
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
-fyc18_19x_demo_gg4
+fyc18_19x_age_povcat.plot
+
+# Finally, the table:
+fyc18_19x_age_povcat.table <- fyc18_19x_age_povcat.data %>% 
+  arrange(SSC_DSC, AGE_GRP_2, POVCAT_DSC) %>% 
+  rename(`Standard Error`=se,
+         Estimate=Individuals,
+         `Marriage Classification`=SSC_DSC,
+         `Age Group`=AGE_GRP_2,
+         `Income as % of FPL`=POVCAT_DSC) %>%   mutate(rse = `Standard Error`/Estimate,
+         rse_flag = case_when(rse > .5 ~ "†", 
+                              rse >= .3 & rse <= .5 ~ "*", 
+                              T ~ ""),
+         `95% CI Lower Bound` = Estimate-1.96*`Standard Error`,
+         `95% CI Upper Bound` = Estimate+1.96*`Standard Error`,
+         `Relative Standard Error`= paste(scales::percent(`Standard Error`/Estimate), rse_flag)) %>% 
+  select(-rse, -rse_flag) %>%  
+  kbl(format.args = list(big.mark = ",", digits=3),
+      caption = paste0("Data Table for '", fyc18_19x_age_povcat.title, " ", fyc18_19x_age_povcat.subtitle, "'")) %>% 
+    kable_classic_2(full_width = F, html_font = "Arial") %>% 
+    footnote(general = "From MEPS' Precision Standards Guidelines:",
+             symbol = c("Estimate can be reported but flagged with an * to indicate that its precision is questionable.", "Estimate should not be reported or displayed in tables due to extremely large sampling error."))
+
+fyc18_19x_age_povcat.table
 
 ```
 
@@ -373,10 +654,14 @@ It is also the case that LGBTQ+ individuals can possess unique healthcare needs 
 
 To better determine if there are relationships between these demographic factors and the cost of care – particularly for older age groups, I prepared the following series of visualizations below that examine the average individual expenditures broken out on the same demographic features as the visualizations above.
 
+```{r Exp_Marriage_Class_And_Sex, echo=FALSE}
 
-```{r Expenditure_Plots, echo=FALSE}
+# Titles:
+fyc17_18_19x_age_sex_exp.title <- "Estimated Healthcare Expenditures"
+fyc17_18_19x_age_sex_exp.subtitle <- "By Marriage Classification and Sex"
 
-fyc18_19x_age_sex_exp <- svyby(~TOTEXPYY + RXEXPYY, by = ~AGE_GRP_2 + SEX_DSC + SSC_DSC, FUN = svymean, design = mepsdsgn) %>% 
+# Data preproceessing:
+fyc17_18_19x_age_sex_exp.data <- svyby(~TOTEXPYY + RXEXPYY, by = ~AGE_GRP_2 + SEX_DSC + SSC_DSC, FUN = svymean, design = mepsdsgn) %>% 
   rename("est.TOTEXPYY"="TOTEXPYY",
          "est.RXEXPYY"="RXEXPYY") %>% 
   pivot_longer(ends_with(c("TOTEXPYY","RXEXPYY")),
@@ -387,13 +672,14 @@ fyc18_19x_age_sex_exp <- svyby(~TOTEXPYY + RXEXPYY, by = ~AGE_GRP_2 + SEX_DSC + 
               values_from = "value") %>% 
   mutate(TYPE_DSC = if_else(type == "TOTEXPYY", "All Healthcare Expenditures", "RX Expenditures Only"))
 
-fyc18_19x_demo_gg1e <- fyc18_19x_age_sex_exp %>% 
+# Build plot
+fyc17_18_19x_age_sex_exp.plot <- fyc17_18_19x_age_sex_exp.data %>% 
   ggplot(mapping = aes(x = AGE_GRP_2,
                        fill = SEX_DSC,
                        y = est)) +
-  scale_fill_viridis(discrete=T, begin=0.5, end = 1) +
+  scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin=est-se, ymax=est+se), width=.2,
+  geom_errorbar(aes(ymin=est-1.96*se, ymax=est+1.96*se), width=.2,
                 position=position_dodge(.9)) +
   theme_bw() +
   scale_y_continuous(labels = scales::dollar) +
@@ -402,14 +688,52 @@ fyc18_19x_demo_gg1e <- fyc18_19x_age_sex_exp %>%
        subtitle="By Marriage Classification and Sex",
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
-       fill = "Sex",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       fill = "Gender",
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
-fyc18_19x_demo_gg1e
+# Render plot
+fyc17_18_19x_age_sex_exp.plot
 
-fyc18_19x_age_cov_exp <- svyby(~TOTEXPYY+RXEXPYY, by = ~AGE_GRP_2 + INSCOV_DSC + SSC_DSC, FUN = svymean, design = mepsdsgn) %>% 
+# Build data table
+fyc17_18_19x_age_sex_exp.table <- fyc17_18_19x_age_sex_exp.data %>% 
+  select(-type) %>% 
+  relocate(TYPE_DSC, .after=SSC_DSC) %>% 
+  arrange(SSC_DSC, AGE_GRP_2, SEX_DSC, TYPE_DSC) %>% 
+  rename(`Standard Error`=se,
+         Estimate=est,
+         `Expenditure Type`=TYPE_DSC,
+         `Marriage Classification`=SSC_DSC,
+         `Age Group`=AGE_GRP_2,
+         `Gender`=SEX_DSC) %>% 
+  mutate(rse = `Standard Error`/Estimate,
+         rse_flag = case_when(rse > .5 ~ "†", 
+                              rse >= .3 & rse <= .5 ~ "*", 
+                              T ~ ""),
+         `95% CI Lower Bound` = Estimate-1.96*`Standard Error`,
+         `95% CI Upper Bound` = Estimate+1.96*`Standard Error`,         
+         `Relative Standard Error`= paste(scales::percent(`Standard Error`/Estimate), rse_flag)) %>% 
+  select(-rse, -rse_flag) %>%  
+  kbl(format.args = list(big.mark = ",", digits=3),
+      caption = paste0("Data Table for '", fyc18_19x_age_sex_exp.title, " ", fyc18_19x_age_sex_exp.subtitle, "'")) %>% 
+    kable_classic_2(full_width = F, html_font = "Arial") %>% 
+    footnote(general = "From MEPS' Precision Standards Guidelines:",
+             symbol = c("Estimate can be reported but flagged with an * to indicate that its precision is questionable.", "Estimate should not be reported or displayed in tables due to extremely large sampling error."))
+
+# Render data table
+fyc17_18_19x_age_sex_exp.table
+
+```
+
+```{r Exp_Marriage_Class_And_Plan_Coverage, echo=FALSE}
+
+# Titles:
+fyc17_18_19x_age_cov_exp.title <- "Estimated Healthcare Expenditures"
+fyc17_18_19x_age_cov_exp.subtitle <- "By Marriage Classification and Health Plan Coverage"
+
+# Data preproceessing:
+fyc17_18_19x_age_cov_exp.data <- svyby(~TOTEXPYY+RXEXPYY, by = ~AGE_GRP_2 + INSCOV_DSC + SSC_DSC, FUN = svymean, design = mepsdsgn) %>% 
   rename("est.TOTEXPYY"="TOTEXPYY",
          "est.RXEXPYY"="RXEXPYY") %>% 
   pivot_longer(ends_with(c("TOTEXPYY","RXEXPYY")),
@@ -420,29 +744,67 @@ fyc18_19x_age_cov_exp <- svyby(~TOTEXPYY+RXEXPYY, by = ~AGE_GRP_2 + INSCOV_DSC +
               values_from = "value") %>% 
   mutate(TYPE_DSC = if_else(type == "TOTEXPYY", "All Healthcare Expenditures", "RX Expenditures Only"))
 
-fyc18_19x_demo_gg2e <- fyc18_19x_age_cov_exp %>% 
+# Build plot
+fyc17_18_19x_age_cov_exp.plot <- fyc17_18_19x_age_cov_exp.data %>% 
   ggplot(mapping = aes(x = AGE_GRP_2,
                        fill = INSCOV_DSC,
                        y = est)) +
-  scale_fill_viridis(discrete=T, begin=0.5, end = 1) +
+  scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin=est-se, ymax=est+se), width=.2,
+  geom_errorbar(aes(ymin=est-1.96*se, ymax=est+1.96*se), width=.2,
                 position=position_dodge(.9)) +
   theme_bw() +
   scale_y_continuous(labels = scales::dollar) +
   facet_grid(TYPE_DSC ~ SSC_DSC, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Healthcare Expenditures",
-       subtitle="By Marriage Classification and Health Plan Coverage",
+  labs(title=fyc17_18_19x_age_cov_exp.title,
+       subtitle=fyc17_18_19x_age_cov_exp.subtitle,
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Health Plan Coverage",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
-fyc18_19x_demo_gg2e
+# Render plot
+fyc17_18_19x_age_cov_exp.plot
 
-fyc18_19x_age_race_exp <- svyby(~TOTEXPYY+RXEXPYY, by = ~AGE_GRP_2 + RACE_DSC + SSC_DSC, FUN = svymean, design = mepsdsgn) %>% 
+# Build data table
+fyc17_18_19x_age_cov_exp.table <- fyc17_18_19x_age_cov_exp.data %>% 
+  arrange(SSC_DSC, AGE_GRP_2, INSCOV_DSC, TYPE_DSC) %>% 
+  relocate(TYPE_DSC, .after=SSC_DSC) %>% 
+  rename(`Standard Error`=se,
+         Estimate=est,
+         `Marriage Classification`=SSC_DSC,
+         `Expenditure Type`=TYPE_DSC,
+         `Age Group`=AGE_GRP_2,
+         `Health Plan Coverage`=INSCOV_DSC) %>% 
+  mutate(rse = `Standard Error`/Estimate,
+         rse_flag = case_when(rse > .5 ~ "†", 
+                              rse >= .3 & rse <= .5 ~ "*", 
+                              T ~ ""),
+         `95% CI Lower Bound` = Estimate-1.96*`Standard Error`,
+         `95% CI Upper Bound` = Estimate+1.96*`Standard Error`,
+         `Relative Standard Error`= paste(scales::percent(`Standard Error`/Estimate), rse_flag)) %>% 
+  select(-rse, -rse_flag, -type) %>%  
+  kbl(format.args = list(big.mark = ",", digits=3),
+      caption = paste0("Data Table for '", fyc17_18_19x_age_cov.title, " ", fyc17_18_19x_age_cov.subtitle, "'")) %>% 
+    kable_classic_2(full_width = F, html_font = "Arial") %>% 
+    footnote(general = "From MEPS' Precision Standards Guidelines:",
+             symbol = c("Estimate can be reported but flagged with an * to indicate that its precision is questionable.", "Estimate should not be reported or displayed in tables due to extremely large sampling error."))
+
+# Render data table
+fyc17_18_19x_age_cov_exp.table
+
+```
+
+```{r Exp_Marriage_Class_And_Race_Ethnicity, echo=FALSE}
+
+# Titles:
+fyc17_18_19x_age_race_exp.title <- "Estimated Healthcare Expenditures"
+fyc17_18_19x_age_race_exp.subtitle <- "By Marriage Classification and Race, Ethnicity"
+
+# Data preproceessing:
+fyc17_18_19x_age_race_exp.data <- svyby(~TOTEXPYY+RXEXPYY, by = ~AGE_GRP_2 + RACE_DSC + SSC_DSC, FUN = svymean, design = mepsdsgn) %>% 
   rename("est.TOTEXPYY"="TOTEXPYY",
          "est.RXEXPYY"="RXEXPYY") %>% 
   pivot_longer(ends_with(c("TOTEXPYY","RXEXPYY")),
@@ -453,27 +815,59 @@ fyc18_19x_age_race_exp <- svyby(~TOTEXPYY+RXEXPYY, by = ~AGE_GRP_2 + RACE_DSC + 
               values_from = "value") %>% 
   mutate(TYPE_DSC = if_else(type == "TOTEXPYY", "All Healthcare Expenditures", "RX Expenditures Only"))
 
-fyc18_19x_demo_gg3e <- fyc18_19x_age_race_exp %>% 
+# Build plot
+fyc17_18_19x_age_race_exp.plot <- fyc17_18_19x_age_race_exp.data %>% 
   ggplot(mapping = aes(x = AGE_GRP_2,
                        fill = RACE_DSC,
                        y = est)) +
-  scale_fill_viridis(discrete=T, begin=0.5, end = 1) +
+  scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
-  geom_errorbar(aes(ymin=est-se, ymax=est+se), width=.2,
+  geom_errorbar(aes(ymin=est-1.96*se, ymax=est+1.96*se), width=.2,
                 position=position_dodge(.9)) +
   theme_bw() +
   scale_y_continuous(labels = scales::dollar) +
   facet_grid(TYPE_DSC ~ SSC_DSC, scales="free_y", labeller = label_wrap_gen(width = 18, multi_line = TRUE)) +
-  labs(title="Estimated Healthcare Expenditures",
-       subtitle="By Marriage Classification and Race, Ethnicity",
+  labs(title=fyc17_18_19x_age_race_exp.title,
+       subtitle=fyc17_18_19x_age_race_exp.subtitle,
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Race and Ethnicity",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
-fyc18_19x_demo_gg3e
+# Render plot
+fyc17_18_19x_age_race_exp.plot
+
+# Build data table
+fyc17_18_19x_age_race_exp.table <- fyc17_18_19x_age_race_exp.data %>% 
+  arrange(SSC_DSC, AGE_GRP_2, RACE_DSC, TYPE_DSC) %>% 
+  rename(`Standard Error`=se,
+         Estimate=est,
+         `Marriage Classification`=SSC_DSC,
+         `Expenditure Type`=TYPE_DSC,
+         `Age Group`=AGE_GRP_2,
+         `Race & Ethnicity`=RACE_DSC) %>% 
+  mutate(rse = `Standard Error`/Estimate,
+         rse_flag = case_when(rse > .5 ~ "†", 
+                              rse >= .3 & rse <= .5 ~ "*", 
+                              T ~ ""),
+         `95% CI Lower Bound` = Estimate-1.96*`Standard Error`,
+         `95% CI Upper Bound` = Estimate+1.96*`Standard Error`,
+         `Relative Standard Error`= paste(scales::percent(`Standard Error`/Estimate), rse_flag)) %>% 
+  select(-rse, -rse_flag, -type) %>%  
+  kbl(format.args = list(big.mark = ",", digits=3),
+      caption = paste0("Data Table for '", fyc17_18_19x_age_race.title, " ", fyc17_18_19x_age_race.subtitle, "'")) %>% 
+    kable_classic_2(full_width = F, html_font = "Arial") %>% 
+    footnote(general = "From MEPS' Precision Standards Guidelines:",
+             symbol = c("Estimate can be reported but flagged with an * to indicate that its precision is questionable.", "Estimate should not be reported or displayed in tables due to extremely large sampling error."))
+
+# Render data table
+fyc17_18_19x_age_race_exp.table
+```
+
+
+```{r start-here-Exp_Marriage_Class_And_Race_Ethnicity, echo=FALSE}
 
 fyc18_19x_age_povcat_exp <- svyby(~TOTEXPYY+RXEXPYY, by = ~AGE_GRP_2 + POVCAT_DSC + SSC_DSC, FUN = svymean, design = mepsdsgn) %>% 
   rename("est.TOTEXPYY"="TOTEXPYY",
@@ -503,7 +897,7 @@ fyc18_19x_demo_gg4e <- fyc18_19x_age_povcat_exp %>%
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Income Level",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
@@ -556,7 +950,7 @@ fyc18_19x_age_ssc_chronics_gg <- fyc18_19x_age_ssc_chronics %>%
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Marriage Classification",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
@@ -580,7 +974,7 @@ fyc18_19x_age_race_chronics_gg <- fyc18_19x_age_race_chronics %>%
        x = "Age Grouping",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Race and Ethnicity",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
@@ -623,7 +1017,7 @@ fyc18_19x_age_famsize_exp_gg1 <- fyc18_19x_age_famsize_exp %>%
        x = "Family Size",
        y = "Individual Healthcare Spend (Survey Weighted)",
        fill = "Marriage Classification",
-       caption = "MEPS 2018 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "MEPS 2017 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
