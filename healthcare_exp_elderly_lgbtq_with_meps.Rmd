@@ -1,10 +1,11 @@
 ---
-title: "Healthcare Experiences of Elderly LGBTQ+ Individuals in the US: A Visual Analysis Using Medical Expenditure Panel Survey (MEPS) Data"
-
+title: "Healthcare Experiences of Elderly LGBTQ+ Individuals in the US"
+subtitle: "A Visual Analysis Using Medical Expenditure Panel Survey (MEPS) Data"
 author: C. Seth Lester, ASA, MAAA ([Seth.Lester@milliman.com](mailto:seth.lester@milliman.com)) <br>
-date: 6 July 2023
-output: github_document
-always_allow_html: true
+#output: github_document
+output: 
+  word_document:
+    reference_docx: REFDOC.docx
 ---
 
 ```{r Initial_Setup, include=FALSE}
@@ -13,11 +14,13 @@ always_allow_html: true
 knitr::opts_chunk$set(
  fig.align='center',
  echo=FALSE,
- scientific=FALSE
+ scientific=FALSE,
+ fig.asp = 1.168
 )
 
 # Suppress any and all console output (warnings and messages)
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
+
 
 # This chunk consists of all package installs and other environment setup considerations that should be run only once. The use of if statements below ensures that packages which are already installed are not re-installed - however, if you have a very old version of these packages, you might need to reinstall with a newer version.
 
@@ -76,7 +79,7 @@ However, one piece of information that is glaringly absent from the survey respo
 
 However, since it is possible to use the survey metadata to identify respondents who are spouses of one another, and because MEPS provides the self-reported gender of each respondent within each family unit and household, this approach can be used to create a data set of all married respondents, and furthermore, a label indicating which married respondents are in same-gender marriages, which serves as a proxy indicator of LGBTQ+ identity for the purposes of this analysis.
 
-The R code that performs this analysis and prepares the data tables visualizations that follow is available on [my personal Github site](https://github.com/bentwheel/lgbtq-retirement-meps-analysis).
+The R code that performs this analysis and prepares this document is available on [my personal Github site](https://github.com/bentwheel/lgbtq-retirement-meps-analysis).
 
 ```{r Preprocessing_Step_1, include=FALSE}
 
@@ -133,7 +136,8 @@ In this essay, we will consider and even see some evidence supporting the possib
 In most cases, the MEPS precision guidelines referenced earlier require that any mean, count, ratio, etc. of categorical indicators (such as race, gender, etc.) or numeric variables (such as "total healthcare expenditures") computed for any subpopulation in the MEPS data adhere to two restrictions:
 
 1. The underlying sample data from which the estimates are derived should consist of at least 60 sampling units (in our case, individual respondents).
-2. The relative standard error (RSE) corresponding to any estimate of a statistic of interest, such as a mean, count, or ratio, must absolutely not exceed 0.5. If so, it should not be displayed. Furthermore, if the RSE of the corresponding population-level estimate exceeds 0.3, it must be called out in any charts or tables as potentially spurious. Relative standard error can be computed as $$ RSE = \frac{Std. Err}{Estimate} $$ and is displayed as a percentage in the data tables in [Appendix A](#-appendix-a-data-tables) for all population-level estimates computed in this essay. 
+2. The relative standard error (RSE) corresponding to any estimate of a statistic of interest, such as a mean, count, or ratio, must absolutely not exceed 0.5. If so, it should not be displayed. Furthermore, if the RSE of the corresponding population-level estimate exceeds 0.3, it must be called out in any charts or tables as potentially spurious. Relative standard error can be computed as $$ RSE = \frac{Std. Err.}{Estimate} $$ and is displayed as a percentage in data tables for all population-level estimates computed in this essay. 
+
 
 ```{r count_individ_in_sample_unwt_nopool, echo=FALSE, fig.cap='Table 1: Counts of Individuals in Sample Before Pooling Across Years'}
 
@@ -142,12 +146,12 @@ custom_palette <- c("#0078D4", "#00A562", "#FFA100", "#50BDFF", "#74BF60", "#FFC
 
 # Table options
 set_flextable_defaults(
-  font.size = 8, font.family = "Arial",
+  font.size = 6.5, font.family = "Arial",
   font.color = "#333333",
   table.layout = "autofit",
   border.color = "gray",
-  padding.top = 1, padding.bottom = 1,
-  padding.left = 2, padding.right = 2,
+  padding.top = 2, padding.bottom = 2,
+  padding.left = 3, padding.right = 3,
   digits = 0,
   decimal.mark = ".",
   big.mark = ",")
@@ -230,9 +234,12 @@ count_individ_in_sample_unwt_nopool.table <- count_individ_in_sample_unwt_nopool
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
 
+# Then we render the table.
+count_individ_in_sample_unwt_nopool.table
 ```
 
-```{r count_individ_in_sample_unwt_nopool_plot, echo=FALSE, fig.cap='Fig 2: Counts of Individuals in Sample Before Pooling Across Years'}
+```{r count_individ_in_sample_unwt_nopool_plot, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), fig.cap='Fig. 2: Counts of Individuals in Sample Before Pooling Across Years'}
+
 # Next we create the visualization based on the data table
 count_individ_in_sample_unwt_nopool.plot <- count_individ_in_sample_unwt_nopool.data %>% 
   ggplot(mapping = aes(x = `MEPS Survey Year`,
@@ -243,12 +250,13 @@ count_individ_in_sample_unwt_nopool.plot <- count_individ_in_sample_unwt_nopool.
   geom_hline(aes(yintercept = 60, linetype = "n = 60"), color= 'red') +
   scale_linetype_manual(name = "Required MEPS Sample Size", values = c(2, 1), 
                         guide = guide_legend(override.aes = list(color = c("red")))) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 1, scales="free_y", labeller = label_wrap_gen(width = 36, multi_line = TRUE)) +
   labs(title=count_individ_in_sample_unwt_nopool.title,
        subtitle=count_individ_in_sample_unwt_nopool.subtitle,
-       caption = "Source: MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+       caption = "Source: MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)",
+       y = "Number of Respondents") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
@@ -262,7 +270,7 @@ Additionally, there should also be some concern about the statistical validity o
 
 As a validation exercise, we will compute population-level estimates of total counts of individuals in same-gender marriages below, and then compare these results to estimates of total counts of individuals in same-gender marriages drawn from survey data not related to MEPS.  In the following table, we can see the computed population-level estimates for the total number of married individuals within the United States, broken out by MEPS survey year.
 
-```{r count_individ_in_sample_wt_nopool, echo=FALSE}
+```{r count_individ_in_sample_wt_nopool, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), fig.cap='Fig. 3: Population-level Estimates Before Pooling Across Years'}
 
 # Visualizations appear in several steps. 
 # First, the title:
@@ -281,7 +289,7 @@ count_individ_in_sample_wt_nopool.plot <- count_individ_in_sample_wt_nopool.data
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 1, scales="free_y", labeller = label_wrap_gen(width = 36, multi_line = TRUE)) +
   labs(title=count_individ_in_sample_wt_nopool.title,
@@ -301,7 +309,7 @@ Please note that each of the solid bars in the data visualizations within this e
 In lay terms, you can imagine each solid bar as representing the "true" population measure, but because this chart is presenting an *estimate* of the "true" population measure based on survey data, you should interpret the bar to be "fuzzy" in length but still "almost certainly" (95%) contained within the boundaries of the error bars. In other words, we are confident at a 95% level that the "true" population-level measure of interest, if we were able to survey the entire US population, falls somewhere in between the two extreme points of the associated error bar.
 
 ## Validating Population-level Estimates
-As you inspect the data visualizations in this essay, please refer to the accompanying data table for the respective visualizations in [Appendix A](#-appendix-a-data-tables) for additional information about the estimates or their variability and statistical validity. Throughout the course of this essay, I will take every opportunity to cross-reference population-level estimates derived from MEPS data against available 3rd-party data sources in order to provide some level of external validation.
+As you inspect the data visualizations in this essay, please refer to the accompanying data table that precedes the visualizations for additional information about the estimates or their variability and statistical validity. Throughout the course of this essay, I will take every opportunity to cross-reference population-level estimates derived from MEPS data against available 3rd-party data sources in order to provide some level of external validation.
 
 Let us take for example the data from 2016, which represents the US population one year after the landmark Supreme Court decision in *Obergefell v. Hodges* that effectively legalized same-gender marriages across the US. Same-gender marriages were already legal in several, but not all, US geographies at the time. In the visualization and accompanying data table above, we see that the population-level estimate of the number of individuals ages 18 - 64 in same-gender marriages in the US is centered at 982,877 with a 95% confidence interval spanning from 666,223 to 1,299,532. The corresponding estimate for individuals in same-gender marriages ages 65 and up is 167,152, and is marked as potentially spurious due to a high RSE (relative standard error), largely as a result of small sample cardinality for this particular subpopulation.
 
@@ -309,9 +317,9 @@ One external source we can use to externally validate this estimate is the [Amer
 
 Also note that, for each year of MEPS data, the 95% confidence interval around the population-level estimates of the total number married individuals *not* in same-gender marriages is far smaller than it is for the estimate of the count of individuals in same-gender marriages, due to the fact that the latter subpopulation is sampled far less frequently in the underlying data than the former. In fact, in some years, the representative sample is so small for same-gender married individuals over age 65 that the computed lower bound of the 95% confidence interval extends into negative territory, which is nonsensical. Avoiding this kind of nonsensical presentation of statistical variability around an estimate derived from MEPS data is the primary reasoning given by MEPS for imposing the RSE restriction in their statistical precision guidelines.
 
-Displaying nonsensical error bars on the following visualization is done for explanatory purposes only. Going forward, subsequent data visualizations in this essay will be constructed by suppressing any and all subgroups in which the standard error of the population-level estimate exceeds the 50% RSE threshold specified in the MEPS statistical precision guidelines (denoted in corresponding data tables by the symbol "†").
+Displaying nonsensical error bars on the following visualization is done for explanatory purposes only. Going forward, subsequent data visualizations in this essay will be constructed by suppressing any and all subgroups in which the standard error of the population-level estimate exceeds the 50% RSE threshold specified in the MEPS statistical precision guidelines (denoted in accompanying data tables by the symbol "†").
 
-```{r count_individ_in_sample_unwt_pool, echo=FALSE}
+```{r count_individ_in_sample_unwt_pool, echo=FALSE, fig.height=grid::unit(6*1.618, "inches"), fig.width=grid::unit(6, "inches")}
 # Set table output format to HTML for easier rendering for data table presentations:
 options(knitr.table.format = "html") 
 
@@ -361,7 +369,11 @@ count_individ_in_sample_unwt_pool.table <- count_individ_in_sample_unwt_pool.dat
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
 
+count_individ_in_sample_unwt_pool.table
+```
 
+
+```{r count_individ_in_sample_unwt_pool_plot, echo=FALSE, fig.height=grid::unit(6*1.618, "inches"), fig.width=grid::unit(6, "inches"), fig.cap='Fig. 4: Counts of Individuals in Sample After Pooling Across Years'}
 
 count_individ_in_sample_unwt_pool.plot <- count_individ_in_sample_unwt_pool.data %>% 
   ggplot(mapping = aes(x = `Age Group`,
@@ -372,7 +384,7 @@ count_individ_in_sample_unwt_pool.plot <- count_individ_in_sample_unwt_pool.data
   geom_hline(aes(yintercept = 60, linetype = "n = 60"), color= 'red') +
   scale_linetype_manual(name = "Required MEPS Sample Size", values = c(2, 1), 
                         guide = guide_legend(override.aes = list(color = c("red")))) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 1, scales="free_y", labeller = label_wrap_gen(width = 36, multi_line = TRUE)) +
   labs(title=count_individ_in_sample_unwt_pool.title,
@@ -393,11 +405,11 @@ MEPS prescribes a methodology for pooling across multiple data years within [the
 
 Once pooling from 2014 - 2019 is completed, we can see that both age groups in the same-gender marriage subpopulation meet the minimum sample size of 60 required by the MEPS statistical precision guidelines (*n* = 435 for the 18 - 64 age band, *n* = 62 for the over 65 age band). However, even with over 60 respondents, we are likely to encounter a good deal of variability around the estimates of measurements for the subpopulations of which these respondents are representative.
 
-```{r count_individ_in_sample_wt_pool, echo=FALSE}
+```{r count_individ_in_sample_wt_pool, echo=FALSE, fig.height=grid::unit(6*1.618, "inches"), fig.width=grid::unit(6, "inches"), fig.cap='Fig. 5: Population-level Estimates After Pooling Across Years'}
 
 # Visualizations appear in several steps. 
 # First, the title:
-count_individ_in_sample_wt_pool.title <- "Weighted Population Estimates After Pooling Across Years"
+count_individ_in_sample_wt_pool.title <- "Population-level Estimates After Pooling Across Years"
 count_individ_in_sample_wt_pool.subtitle <- "By Survey Year, Marriage Classification, and Age Group"
 
 # Underlying was already computed in the previous chunk
@@ -412,7 +424,7 @@ count_individ_in_sample_wt_pool.plot <- count_individ_in_sample_unwt_pool.data %
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 1, scales="free_y", labeller = label_wrap_gen(width = 36, multi_line = TRUE)) +
   labs(title=count_individ_in_sample_wt_pool.title,
@@ -445,7 +457,7 @@ print(paste0("The 95% confidence interval around this estimate spans from ", sca
 
 Once again, we can compare these estimates to the [findings from the American Community Survey for 2019](https://www.census.gov/content/dam/Census/library/publications/2021/acs/acsbr-005.pdf) which reports the total estimated count of same-sex married individuals at 1,136,220 (two times the number of same-sex married couples *households* reported in Table 1, on page 2), which falls relatively close to the center of the 95% confidence interval around our population-level estimate for the same statistic.
 
-```{r marriage_class_and_gender, echo=FALSE}
+```{r marriage_class_and_gender, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -501,7 +513,8 @@ marriage_class_and_gender.table <- marriage_class_and_gender.data %>%
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
   
-
+# Then we render the table.
+marriage_class_and_gender.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 marriage_class_and_gender.plot <- marriage_class_and_gender.data %>% 
@@ -512,7 +525,7 @@ marriage_class_and_gender.plot <- marriage_class_and_gender.data %>%
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::percent) +
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_gender.title,
@@ -531,7 +544,7 @@ marriage_class_and_gender.plot
 ```
 
 
-```{r marriage_class_and_plan_coverage}
+```{r marriage_class_and_plan_coverage, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -587,7 +600,8 @@ marriage_class_and_plan_coverage.table <- marriage_class_and_plan_coverage.data 
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
 
-
+# Then we render the table.
+marriage_class_and_plan_coverage.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 marriage_class_and_plan_coverage.plot <- marriage_class_and_plan_coverage.data %>% 
@@ -599,7 +613,7 @@ marriage_class_and_plan_coverage.plot <- marriage_class_and_plan_coverage.data %
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::percent) +
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_plan_coverage.title,
@@ -617,7 +631,7 @@ marriage_class_and_plan_coverage.plot
 ```
 
 
-```{r marriage_class_and_race_ethnicity}
+```{r marriage_class_and_race_ethnicity, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -672,7 +686,8 @@ marriage_class_and_race_ethnicity.table <- marriage_class_and_race_ethnicity.dat
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
 
-
+# Then we render the table.
+marriage_class_and_race_ethnicity.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 marriage_class_and_race_ethnicity.plot <- marriage_class_and_race_ethnicity.data %>% 
@@ -684,7 +699,7 @@ marriage_class_and_race_ethnicity.plot <- marriage_class_and_race_ethnicity.data
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::percent) +
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_race_ethnicity.title,
@@ -702,7 +717,7 @@ marriage_class_and_race_ethnicity.plot
 ```
 
 
-```{r marriage_class_and_income}
+```{r marriage_class_and_income, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -757,7 +772,8 @@ marriage_class_and_income.table <- marriage_class_and_income.data %>%
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
   
-
+# Then we render the table.
+marriage_class_and_income.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 marriage_class_and_income.plot <- marriage_class_and_income.data %>% 
@@ -769,7 +785,7 @@ marriage_class_and_income.plot <- marriage_class_and_income.data %>%
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::percent) +
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_income.title,
@@ -812,7 +828,7 @@ Validation Against:
 https://www.kff.org/other/state-indicator/emergency-room-visits-by-ownership/
 
 
-```{r er_util_marriage_class}
+```{r er_util_marriage_class, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -866,7 +882,8 @@ er_util_marriage_class.table <- er_util_marriage_class.data %>%
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
 
-
+# Then we render the table.
+er_util_marriage_class.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 er_util_marriage_class.plot <- er_util_marriage_class.data %>% 
@@ -876,7 +893,7 @@ er_util_marriage_class.plot <- er_util_marriage_class.data %>%
   geom_bar(stat="identity", position="dodge", fill=custom_palette[1]) +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=er_util_marriage_class.title,
@@ -899,7 +916,7 @@ https://www.kff.org/other/state-indicator/inpatient-days-by-ownership/?currentTi
 
 Reported on HCA earnings call - an important financial metric!
 
-```{r inpatient_los_marriage_class}
+```{r inpatient_los_marriage_class, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -953,7 +970,8 @@ inpatient_los_marriage_class.table <- inpatient_los_marriage_class.data %>%
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
 
-
+# Then we render the table.
+inpatient_los_marriage_class.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 inpatient_los_marriage_class.plot <- inpatient_los_marriage_class.data %>% 
@@ -963,7 +981,7 @@ inpatient_los_marriage_class.plot <- inpatient_los_marriage_class.data %>%
   geom_bar(stat="identity", position="dodge", fill=custom_palette[2]) +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=inpatient_los_marriage_class.title,
@@ -985,7 +1003,7 @@ In the 2022 Inflation Reduction Act signed into law by President Biden, [several
 
 A substantial portion of the total medical expenditures incurred by individuals in retirement are attributable to pharmacy spend, as we are able to see in the visualizations of total healthcare spend above, which include breakout estimates of total individual healthcare spend as well as RX spend alone. Across most socioeconomic strata, racial/ethnicity boundaries, and other demographic classifiers, individuals age 65 and up appear to spend more money on pharmaceutical therapies than their younger counterparts who are in their working years of adulthood.
 
-```{r exp_marriage_class}
+```{r exp_marriage_class, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -1041,7 +1059,8 @@ exp_marriage_class.table <- exp_marriage_class.data %>%
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
   
-
+# Then we render the table.
+exp_marriage_class.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 exp_marriage_class.plot <- exp_marriage_class.data %>% 
@@ -1052,7 +1071,7 @@ exp_marriage_class.plot <- exp_marriage_class.data %>%
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::dollar) +
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=exp_marriage_class.title,
@@ -1072,7 +1091,7 @@ exp_marriage_class.plot
 
 lorem ipsum drug utilization
 
-```{r rx_util_marriage_class}
+```{r rx_util_marriage_class, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -1125,7 +1144,8 @@ rx_util_marriage_class.table <- rx_util_marriage_class.data %>%
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))  
  
-
+# Then we render the table.
+rx_util_marriage_class.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 rx_util_marriage_class.plot <- rx_util_marriage_class.data %>% 
@@ -1135,7 +1155,7 @@ rx_util_marriage_class.plot <- rx_util_marriage_class.data %>%
   geom_bar(stat="identity", position="dodge", fill=custom_palette[3]) +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=rx_util_marriage_class.title,
@@ -1160,7 +1180,7 @@ Senior citizens often make use of low-cost generic medications to manage their c
 
 Type 2 diabetes, high cholesterol, and hypertension are three of the leading causes of many other high-cost and potentially avoidable medical complications. Therefore, if senior citizens are able to manage these conditions with regular visits to their primary care providers and by adherence to low-cost drug therapies such as the drugs discussed above, then seniors are less likely to incur potentially avoidable medical costs down the line, which can ultimately help safeguard their their financial security and well-being in retirement.
 
-```{r chronic_cond_marriage_class}
+```{r chronic_cond_marriage_class, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -1218,6 +1238,8 @@ chronic_cond_marriage_class.table <- chronic_cond_marriage_class.data %>%
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))  
 
+chronic_cond_marriage_class.table
+
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 chronic_cond_marriage_class.plot <- chronic_cond_marriage_class.data %>% 
   filter(rse_flag != "†") %>% 
@@ -1227,7 +1249,7 @@ chronic_cond_marriage_class.plot <- chronic_cond_marriage_class.data %>%
   geom_bar(stat="identity", position="dodge") +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::percent) +
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=chronic_cond_marriage_class.title,
@@ -1254,7 +1276,7 @@ https://pubmed.ncbi.nlm.nih.gov/29470115/
 
 For a number of reasons not discussed further here, the family size of families that include individuals within same-sex marriages is likely to be smaller than that of their counterparts in marriages not regarded as same-sex. As such, it is worth exploring how family size can impact the total individual healthcare spend across age groups.
 
-```{r exp_vs_famsize, echo=FALSE}
+```{r exp_vs_famsize, echo=FALSE, fig.height=grid::unit(6, "inches"), fig.width=grid::unit(6*1.618, "inches"), scientific=FALSE}
 
 # Visualizations appear in several steps. 
 
@@ -1308,7 +1330,8 @@ exp_vs_famsize.table <- exp_vs_famsize.data %>%
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))  
   
-
+# Then we render the table.
+exp_vs_famsize.table
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 exp_vs_famsize.plot <- exp_vs_famsize.data %>% 
@@ -1318,7 +1341,7 @@ exp_vs_famsize.plot <- exp_vs_famsize.data %>%
   geom_bar(stat="identity", position="dodge", fill=custom_palette[1]) +
   geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
                 position=position_dodge(.9)) +
-  theme_bw(base_size = 9) +
+  theme_bw(base_size = 12, base_family = "Arial", base_rect_size = 8/22, base_line_size = 8/22) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=exp_vs_famsize.title,
@@ -1355,22 +1378,4 @@ And while the particular method I’ve demonstrated in this paper for identifyin
 
 Finally, this sort of work encourages discussions that broaden our understanding of how systemic disparities act with intersectionality among other groups and subpopulations. And while understanding the concept of intersectionality is one thing, being able to quantify the result of intersectional disparate outcomes, even if the data isn’t perfect, is entirely more useful.
 
-# Appendix A: Data Tables
 
-```{r appendix_a, echo=FALSE}
-
-# Then we render the tables
-count_individ_in_sample_unwt_nopool.table
-count_individ_in_sample_unwt_pool.table
-marriage_class_and_gender.table
-marriage_class_and_plan_coverage.table
-marriage_class_and_race_ethnicity.table
-marriage_class_and_income.table
-er_util_marriage_class.table
-inpatient_los_marriage_class.table
-exp_marriage_class.table
-rx_util_marriage_class.table
-chronic_cond_marriage_class.table
-exp_vs_famsize.table
-
-```
