@@ -1360,17 +1360,17 @@ Finally, this sort of work encourages discussions that broaden our understanding
 ```{r appendix_a, echo=FALSE}
 
 # Then we render the tables
-count_individ_in_sample_unwt_nopool.table
-count_individ_in_sample_unwt_pool.table
-marriage_class_and_gender.table
-marriage_class_and_plan_coverage.table
-marriage_class_and_race_ethnicity.table
-marriage_class_and_income.table
-er_util_marriage_class.table
-inpatient_los_marriage_class.table
-exp_marriage_class.table
-rx_util_marriage_class.table
-chronic_cond_marriage_class.table
-exp_vs_famsize.table
+knitr::include_graphics(count_individ_in_sample_unwt_nopool.table %>% save_as_image(here::here("./tables/tbl1.png")))
+knitr::include_graphics(count_individ_in_sample_unwt_pool.table %>% save_as_image(here::here("./tables/tbl2.png")))
+knitr::include_graphics(marriage_class_and_gender.table %>% save_as_image(here::here("./tables/tbl3.png")))
+knitr::include_graphics(marriage_class_and_plan_coverage.table %>% save_as_image(here::here("./tables/tbl4.png")))
+knitr::include_graphics(marriage_class_and_race_ethnicity.table %>% save_as_image(here::here("./tables/tbl5.png")))
+knitr::include_graphics(marriage_class_and_income.table %>% save_as_image(here::here("./tables/tbl6.png")))
+knitr::include_graphics(er_util_marriage_class.table %>% save_as_image(here::here("./tables/tbl7.png")))
+knitr::include_graphics(inpatient_los_marriage_class.table %>% save_as_image(here::here("./tables/tbl8.png")))
+knitr::include_graphics(exp_marriage_class.table %>% save_as_image(here::here("./tables/tbl9.png")))
+knitr::include_graphics(rx_util_marriage_class.table %>% save_as_image(here::here("./tables/tbl10.png")))
+knitr::include_graphics(chronic_cond_marriage_class.table %>% save_as_image(here::here("./tables/tbl11.png")))
+knitr::include_graphics(exp_vs_famsize.table %>% save_as_image(here::here("./tables/tbl12.png")))
 
 ```
