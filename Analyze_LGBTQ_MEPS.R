@@ -1,5 +1,22 @@
 # This R Script is only intended to be called from the 'README.Rmd' Preprocessing Chunk and not intended to run on a standalone basis.
 
+# This chunk consists of all package installs and other environment setup considerations that should be run only once. The use of if statements below ensures that packages which are already installed are not re-installed - however, if you have a very old version of these packages, you might need to reinstall with a newer version.
+
+# Invoke required libraries - install them in the User package library if not already installed.
+if(!require(devtools)) { install.packages("devtools"); library(devtools) }
+if(!require(survey)) { install.packages("survey"); library(survey) }
+if(!require(foreign)) { install.packages("foreign"); library(foreign) }
+if(!require(haven)) { install.packages("haven"); library(haven) }
+if(!require(tidyverse)) { install.packages("tidyverse"); library(tidyverse) }
+if(!require(flextable)) { install.packages("flextable"); library(flextable) }
+if(!require(scales)) { install.packages("scales"); library(scales) }
+if(!require(here)) { install.packages("here"); library(here) }
+
+# Use devtools to download custom MEPS dataset interface package from Github if it is not already installed.
+# Fore more information on the MEPS package and how to use it, refer to the following URL:
+# https://github.com/HHS-AHRQ/MEPS/tree/master/R#all-data-years-using-the-meps-package
+if(!require(MEPS)) { devtools::install_github("e-mitchell/meps_r_pkg/MEPS"); library(MEPS) }
+
 # Set options to deal with lonely PSUs. A PSU is a Primary Sampling Unit. Primary Sampling Units are divided among several sampling strata. The MEPS survey design package provides appropriate sampling weights for each strata in order for each sampling unit to be reweighted in proportion to the POI (Population of Interest - in this case ,the entire US).
 
 # In some cases, our analysis might necessitate drilling down to very small subpopulations, which will whittle down the membership of some strata to 1 or fewer members. In this case, we might encounter some strata with a single member - a "lonely PSU" - at which point the Survey package will error out when computing the sample variance to determine the standard error for a particular statistic (mean, total sum, etc.) in our analyses. Setting this option will adjust the data in the single-PSU stratum so that it is centered at the entire sample mean instead of the particular stratum mean, which tends to be a more conservative computation of the variance and has the effect of contributing to a wider standard error estimate for any statistic of interest in the analysis.
@@ -91,7 +108,7 @@ count_married_individuals_in_sgm <- function(df) {
 
 fyc19_by_dufam  <- fyc19 %>% 
   # 1. Subsets only relevant columns out of the over roughly 1500 columns available.
-  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV19, REGION19, RACETHX, POVCAT19, RXEXP19, TOTEXP19, TOTSLF19, ERTOT19, IPNGTD19, HHTOTD19, RXTOT19, VARSTR, VARPSU, PERWT19F, MARRY19X, SPOUID19, FAMIDYR, FAMWT19F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX_M18) %>% 
+  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV19, REGION19, RACETHX, RACEV1X, HISPANX, RACEAX, RACEBX, RACEWX, POVLEV19, RXEXP19, TOTEXP19, TOTSLF19, ERTOT19, IPNGTD19, IPDIS19, HHTOTD19, RXTOT19, VARSTR, VARPSU, PERWT19F, MARRY19X, SPOUID19, FAMIDYR, FAMWT19F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, BPMLDX, ARTHDX, ASTHDX, CHDDX, ANGIDX, MIDX, OHRTDX, STRKDX, CANCERDX, CHOLDX, DIABDX_M18) %>% 
   # 2. As we will be pooling the FYC 2019 and 2018 files, we wish to rename fields with a '19' to a more general (e.g., 'YY') label. We will do the same with 2018 fields with names that include '18', 2017 fields with names that include '17', etc. Note that the field DIABDX_M18 contains responses to a survey question which is only administered to respondents aged 18 or over, so this field is renamed entirely for the sake of convenience and the '18' has nothing to do with the year 2018. This is also likewise true for the field PROBPY42. Finally, since we will be losing information about what year the column contains, we will add a row that identifies these rows as coming from the 2019 FYC file.
   rename(PERWTYYF=PERWT19F,
          MARRYYYX=MARRY19X,
@@ -103,8 +120,9 @@ fyc19_by_dufam  <- fyc19 %>%
          TOTEXPYY=TOTEXP19,
          RXEXPYY=RXEXP19,
          TOTSLFYY=TOTSLF19,
-         POVCATYY=POVCAT19,
+         POVLEVYY=POVLEV19,
          ERTOTYY=ERTOT19,
+         IPDISYY=IPDIS19,
          IPNGTDYY=IPNGTD19,
          RXTOTYY=RXTOT19,
          HHTOTDYY=HHTOTD19,
@@ -125,7 +143,7 @@ nrow(fyc19_by_dufam) == 11924L
 
 # We will now perform the same steps of preprocessing for the 2014 - 2018 files in descending order.
 fyc18_by_dufam  <- fyc18 %>% 
-  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV18, REGION18, RACETHX, POVCAT18, RXEXP18, TOTEXP18, TOTSLF18, ERTOT18, IPNGTD18, HHTOTD18, RXTOT18, VARSTR, VARPSU, PERWT18F, MARRY18X, SPOUID18, FAMIDYR, FAMWT18F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX_M18) %>% 
+  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV18, REGION18, RACETHX, RACEV1X, HISPANX, RACEAX, RACEBX, RACEWX, POVLEV18, RXEXP18, TOTEXP18, TOTSLF18, ERTOT18, IPNGTD18, IPDIS18, HHTOTD18, RXTOT18, VARSTR, VARPSU, PERWT18F, MARRY18X, SPOUID18, FAMIDYR, FAMWT18F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, BPMLDX, ARTHDX, ASTHDX, CHDDX, ANGIDX, MIDX, OHRTDX, STRKDX, CANCERDX,  CHOLDX, DIABDX_M18) %>% 
   rename(PERWTYYF=PERWT18F,
          MARRYYYX=MARRY18X,
          SPOUIDYY=SPOUID18,
@@ -136,8 +154,9 @@ fyc18_by_dufam  <- fyc18 %>%
          TOTEXPYY=TOTEXP18,
          RXEXPYY=RXEXP18,
          TOTSLFYY=TOTSLF18,
-         POVCATYY=POVCAT18,
+         POVLEVYY=POVLEV18,
          ERTOTYY=ERTOT18,
+         IPDISYY=IPDIS18,
          IPNGTDYY=IPNGTD18,
          RXTOTYY=RXTOT18,
          HHTOTDYY=HHTOTD18,
@@ -153,7 +172,7 @@ fyc18_by_dufam  <- fyc18 %>%
 nrow(fyc18_by_dufam) == 12475L
 
 fyc17_by_dufam  <- fyc17 %>% 
-  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV17, REGION17, RACETHX, POVCAT17, RXEXP17, TOTEXP17, TOTSLF17, ERTOT17, IPNGTD17, HHTOTD17, RXTOT17, VARSTR, VARPSU, PERWT17F, MARRY17X, SPOUID17, FAMIDYR, FAMWT17F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX) %>% 
+  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV17, REGION17, RACETHX, RACEV1X, HISPANX, RACEAX, RACEBX, RACEWX, POVLEV17, RXEXP17, TOTEXP17, TOTSLF17, ERTOT17, IPNGTD17, IPDIS17, HHTOTD17, RXTOT17, VARSTR, VARPSU, PERWT17F, MARRY17X, SPOUID17, FAMIDYR, FAMWT17F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, BPMLDX, ARTHDX, ASTHDX, CHDDX, ANGIDX, MIDX, OHRTDX, STRKDX, CANCERDX,  CHOLDX, DIABDX) %>% 
   rename(PERWTYYF=PERWT17F,
          MARRYYYX=MARRY17X,
          SPOUIDYY=SPOUID17,
@@ -164,8 +183,9 @@ fyc17_by_dufam  <- fyc17 %>%
          TOTEXPYY=TOTEXP17,
          RXEXPYY=RXEXP17,
          TOTSLFYY=TOTSLF17,
-         POVCATYY=POVCAT17,
+         POVLEVYY=POVLEV17,
          ERTOTYY=ERTOT17,
+         IPDISYY=IPDIS17,
          IPNGTDYY=IPNGTD17,
          RXTOTYY=RXTOT17,
          HHTOTDYY=HHTOTD17,
@@ -180,7 +200,7 @@ fyc17_by_dufam  <- fyc17 %>%
 nrow(fyc17_by_dufam) == 12756L
 
 fyc16_by_dufam  <- fyc16 %>% 
-  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV16, REGION16, RACETHX, POVCAT16, RXEXP16, TOTEXP16, TOTSLF16, ERTOT16, IPNGTD16, HHTOTD16, RXTOT16, VARSTR, VARPSU, PERWT16F, MARRY16X, SPOUID16, FAMIDYR, FAMWT16F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX) %>% 
+  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV16, REGION16, RACETHX, RACEV1X, HISPANX, RACEAX, RACEBX, RACEWX, POVLEV16, RXEXP16, TOTEXP16, TOTSLF16, ERTOT16, IPNGTD16, IPDIS16, HHTOTD16, RXTOT16, VARSTR, VARPSU, PERWT16F, MARRY16X, SPOUID16, FAMIDYR, FAMWT16F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, BPMLDX, ARTHDX, ASTHDX, CHDDX, ANGIDX, MIDX, OHRTDX, STRKDX, CANCERDX,  CHOLDX, DIABDX) %>% 
   rename(PERWTYYF=PERWT16F,
          MARRYYYX=MARRY16X,
          SPOUIDYY=SPOUID16,
@@ -191,8 +211,9 @@ fyc16_by_dufam  <- fyc16 %>%
          TOTEXPYY=TOTEXP16,
          RXEXPYY=RXEXP16,
          TOTSLFYY=TOTSLF16,
-         POVCATYY=POVCAT16,
+         POVLEVYY=POVLEV16,
          ERTOTYY=ERTOT16,
+         IPDISYY=IPDIS16,
          IPNGTDYY=IPNGTD16,
          RXTOTYY=RXTOT16,
          HHTOTDYY=HHTOTD16,
@@ -207,7 +228,7 @@ fyc16_by_dufam  <- fyc16 %>%
 nrow(fyc16_by_dufam) == 13587L
 
 fyc15_by_dufam  <- fyc15 %>% 
-  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV15, REGION15, RACETHX, POVCAT15, RXEXP15, TOTEXP15, TOTSLF15, ERTOT15, IPNGTD15, HHTOTD15, RXTOT15, VARSTR, VARPSU, PERWT15F, MARRY15X, SPOUID15, FAMIDYR, FAMWT15F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX) %>% 
+  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV15, REGION15, RACETHX, RACEV1X, HISPANX, RACEAX, RACEBX, RACEWX, POVLEV15, RXEXP15, TOTEXP15, TOTSLF15, ERTOT15, IPNGTD15, IPDIS15, HHTOTD15, RXTOT15, VARSTR, VARPSU, PERWT15F, MARRY15X, SPOUID15, FAMIDYR, FAMWT15F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, BPMLDX, ARTHDX, ASTHDX, CHDDX, ANGIDX, MIDX, OHRTDX, STRKDX, CANCERDX,  CHOLDX, DIABDX) %>% 
   rename(PERWTYYF=PERWT15F,
          MARRYYYX=MARRY15X,
          SPOUIDYY=SPOUID15,
@@ -218,8 +239,9 @@ fyc15_by_dufam  <- fyc15 %>%
          TOTEXPYY=TOTEXP15,
          RXEXPYY=RXEXP15,
          TOTSLFYY=TOTSLF15,
-         POVCATYY=POVCAT15,
+         POVLEVYY=POVLEV15,
          ERTOTYY=ERTOT15,
+         IPDISYY=IPDIS15,
          IPNGTDYY=IPNGTD15,
          RXTOTYY=RXTOT15,
          HHTOTDYY=HHTOTD15,
@@ -234,7 +256,7 @@ fyc15_by_dufam  <- fyc15 %>%
 nrow(fyc15_by_dufam) == 13800L
 
 fyc14_by_dufam  <- fyc14 %>% 
-  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV14, REGION14, RACETHX, POVCAT14, RXEXP14, TOTEXP14, TOTSLF14, ERTOT14, IPNGTD14, HHTOTD14, RXTOT14, VARSTR, VARPSU, PERWT14F, MARRY14X, SPOUID14, FAMIDYR, FAMWT14F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, CHOLDX, DIABDX) %>% 
+  select(DUID, PID, DUPERSID, PANEL, SEX, AGELAST, INSCOV14, REGION14, RACETHX, RACEV1X, HISPANX, RACEAX, RACEBX, RACEWX, POVLEV14, RXEXP14, TOTEXP14, TOTSLF14, ERTOT14, IPNGTD14, IPDIS14, HHTOTD14, RXTOT14, VARSTR, VARPSU, PERWT14F, MARRY14X, SPOUID14, FAMIDYR, FAMWT14F, FAMRFPYR, FAMSZEYR, PROBPY42, HIBPDX, BPMLDX, ARTHDX, ASTHDX, CHDDX, ANGIDX, MIDX, OHRTDX, STRKDX, CANCERDX,  CHOLDX, DIABDX) %>% 
   rename(PERWTYYF=PERWT14F,
          MARRYYYX=MARRY14X,
          SPOUIDYY=SPOUID14,
@@ -245,8 +267,9 @@ fyc14_by_dufam  <- fyc14 %>%
          TOTEXPYY=TOTEXP14,
          RXEXPYY=RXEXP14,
          TOTSLFYY=TOTSLF14,
-         POVCATYY=POVCAT14,
+         POVLEVYY=POVLEV14,
          ERTOTYY=ERTOT14,
+         IPDISYY=IPDIS14,
          IPNGTDYY=IPNGTD14,
          RXTOTYY=RXTOT14,
          HHTOTDYY=HHTOTD14,
@@ -386,7 +409,7 @@ table((fyc14_to_19_by_dufam_flattened %>% filter(!is.na(same_gender_lgl)))$MARRY
 
 # At this stage, `fyc14_to_19_by_dufam_flattened` is a final flattened table with which to do our analysis. We will discuss the sample data using visualizations in the next chunk. Finally we will enrich our data with human-readable labels and factors now so that we can more easily apply these description fields to data visualizations later on.
 fyc14_to_19_by_dufam_w_desc <-  fyc14_to_19_by_dufam_flattened %>% 
-  # This is a variable to simply provide a sample unit basis to be applied to weighting for when we aggregate and determine counts by demographic cuts.
+  # This is a variable to simply provide a sample unit basis to be evaluated for when we aggregate and determine sample counts by demographic cuts.
   mutate(Individuals = 1) %>% 
   # In some cases, respondents do not include age and it cannot be imputed using other data sources. These respondents are coded with a -1 for age. We do not wish to include these responses in our analysis.
   filter(AGEYYX > 0) %>% 
@@ -437,36 +460,77 @@ fyc14_to_19_by_dufam_w_desc <-  fyc14_to_19_by_dufam_flattened %>%
                              T ~ as.character(REGIONYY))) %>% 
   arrange(REGIONYY) %>% 
   mutate(REG_DSC = forcats::fct_inorder(REG_DSC)) %>% 
-  mutate(RACE_DSC = case_when(RACETHX == 1 ~ "Hispanic",
+  mutate(RACETHX_DSC = case_when(RACETHX == 1 ~ "Hispanic",
                               RACETHX == 2 ~ "Non-Hispanic White Only",
                               RACETHX == 3 ~ "Non-Hispanic Black Only",
                               RACETHX == 4 ~ "Non-Hispanic Asian Only",
                               RACETHX == 5 ~ "Non-Hispanic Other Race or Multiple Race",
                               T ~ as.character(RACETHX))) %>% 
   arrange(RACETHX) %>% 
-  mutate(RACE_DSC = forcats::fct_inorder(RACE_DSC)) %>% 
-  mutate(POVCAT_DSC = case_when(POVCATYY == 1 ~ "0% to less than 100%",
-                                POVCATYY == 2 ~ "100% to less than 125%",
-                                POVCATYY == 3 ~ "125% to less than 200%",
-                                POVCATYY == 4 ~ "200% to less than 400%",
-                                POVCATYY == 5 ~ "400% or more",
-                                T ~ as.character(POVCATYY))) %>% 
-  arrange(POVCATYY) %>% 
-  mutate(POVCAT_DSC = forcats::fct_inorder(POVCAT_DSC)) %>%   
+  mutate(RACETHX_DSC = forcats::fct_inorder(RACETHX_DSC)) %>%
+  mutate(RACEV1X_DSC = case_when(RACEV1X == 1 ~ "White – No other race reported",
+                                 RACEV1X == 2 ~ "Black – No other race reported",
+                                 RACEV1X == 3 ~ "American Indian/Alaska Native – No other race reported",
+                                 RACEV1X == 4 ~ "Asian – No other race reported",
+                                 RACEV1X == 5 ~ "Native Hawaiian/Pacific Islande (NOT USED)",
+                                 RACEV1X == 6 ~ "Multiple races reported",
+                                 T ~ as.character(RACEV1X))) %>% 
+  arrange(RACEV1X) %>% 
+  mutate(RACEV1X_DSC = forcats::fct_inorder(RACEV1X_DSC)) %>%
+  mutate(HISPANX_DSC = case_when(HISPANX == 1 ~ "Hispanic",
+                                 HISPANX == 2 ~ "Not Hispanic",
+                                 T ~ as.character(HISPANX))) %>% 
+  arrange(HISPANX) %>% 
+  mutate(HISPANX_DSC = forcats::fct_inorder(HISPANX_DSC)) %>% 
+  mutate(RACEBX_DSC = case_when(RACEBX == 1 | RACEBX == 2 ~ "Black or Black and multi-race reported",
+                                RACEBX == 3 ~ "All other race assignments",
+                                 T ~ as.character(RACEBX))) %>% 
+  arrange(RACEBX) %>% 
+  mutate(RACEBX_DSC = forcats::fct_inorder(RACEBX_DSC)) %>% 
+  mutate(POVLEV_DSC = case_when(POVLEVYY < 100 ~ "Less than 100%",
+                                POVLEVYY >= 100 & POVLEVYY < 138 ~ "100% to less than 138%",
+                                POVLEVYY >= 138 & POVLEVYY < 150 ~ "138% to less than 150%",
+                                POVLEVYY >= 150 & POVLEVYY < 400 ~ "150% to less than 400%",
+                                POVLEVYY >= 400 ~ "400% or more",
+                                T ~ as.character(POVLEVYY))) %>% 
+  arrange(POVLEVYY) %>% 
+  mutate(POVLEV_DSC = forcats::fct_inorder(POVLEV_DSC, ordered=T)) %>%   
   mutate(HAS_EXP = if_else(TOTEXPYY > 0, "Had Healthcare Expenses", "Did Not Have Healthcare Expenses")) %>% 
   mutate(HAS_EXP = forcats::fct_inorder(HAS_EXP)) %>%   
+  mutate(HDDX_DSC = case_when(CHDDX == 1 | ANGIDX == 1 | MIDX == 1 | OHRTDX == 1 ~ "Diagnosed with Heart Disease", 
+                                T ~ "Not Diagnosed with Heart Disease, or Unknown/Inapplicable")) %>% 
+  mutate(HDDX_DSC = forcats::fct_inorder(HDDX_DSC)) %>%   
   mutate(DIABDX_DSC = case_when(DIABDX == 1 ~ "Diagnosed with Diabetes", 
                                 DIABDX == 2 ~ "Not Diagnosed with Diabetes", 
-                                T ~ "Unknown")) %>% 
+                                T ~ "Unknown or Inapplicable")) %>% 
   mutate(DIABDX_DSC = forcats::fct_inorder(DIABDX_DSC)) %>%   
+  mutate(STRKDX_DSC = case_when(STRKDX == 1 ~ "Diagnosed with having had a Stroke", 
+                                STRKDX == 2 ~ "Not Diagnosed with having had a Stroke", 
+                                T ~ "Unknown or Inapplicable")) %>% 
+  mutate(STRKDX_DSC = forcats::fct_inorder(STRKDX_DSC)) %>%   
   mutate(HIBPDX_DSC = case_when(HIBPDX == 1 ~ "Diagnosed with High Blood Pressure", 
                                 HIBPDX == 2 ~ "Not Diagnosed with High Blood Pressure", 
-                                T ~ "Unknown")) %>% 
+                                T ~ "Unknown or Inapplicable")) %>% 
   mutate(HIBPDX_DSC = forcats::fct_inorder(HIBPDX_DSC)) %>%   
   mutate(CHOLDX_DSC = case_when(CHOLDX == 1 ~ "Diagnosed with High Cholesterol", 
                                 CHOLDX == 2 ~ "Not Diagnosed with High Cholesterol", 
-                                T ~ "Unknown")) %>% 
+                                T ~ "Unknown or Inapplicable")) %>% 
   mutate(CHOLDX_DSC = forcats::fct_inorder(CHOLDX_DSC)) %>%   
+  mutate(ASTHDX_DSC = case_when(ASTHDX == 1 ~ "Diagnosed with Asthma", 
+                                ASTHDX == 2 ~ "Not Diagnosed with Asthma", 
+                                T ~ "Unknown or Inapplicable")) %>% 
+  mutate(ASTHDX_DSC = forcats::fct_inorder(ASTHDX_DSC)) %>% 
+  mutate(ARTHDX_DSC = case_when(ARTHDX == 1 ~ "Diagnosed with Arthritis", 
+                                ARTHDX == 2 ~ "Not Diagnosed with Arthritis", 
+                                T ~ "Unknown or Inapplicable")) %>% 
+  mutate(ARTHDX_DSC = forcats::fct_inorder(ARTHDX_DSC)) %>% 
+  mutate(CANCERDX_DSC = case_when(CANCERDX == 1 ~ "Diagnosed with Cancer", 
+                                  CANCERDX == 2 ~ "Not Diagnosed with Cancer", 
+                                T ~ "Unknown or Inapplicable")) %>% 
+  mutate(CANCERDX_DSC = forcats::fct_inorder(CANCERDX_DSC)) %>% 
+  mutate(ATLEASTONE_CHRONIC_DSC = case_when((CHDDX == 1 | ANGIDX == 1 | MIDX == 1 | OHRTDX == 1 | DIABDX == 1 | HIBPDX == 1 | CHOLDX == 1 | ASTHDX == 1 | ARTHDX == 1 | CANCERDX == 1 | STRKDX == 1) ~ "Diagnosed with one or more of these conditions", 
+                                            T ~ "Not diagnosed with one or more of these conditions, or Unknown/Inapplicable")) %>% 
+  mutate(CANCERDX_DSC = forcats::fct_inorder(CANCERDX_DSC)) %>% 
   mutate(SEX_DSC = if_else(SEX == 1, "Male", if_else(SEX == 2, "Female", "Unknown"))) %>% 
   mutate(SEX_DSC = forcats::fct_inorder(SEX_DSC)) %>%   
   mutate(SGM_DSC = case_when(same_gender_lgl == T ~ "Married Individuals in Same-Gender Marriages", 
@@ -483,15 +547,18 @@ fyc14_to_19_by_dufam_w_desc <-  fyc14_to_19_by_dufam_flattened %>%
   # Divide survey weights by two and store in a new "pooled weight" column so that we can still refer to specific-year-only data if we would like to do so for any particular analysis. Directions to adjust the analytic weight variable (PERWTYYF) by division by 6 (the number of pooled years, 2014 - 2019) are in section 4.0 of the Pooled Linkage file documentation, here:
   # https://meps.ahrq.gov/data_stats/download_data/pufs/h036/h36u20doc.shtml#2
   mutate(POOLWTYY = PERWTYYF / 6)
+
 rm(fyc14_to_19_by_dufam_flattened)
 
 # Join to Pooled Linkages file - this file ensures we are not "double counting" in our weighting in a way that would botch our standard error calculations from panel participants sampled across multiple years. More info on the linkage process can be found at the following URL, in section "3.0 Linking Instructions":
 linkage_sub <- linkage %>% 
   select(DUPERSID, PANEL, STRA9620, PSU9620)
+
 rm(linkage)
 
 fyc14_to_19_by_dufam_w_desc_weights <- fyc14_to_19_by_dufam_w_desc %>% 
   left_join(linkage_sub, by = c("DUPERSID", "PANEL"))
+
 rm(fyc14_to_19_by_dufam_w_desc)
 
 # Define the survey design - here we are using the pooled weights which were divided by two, and pooled ID/STRATA variables that were joined into our dataset, from the previous steps.
