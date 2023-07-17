@@ -156,14 +156,16 @@ In the data visualization below, the minimum sample threshold required by the ME
 custom_palette <- c("#0078D4", "#00A562", "#FFA100", "#50BDFF", "#74BF60", "#FFC800")
 
 # Table options
+init_flextable_defaults()
+
 set_flextable_defaults(
   font.size = 8, font.family = "Arial",
   background.color = "white",
   font.color = "#333333",
   table.layout = "autofit",
   border.color = "gray",
-  padding.top = 1, padding.bottom = 1,
-  padding.left = 2, padding.right = 2,
+  padding.top = 3, padding.bottom = 3,
+  padding.left = 4, padding.right = 4,
   digits = 0,
   decimal.mark = ".",
   big.mark = ",")
@@ -277,7 +279,7 @@ count_individ_in_sample_unwt_nopool.table <- count_individ_in_sample_unwt_nopool
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
 
-count_individ_in_sample_unwt_nopool.table
+knitr::include_graphics(count_individ_in_sample_unwt_nopool.table %>% save_as_image(here::here("./tables/tbl1.png")))
 
 ```
 
@@ -310,7 +312,7 @@ count_individ_in_sample_wt_nopool.plot <- count_individ_in_sample_wt_nopool.data
        y = "Population-level Estimate of Total Count",
        caption = "Source: MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 3))
+  guides(fill = guide_legend(nrow = 1))
 
 # Next, we render the visualization
 count_individ_in_sample_wt_nopool.plot
@@ -556,12 +558,12 @@ marriage_class_and_gender.plot <- marriage_class_and_gender.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_gender.title,
        subtitle=marriage_class_and_gender.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        y = "Population Estimate",
        fill = "Gender",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 3))
+  guides(fill = guide_legend(nrow = 1))
 
 # Next, we render the visualization
 marriage_class_and_gender.plot
@@ -657,12 +659,12 @@ marriage_class_and_plan_coverage.plot <- marriage_class_and_plan_coverage.data %
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_plan_coverage.title,
        subtitle=marriage_class_and_plan_coverage.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        y = "Population Estimate",
        fill = "Health Plan Coverage",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 3))
+  guides(fill = guide_legend(nrow = 1))
 
 # Next, we render the visualization
 marriage_class_and_plan_coverage.plot
@@ -750,7 +752,7 @@ marriage_class_and_race_ethnicity.plot <- marriage_class_and_race_ethnicity.data
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_race_ethnicity.title,
        subtitle=marriage_class_and_race_ethnicity.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        y = "Population Estimate",
        fill = "Race and Ethnicity",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
@@ -840,12 +842,12 @@ marriage_class_and_ethnicity.plot <- marriage_class_and_ethnicity.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_ethnicity.title,
        subtitle=marriage_class_and_ethnicity.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        y = "Population Estimate",
        fill = "Ethnicity",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 3))
+  guides(fill = guide_legend(nrow = 1))
 
 # Next, we render the visualization
 marriage_class_and_ethnicity.plot
@@ -924,12 +926,12 @@ marriage_class_and_race_black.plot <- marriage_class_and_race_black.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_race_black.title,
        subtitle=marriage_class_and_race_black.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        y = "Population Estimate",
        fill = "Black Racial Identity Reported",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 3))
+  guides(fill = guide_legend(nrow = 1))
 
 # Next, we render the visualization
 marriage_class_and_race_black.plot
@@ -1016,7 +1018,7 @@ marriage_class_and_income.plot <- marriage_class_and_income.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=marriage_class_and_income.title,
        subtitle=marriage_class_and_income.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        y = "Population Estimate",
        fill = "Income as % of FPL",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
@@ -1110,7 +1112,7 @@ er_util_marriage_class.plot <- er_util_marriage_class.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=er_util_marriage_class.title,
        subtitle=er_util_marriage_class.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        fill = "Annual ER Admits Per 1,000",
        y = "Annual ER Admits Per 1,000",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
@@ -1202,7 +1204,7 @@ inpatient_los_marriage_class.plot <- inpatient_los_marriage_class.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=inpatient_los_marriage_class.title,
        subtitle=inpatient_los_marriage_class.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        fill = "Annual Inpatient-Days Per 1,000",
        y = "Annual Inpatient-Days Per 1,000",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
@@ -1214,11 +1216,11 @@ inpatient_los_marriage_class.plot
 
 ```
 
-I again chose to include the panel containing estimates of this measure for unmarried individuals to once again highlight the fact that marital status is well-known in population health academic literature to be predictive of measures of length of stay in hospital inpatient facilities. [A study over 40 thousand adult hospital patients in 1988 - 1991](https://pubmed.ncbi.nlm.nih.gov/7503606/) found that, after controlling for illness severity, age, gender, race, and diagnosis type, "hospital charges and length of stay were 5% and 8% higher (P < .001), respectively, for unmarried than for married patients."
+I again chose to include the panel containing estimates of total length of stay for unmarried individuals to once again highlight the fact that marital status is well-known in population health academic literature to be predictive of measures of length of stay in hospital inpatient facilities. [A study over 40 thousand adult hospital patients in 1988 - 1991](https://pubmed.ncbi.nlm.nih.gov/7503606/) found that, after controlling for illness severity, age, gender, race, and diagnosis type, "hospital charges and length of stay were 5% and 8% higher (P < .001), respectively, for unmarried than for married patients."
 
 [A more recent study](https://journals.sagepub.com/doi/10.1177/2151459319898648) of just under 2,000 patients admitted to a hospital inpatient facility for orthopedic trauma found that "single and widowed patients experienced 1.36 and 1.3 times longer length of hospital stay thantheir married counterparts, respectively."
 
-Estimates of total length of stay for the cohort of individuals age 65 and over in same-gender marriages has a RSE that exceeds the MEPS-required threshold of 0.5 (please refer to the associated data table in Appendix A).
+Estimates of total length of stay for the cohort of individuals age 65 and over in same-gender marriages has a RSE that exceeds the MEPS-required threshold of 0.5 so it is suppressed from the data visualization above. (Please refer to the associated data table in [Appendix A](#appendix-a-data-tables) for additional information on this and all other visualizations in this essay.)
 
 ### Total Annual Healthcare Expenditures & Drug Costs
 
@@ -1296,12 +1298,12 @@ exp_marriage_class.plot <- exp_marriage_class.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=exp_marriage_class.title,
        subtitle=exp_marriage_class.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        fill = "Expense Type",
        y = "Population Estimate",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
-  guides(fill = guide_legend(nrow = 3))
+  guides(fill = guide_legend(nrow = 1))
 
 # Next, we render the visualization
 exp_marriage_class.plot
@@ -1309,13 +1311,13 @@ exp_marriage_class.plot
 
 ```
 
-This visualization has two key insights. First, that total pharmacy spend appears to be higher for elderly individuals. And second, that there appears to be a pronounced increase in both total healthcare spend and total pharmacy spend in the cohort of individuals age 18 - 64 in same-gender marriages as compared to the cohort of individuals age 18 - 64 not in same-gender marriages, and further analysis would need to consider age, race, and gender factors. 
+This visualization has two key insights. First, that total pharmacy spend appears to be higher for elderly individuals. And second, that there appears to be a difference in both total healthcare spend and total pharmacy spend between the cohort of individuals age 18 - 64 in same-gender marriages and the cohort of individuals age 18 - 64 not in same-gender marriages. Additional analysis of this difference should consider age, race, and gender factors.
 
-Additionally, LGBTQ+ individuals interested in starting a family can potentially face [large healthcare-related expenses](https://www.familyequality.org/resources/building-lgbtq-families-price-parenthood/) (in the tens of thousands of dollars) associated with various surrogacy approaches, in-vitro fertilization (IVF), or reciprocal IVF. Further analysis should also control for the potential added cost of procedures and drugs related to family planning.
+One explanation for this difference of expenditures could relate to the high costs faced by LGBTQ+ individuals interested in starting a family. There can be [large healthcare-related expenses](https://www.familyequality.org/resources/building-lgbtq-families-price-parenthood/) (in the tens of thousands of dollars) associated with various surrogacy approaches, in-vitro fertilization (IVF), or reciprocal IVF. Further analysis of this difference should also explore the degree to which high-cost family planning procedures and pharmacy therapies may contribute to the higher overall average healthcare spend in the cohort of individuals age 18 - 64 in same-gender marriages.
 
 ### Average Pharmacy Utilization
 
-The following visualization addresses average utilization of pharmaceutical therapies across our cohorts of interest by estimating the average number of fills or refills per individual, per year.
+The following visualization addresses average utilization of pharmaceutical therapies across our cohorts of interest by estimating the average number of fills or refills per individual in a year.
 
 ```{r rx_util_marriage_class}
 
@@ -1385,7 +1387,7 @@ rx_util_marriage_class.plot <- rx_util_marriage_class.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=rx_util_marriage_class.title,
        subtitle=rx_util_marriage_class.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        fill = "Annual RX Fills",
        y = "Annual RX Fills",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
@@ -1397,13 +1399,13 @@ rx_util_marriage_class.plot
 
 ```
 
-validated against:
-https://www.kff.org/health-costs/state-indicator/retail-rx-drugs-per-capita/
+The distributions of average pharmacy utilization per individual presented by the visualization above appear consistent with [the same measure reported by Kaiser Family Foundation](https://www.kff.org/health-costs/state-indicator/retail-rx-drugs-per-capita/).
 
 ## Prevalence of Chronic Conditions
+
 Senior citizens often make use of low-cost generic medications to manage their chronic health conditions such as diabetes, hyperlipidemia (high cholesterol), or hypertension (high blood pressure). Some examples of very common drugs include non-insulin blood glucose reducing agents like [metformin](https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=metformin) used for treating Type 2 Diabetes, statins like [atorvastatin](https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=atorvastatin) (brand name "Lipitor") used for treating high cholesterol, or ACE inhibitors like [lisinopril](https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=lisinopril) (brand names "Prinivil" or "Zestril") to treat hypertension. 
 
-Type 2 diabetes, high cholesterol, and hypertension are three of the leading causes of many other high-cost and potentially avoidable medical complications. Therefore, if senior citizens are able to manage these conditions with regular visits to their primary care providers and by adherence to low-cost drug therapies such as the drugs discussed above, then seniors are less likely to incur potentially avoidable medical costs down the line, which can ultimately help safeguard their their financial security and well-being in retirement.
+[Hypertension](https://pubmed.ncbi.nlm.nih.gov/29386200/), [type 2 diabetes](https://diabetesjournals.org/care/article/41/5/917/36518/Economic-Costs-of-Diabetes-in-the-U-S-in-2017), and [high cholesterol](https://pubmed.ncbi.nlm.nih.gov/27787352/) are clinical conditions that are frequently associated with individuals who incur healthcare expenditures at above average levels. Therefore, if senior citizens can manage these conditions with regular visits to their primary care provider(s) and by adherence to low-cost drug therapies such as the drugs listed above, then seniors are less likely to incur these potentially avoidable medical costs, ultimately helping them to safeguard their financial security and well-being in retirement.
 
 ```{r chronic_cond_marriage_class}
 
@@ -1477,7 +1479,7 @@ chronic_cond_marriage_class.plot <- chronic_cond_marriage_class.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=chronic_cond_marriage_class.title,
        subtitle=chronic_cond_marriage_class.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        fill = "Chronic Condition Diagnosis",
        y = "Prevalence",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
@@ -1490,14 +1492,104 @@ chronic_cond_marriage_class.plot
 
 ```
 
+The visualization above displays estimates of the prevalence of these select chronic conditions for our baseline and comparison cohorts. With the available sample, there does not appear to be differences in the distributions of prevalence of these chronic conditions that is worth noting.
+
+Also, MEPS tracks additional chronic conditions that are known to lead to higher-than-average costs for the healthcare system when these conditions are not clinically managed.
+
+```{r all_chronic_cond_marriage_class}
+
+# Visualizations appear in several steps. 
+
+# First, the title:
+all_chronic_cond_marriage_class.title <- "Average Prevalence of Major Chronic Conditions"
+all_chronic_cond_marriage_class.subtitle <-  "By Same-Gender Marriage Status and Age Group"
+
+# Next, we compute the data table for the underlying visualizations using the Survey package 
+
+all_chronic_cond_marriage_class.data <- svyby(~CHOLDX_DSC + HIBPDX_DSC + HDDX_DSC + ASTHDX_DSC + ARTHDX_DSC + CANCERDX_DSC + DIABDX_DSC + STRKDX_DSC,
+        by = ~SGM_DSC + AGE_GRP_3,
+        FUN = svymean,
+        design = fyc14_to_19_by_dufam_final_svydsn ) %>% 
+  pivot_longer(
+    cols = -c(SGM_DSC, AGE_GRP_3),
+    names_to = "measurement_level",
+    values_to = "value") %>% 
+  mutate(`Chronic Condition Status` = str_extract(measurement_level, "CHOLDX_DSC|HIBPDX_DSC|HDDX_DSC|ASTHDX_DSC|ARTHDX_DSC|CANCERDX_DSC|DIABDX_DSC|STRKDX_DSC"),
+         measurement = if_else(str_detect(measurement_level, "^se"), "se", "pct"),
+         measurement_level = str_replace(str_replace(measurement_level, "^se.", ""), `Chronic Condition Status`, "")) %>% 
+  filter(str_detect(measurement_level, "^Diagnosed")) %>% 
+  pivot_wider(names_from = "measurement", values_from = "value") %>% 
+  select(-`Chronic Condition Status`) %>% 
+  rename(`Chronic Condition Status`=measurement_level) %>% 
+  mutate(rse = se/pct) %>% 
+  mutate(rse_flag = case_when(rse > .5 ~ "†", 
+                              rse >= .3 & rse <= .5 ~ "*", 
+                              T ~ ""),
+         `95% CI Lower Bound` = pct+qnorm(.025)*se,
+         `95% CI Upper Bound` = pct+qnorm(.975)*se,
+         `Relative Standard Error (RSE)`= paste(scales::percent(se/pct), rse_flag)) %>% 
+  rename(`Standard Error`=se,
+         `Prevalence`=pct,
+         `Marriage Classification`=SGM_DSC,
+         `Age Group`=AGE_GRP_3) %>% 
+  ungroup() %>% 
+  filter(`Marriage Classification` != "Unmarried Individuals",
+         `Age Group` != "Under 18")  %>% 
+  arrange(`Prevalence`) %>% 
+  mutate(`Chronic Condition Status` = fct_inorder(`Chronic Condition Status`))
+  
+# Then, we create the publication table object for displaying the underlying data:
+all_chronic_cond_marriage_class.table <- all_chronic_cond_marriage_class.data %>% 
+  arrange(`Marriage Classification`, `Age Group`, `Chronic Condition Status`) %>% 
+  select(-rse, -rse_flag) %>% 
+   mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
+         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
+         `Prevalence` = scales::percent(`Prevalence`, accuracy=0.01),
+         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
+  flextable() %>% 
+  bold(part = "header", bold = TRUE) %>% 
+  colformat_double() %>% 
+  theme_box() %>% 
+  merge_v(j = ~ `Marriage Classification` + `Age Group` + `Chronic Condition Status`) %>% 
+  add_header_lines(paste0("Data Table for '", all_chronic_cond_marriage_class.title, " ", all_chronic_cond_marriage_class.subtitle, "'")) %>% 
+  add_footer_lines(paste0("From MEPS Precision Standards Guidelines:\n",
+                          "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
+                          "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))  
+
+# Next we create the visualization based on the data table, removing any lines with RSE > .5
+all_chronic_cond_marriage_class.plot <- all_chronic_cond_marriage_class.data %>% 
+  filter(rse_flag != "†") %>% 
+  ggplot(mapping = aes(x = `Age Group`,
+                       fill = `Chronic Condition Status`,
+                       y = `Prevalence`)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_errorbar(aes(ymin=`95% CI Lower Bound`, ymax=`95% CI Upper Bound`), width=.2,
+                position=position_dodge(.9)) +
+  theme_bw(base_size = 9) +
+  scale_y_continuous(labels = scales::percent) +
+  facet_wrap(~ `Marriage Classification`, ncol = 2, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
+  labs(title=all_chronic_cond_marriage_class.title,
+       subtitle=all_chronic_cond_marriage_class.subtitle,
+       x = "Age Group",
+       fill = "Chronic Condition Diagnosis",
+       y = "Prevalence",
+       caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
+  theme(legend.position = "bottom") +
+  guides(fill = guide_legend(ncol = 2))
+
+# Next, we render the visualization
+all_chronic_cond_marriage_class.plot
+
+
+```
+
+While once again, distributions of estimates of prevalence for all these major conditions do appear to be fairly consistent across our baseline and comparison cohorts, more analysis might be warranted in studying the lower prevalence of heart disease in the cohort of individuals age 65 and up in same-gender marriages, which appears to look much smaller than the estimate of prevalence for the cohort of individuals age 65 and up not in same-gender marriages. Further studies of this finding would need to appropriately control for race, as Black individuals face [substantially higher morbidity and mortality risks associated with cardiovascular disease](https://www.ahajournals.org/doi/full/10.1161/CIRCOUTCOMES.121.007917).
+
 ## Family Size Can Impact Healthcare Outcomes for Seniors
 
-One feature that can drive the total cost of care at the individual level is family size. Larger families within the same dwelling unit can help take care of one another when sick, coordinate transportation to and from sites where healthcare is provided, manage childcare duties so that adults are able to arrange for healthcare services, and so on. Several studies have shown a linkage between medication adherence and family size, particularly among families in low-income socioeconomic strata.
+One feature of a family unit that can drive the total cost of care at the individual level is family size. Larger families within the same dwelling unit can help take care of one another when sick, coordinate transportation to and from sites where healthcare is provided, manage childcare duties so that adults are able to arrange for healthcare services, and so on. On the contrary, saving for retirement is likely to be much more challenging when a couple is faced with the large number of additional expenditures associated with raising and taking care of children. 
 
-"Older Adults' Social Relationships and Health Care Utilization: A Systematic Review"
-https://pubmed.ncbi.nlm.nih.gov/29470115/
-
-For a number of reasons not discussed further here, the family size of families that include individuals within same-sex marriages is likely to be smaller than that of their counterparts in marriages not regarded as same-sex. As such, it is worth exploring how family size can impact the total individual healthcare spend across age groups.
+Several studies have shown a linkage between medication adherence and family support, particularly among families in low-income socioeconomic strata. In one study of 367 randomly sampled adult rural hospital patients diagnosed with type 2 diabetes, researchers found [a medium-to-high level of medication adherence associated with strong levels of family support](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8693738/). Another meta-analysis of literature found [evidence of association](https://pubmed.ncbi.nlm.nih.gov/29470115/) between weaker social relationships and increased rates of hospital readmission and longer hospital stays.
 
 ```{r exp_vs_famsize, echo=FALSE}
 
@@ -1568,7 +1660,7 @@ exp_vs_famsize.plot <- exp_vs_famsize.data %>%
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
   labs(title=exp_vs_famsize.title,
        subtitle=exp_vs_famsize.subtitle,
-       x = "Age Grouping",
+       x = "Age Group",
        y = "Family Size",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
@@ -1579,25 +1671,11 @@ exp_vs_famsize.plot
 
 ```
 
+Perhaps as expected, the estimate of average family size for the cohort of individuals in same-gender marriages age 18 - 64 is about one child less than the estimate of average family size for individuals age 18 - 64 not in same-gender marriages. And while the difference in estimates of family size between the two elderly cohorts appear to have non-overlapping confidence intervals, suggesting that this difference might be statistically significant between these subpopulations, estimates of the measures themselves do not appear to be substantially different.
+
 # Conclusion
 
-Due to the lack of data currently available that describes the healthcare experiences specific to LGBTQ+ populations, we must continue to be creative about how we source information that helps build policy and products to better strengthen the lives of LGBTQ+ individuals who are currently enjoying retirement, as well as those who will be retiring soon.
-
-
-NONE OF THESE ARE STATISTICALLY RIGOROUS BUT VISUAL ANALYSIS ALLOWS US TO EXPLORE WHERE MORE EFFORT IN RESEARCH IS USEFUL:
-
-What we know:
-* Marital status is an important predictor of health plan coverage status - in particular, an individual's uninsured status.
-* Race, ethnicity, and age are significant predictors of marital status.
-
-
-What we might explore further:
-* Do individuals age 18 - 64 in same-gender marriages have an overall lower uninsured rate versus individuals in the age 18 - 64 not in same-gender marriages cohort? Future research of this question should consider controlling for age, race and ethnicity as they are likely to be significant confounder measures.
-
-Could payers offer a "Family Plan" much like your wireless carrier does? Why do "Family Plans" have to be spousal?
-
-
-While we’ve only just skimmed the surface of what MEPS has to offer, MEPS provides an excellent cross section of data collected in a well-designed survey framework that can aid key decision makers as they go about analyzing the impacts that Social Determinants of Health have on retirement-related outcomes. 
+Due to the lack of data currently available that describes the healthcare experiences specific to LGBTQ+ populations, we must continue to be creative about sourcing information that can help build policy and insurance products to better prepare LGBTQ+ individuals for financial prosperity and well-being in retirement.
 
 Some examples of other potentially interesting variables in the context of examining retirement-related outcomes alongside the ones I’ve shown in this paper include:
 
@@ -1610,9 +1688,11 @@ ADRESP42        SAQ 12 MOS: DR SHOWED RESPECT
 PROBPY42        FAMILY HAVING PROB PAYING MEDICAL BILLS 
 ```
 
-And while the particular method I’ve demonstrated in this paper for identifying LGBTQ+ individuals and experiences certainly does have its flaws, we have to do the best we can with the information we have – and publicly available data on the needs of LGBTQ+ individuals at or near retirement age is, at times, frustratingly scarce.
+So while we’ve only just skimmed the surface of what MEPS has to offer, MEPS provides a large and useful amount of data, collected annually for nearly three decades, through a rigorous survey framework. As we saw in this essay, survey data can impose limitations on the degree of certainty in our findings, but on the other hand, surveys like MEPS can still be used to aid key decision-makers in analyzing the impacts that social determinants of health have on retirement-related outcomes for all cross-sections of the US elderly population.
 
-Finally, this sort of work encourages discussions that broaden our understanding of how systemic disparities act with intersectionality among other groups and subpopulations. And while understanding the concept of intersectionality is one thing, being able to quantify the result of intersectional disparate outcomes, even if the data isn’t perfect, is entirely more useful.
+While isolating MEPS respondents based on same-gender marriage status is one way of highlighting any differences in key healthcare measures between this population and non-LGBTQ+ populations, perhaps a better way of understanding these differences is simply by adding [SOGI](https://eca.state.gov/files/bureau/sogi_terminology.pdf) questions and terminology to the standard MEPS questionnaire. The US Census Bureau took this very same action in July 2021, when it began [surveying respondents for information on sexual orientation and gender identity in its Household Pulse Survey](https://www.census.gov/library/stories/2021/08/household-pulse-survey-updates-sex-question-now-asks-sexual-orientation-and-gender-identity.html). This very act of broadening the survey questionnaire led to [findings from the US Census Bureau](https://www.pbs.org/newshour/economy/the-census-bureaus-first-ever-data-on-lgbtq-people-indicates-deep-disparities) that LGBTQ+-identifying individuals were more likely to "have lost employment, not have enough to eat, be at elevated risk of eviction or foreclosure, and face difficulty paying for basic household expenses" as compared to their non-LGBTQ+ counterparts.
+
+We also have seen how important of a predictor that an individual's marital status can be for measures of certain risks that can lead to increased healthcare spend, such as measures of total inpatient length-of-stay, uninsured rates, rates of readmission, and emergency room utilization. And while there is likely a lot of correlation "noise" to be sorted out when analyzing the connection between marital status and health outcomes, particularly among potential confounding influences like race, age, and gender, it still might be the case that a consistent and clear path to legally-recognized marriage for all individuals in the US could have beneficial health-care related outcomes.
 
 # Appendix A: Data Tables
 
@@ -1631,7 +1711,8 @@ knitr::include_graphics(er_util_marriage_class.table %>% save_as_image(here::her
 knitr::include_graphics(inpatient_los_marriage_class.table %>% save_as_image(here::here("./tables/tbl8.png")))
 knitr::include_graphics(exp_marriage_class.table %>% save_as_image(here::here("./tables/tbl9.png")))
 knitr::include_graphics(rx_util_marriage_class.table %>% save_as_image(here::here("./tables/tbl10.png")))
-knitr::include_graphics(chronic_cond_marriage_class.table %>% save_as_image(here::here("./tables/tbl11.png")))
+knitr::include_graphics(chronic_cond_marriage_class.table %>% save_as_image(here::here("./tables/tbl11a.png")))
+knitr::include_graphics(all_chronic_cond_marriage_class.table %>% save_as_image(here::here("./tables/tbl11b.png")))
 knitr::include_graphics(exp_vs_famsize.table %>% save_as_image(here::here("./tables/tbl12.png")))
 
 ```

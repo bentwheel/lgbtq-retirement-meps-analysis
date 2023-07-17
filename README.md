@@ -324,7 +324,7 @@ compute a measure of the estimate’s precision, which is expressed as a
 standard error measurement, relative standard error (RSE), and the lower
 and upper bounds of the 95% confidence interval.
 
-<div class="tabwid"><style>.cl-29f6f9aa{table-layout:auto;}.cl-29ea1050{font-family:'Arial';font-size:8pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(51, 51, 51, 1.00);background-color:transparent;}.cl-29ea1064{font-family:'Arial';font-size:8pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(51, 51, 51, 1.00);background-color:transparent;}.cl-29eec41a{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:2pt;padding-right:2pt;line-height: 1;background-color:transparent;}.cl-29eec424{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:1pt;padding-top:1pt;padding-left:2pt;padding-right:2pt;line-height: 1;background-color:transparent;}.cl-29eee97c{background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.75pt solid rgba(190, 190, 190, 1.00);border-top: 0.75pt solid rgba(190, 190, 190, 1.00);border-left: 0.75pt solid rgba(190, 190, 190, 1.00);border-right: 0.75pt solid rgba(190, 190, 190, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-29eee986{background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.75pt solid rgba(190, 190, 190, 1.00);border-top: 0.75pt solid rgba(190, 190, 190, 1.00);border-left: 0.75pt solid rgba(190, 190, 190, 1.00);border-right: 0.75pt solid rgba(190, 190, 190, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-29eee990{background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.75pt solid rgba(190, 190, 190, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(190, 190, 190, 1.00);border-right: 0.75pt solid rgba(190, 190, 190, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-29eee991{background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0.75pt solid rgba(190, 190, 190, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0.75pt solid rgba(190, 190, 190, 1.00);border-right: 0.75pt solid rgba(190, 190, 190, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-29eee99a{background-color:rgba(255, 255, 255, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table data-quarto-disable-processing='true' class='cl-29f6f9aa'><thead><tr style="overflow-wrap:break-word;"><th  colspan="9"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1050">Counts of Individuals in Sample Before Pooling Across Years By Survey Year, Marriage Classification, and Age Group</span></p></th></tr><tr style="overflow-wrap:break-word;"><th class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1050">Marriage Classification</span></p></th><th class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1050">Age Group</span></p></th><th class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1050">MEPS Survey Year</span></p></th><th class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1050">n</span></p></th><th class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1050">Pop-lvl. Estimate</span></p></th><th class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1050">Standard Error</span></p></th><th class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1050">95% CI Lower Bound</span></p></th><th class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1050">95% CI Upper Bound</span></p></th><th class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1050">Relative Standard Error (RSE)</span></p></th></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td  rowspan="13"class="cl-29eee990"><p class="cl-29eec41a"><span class="cl-29ea1064">Married Individuals Not in Same-Gender Marriages</span></p></td><td class="cl-29eee990"><p class="cl-29eec41a"><span class="cl-29ea1064">Under 18</span></p></td><td class="cl-29eee990"><p class="cl-29eec41a"><span class="cl-29ea1064">2016</span></p></td><td class="cl-29eee991"><p class="cl-29eec424"><span class="cl-29ea1064">1</span></p></td><td class="cl-29eee991"><p class="cl-29eec424"><span class="cl-29ea1064">2,733</span></p></td><td class="cl-29eee991"><p class="cl-29eec424"><span class="cl-29ea1064">2,733</span></p></td><td class="cl-29eee991"><p class="cl-29eec424"><span class="cl-29ea1064">-2,624</span></p></td><td class="cl-29eee991"><p class="cl-29eec424"><span class="cl-29ea1064">8,091</span></p></td><td class="cl-29eee990"><p class="cl-29eec41a"><span class="cl-29ea1064">100.00% †</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="6"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">18 - 64</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2014</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">8,556</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">96,102,041</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,723,089</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">90,764,885</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">101,439,197</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2.83% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2015</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">8,892</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">96,787,353</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,959,551</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">90,986,740</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">102,587,967</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.06% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2016</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">8,629</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">94,337,377</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,902,250</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">88,649,071</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">100,025,683</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.08% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2017</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">7,968</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">92,659,230</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,119,318</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">88,505,442</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">96,813,018</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2.29% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2018</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">7,683</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">92,889,257</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,756,832</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">87,485,964</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">98,292,549</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2.97% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2019</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">7,165</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">91,319,125</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">3,006,026</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">85,427,423</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">97,210,826</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.29% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="6"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">65 and over</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2014</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,814</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">24,030,932</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,240,582</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">21,599,435</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">26,462,429</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">5.16% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2015</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,995</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">25,698,911</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,125,244</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">23,493,474</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">27,904,348</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">4.38% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2016</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,161</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">26,394,055</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,195,495</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">24,050,928</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">28,737,181</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">4.53% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2017</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,292</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">26,795,556</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,028,101</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">24,780,514</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">28,810,598</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.84% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2018</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,649</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">27,673,346</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">975,474</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">25,761,451</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">29,585,240</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.52% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2019</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,651</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">27,438,639</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,022,391</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">25,434,789</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">29,442,489</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.73% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="12"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">Married Individuals in Same-Gender Marriages</span></p></td><td  rowspan="6"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">18 - 64</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2014</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">41</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">497,417</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">143,493</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">216,176</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">778,658</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">28.85% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2015</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">57</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">701,225</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">144,287</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">418,427</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">984,024</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">20.58% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2016</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">83</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">982,877</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">161,561</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">666,223</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,299,532</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">16.44% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2017</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">102</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,166,348</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">181,834</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">809,959</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,522,736</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">15.59% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2018</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">80</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">932,480</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">162,362</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">614,256</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,250,703</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">17.41% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2019</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">72</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,125,354</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">196,043</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">741,117</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,509,590</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">17.42% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="6"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">65 and over</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2014</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">5</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">80,463</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">58,499</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">-34,194</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">195,120</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">72.70% †</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2015</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">15</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">220,017</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">91,331</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">41,013</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">399,022</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">41.51% *</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2016</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">11</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">167,152</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">81,976</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">6,481</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">327,822</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">49.04% *</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2017</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">6</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">103,145</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">62,693</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">-19,731</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">226,021</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">60.78% †</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2018</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">12</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">163,299</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">70,304</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">25,505</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">301,094</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">43.05% *</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2019</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">13</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">166,481</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">56,654</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">55,441</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">277,522</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">34.03% *</span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="18"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">Unmarried Individuals</span></p></td><td  rowspan="6"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">Under 18</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2014</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">8,634</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">68,371,394</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,233,108</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">63,994,582</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">72,748,206</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.27% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2015</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">8,599</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">68,513,378</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,288,072</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">64,028,839</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">72,997,917</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.34% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2016</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">8,195</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">68,268,664</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,129,868</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">64,094,199</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">72,443,129</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.12% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2017</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">7,311</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">67,897,667</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,725,171</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">64,516,394</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">71,278,941</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2.54% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2018</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">6,690</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">67,987,396</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,115,773</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">63,840,557</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">72,134,235</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.11% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2019</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">5,906</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">67,791,411</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,423,037</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">63,042,345</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">72,540,476</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.57% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="6"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">18 - 64</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2014</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">10,722</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">94,976,938</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,510,822</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">90,055,816</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">99,898,059</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2.64% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2015</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">10,783</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">94,417,804</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,193,317</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">90,118,982</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">98,716,627</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2.32% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2016</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">10,317</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">95,123,760</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,053,220</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">91,099,523</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">99,147,996</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2.16% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2017</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">9,231</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">98,134,737</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">1,876,166</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">94,457,519</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">101,811,956</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">1.91% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2018</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">8,373</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">97,405,253</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,265,942</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">92,964,088</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">101,846,417</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2.33% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2019</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">7,936</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">98,620,261</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,955,216</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">92,828,144</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">104,412,379</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.00% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td  rowspan="6"class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">65 and over</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2014</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,064</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">22,461,619</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">805,793</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">20,882,294</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">24,040,944</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.59% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2015</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,232</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">22,157,603</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">789,809</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">20,609,605</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">23,705,601</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.56% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2016</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,316</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">23,179,175</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">778,785</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">21,652,784</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">24,705,566</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.36% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2017</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,404</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">24,088,160</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">772,400</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">22,574,283</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">25,602,036</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.21% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2018</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,598</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">24,779,543</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">779,929</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">23,250,910</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">26,308,176</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.15% </span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">2019</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">2,611</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">24,709,246</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">888,509</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">22,967,800</span></p></td><td class="cl-29eee986"><p class="cl-29eec424"><span class="cl-29ea1064">26,450,692</span></p></td><td class="cl-29eee97c"><p class="cl-29eec41a"><span class="cl-29ea1064">3.60% </span></p></td></tr></tbody><tfoot><tr style="overflow-wrap:break-word;"><td  colspan="9"class="cl-29eee99a"><p class="cl-29eec41a"><span class="cl-29ea1064">From MEPS Precision Standards Guidelines:</span><br><span class="cl-29ea1064">* "Estimate can be reported but flagged with an * to indicate that its precision is questionable."</span><br><span class="cl-29ea1064">† "Estimate should not be reported or displayed in tables due to extremely large sampling error." These rows are generally not reflected in accompanying data visualizations.</span></p></td></tr></tfoot></table></div>
+<img src="tables/tbl1.png" style="display: block; margin: auto;" />
 
 Additionally, we can use the population-level estimates and squared
 errors displayed in the table to construct a visualization of these
@@ -759,10 +759,10 @@ reported annually by Kaiser Family Foundation.
 
 <img src="README_files/figure-gfm/inpatient_los_marriage_class-1.png" style="display: block; margin: auto;" />
 
-I again chose to include the panel containing estimates of this measure
-for unmarried individuals to once again highlight the fact that marital
-status is well-known in population health academic literature to be
-predictive of measures of length of stay in hospital inpatient
+I again chose to include the panel containing estimates of total length
+of stay for unmarried individuals to once again highlight the fact that
+marital status is well-known in population health academic literature to
+be predictive of measures of length of stay in hospital inpatient
 facilities. [A study over 40 thousand adult hospital patients in 1988 -
 1991](https://pubmed.ncbi.nlm.nih.gov/7503606/) found that, after
 controlling for illness severity, age, gender, race, and diagnosis type,
@@ -778,8 +778,10 @@ counterparts, respectively.”
 
 Estimates of total length of stay for the cohort of individuals age 65
 and over in same-gender marriages has a RSE that exceeds the
-MEPS-required threshold of 0.5 (please refer to the associated data
-table in Appendix A).
+MEPS-required threshold of 0.5 so it is suppressed from the data
+visualization above. (Please refer to the associated data table in
+[Appendix A](#appendix-a-data-tables) for additional information on this
+and all other visualizations in this essay.)
 
 ### Total Annual Healthcare Expenditures & Drug Costs
 
@@ -803,30 +805,35 @@ as RX (pharmacy) spend alone.
 
 This visualization has two key insights. First, that total pharmacy
 spend appears to be higher for elderly individuals. And second, that
-there appears to be a pronounced increase in both total healthcare spend
-and total pharmacy spend in the cohort of individuals age 18 - 64 in
-same-gender marriages as compared to the cohort of individuals age 18 -
-64 not in same-gender marriages, and further analysis would need to
+there appears to be a difference in both total healthcare spend and
+total pharmacy spend between the cohort of individuals age 18 - 64 in
+same-gender marriages and the cohort of individuals age 18 - 64 not in
+same-gender marriages. Additional analysis of this difference should
 consider age, race, and gender factors.
 
-Additionally, LGBTQ+ individuals interested in starting a family can
-potentially face [large healthcare-related
+One explanation for this difference of expenditures could relate to the
+high costs faced by LGBTQ+ individuals interested in starting a family.
+There can be [large healthcare-related
 expenses](https://www.familyequality.org/resources/building-lgbtq-families-price-parenthood/)
 (in the tens of thousands of dollars) associated with various surrogacy
 approaches, in-vitro fertilization (IVF), or reciprocal IVF. Further
-analysis should also control for the potential added cost of procedures
-and drugs related to family planning.
+analysis of this difference should also explore the degree to which
+high-cost family planning procedures and pharmacy therapies may
+contribute to the higher overall average healthcare spend in the cohort
+of individuals age 18 - 64 in same-gender marriages.
 
 ### Average Pharmacy Utilization
 
 The following visualization addresses average utilization of
 pharmaceutical therapies across our cohorts of interest by estimating
-the average number of fills or refills per individual, per year.
+the average number of fills or refills per individual in a year.
 
 <img src="README_files/figure-gfm/rx_util_marriage_class-1.png" style="display: block; margin: auto;" />
 
-validated against:
-<https://www.kff.org/health-costs/state-indicator/retail-rx-drugs-per-capita/>
+The distributions of average pharmacy utilization per individual
+presented by the visualization above appear consistent with [the same
+measure reported by Kaiser Family
+Foundation](https://www.kff.org/health-costs/state-indicator/retail-rx-drugs-per-capita/).
 
 ## Prevalence of Chronic Conditions
 
@@ -842,70 +849,85 @@ inhibitors like
 [lisinopril](https://mor.nlm.nih.gov/RxNav/search?searchBy=String&searchTerm=lisinopril)
 (brand names “Prinivil” or “Zestril”) to treat hypertension.
 
-Type 2 diabetes, high cholesterol, and hypertension are three of the
-leading causes of many other high-cost and potentially avoidable medical
-complications. Therefore, if senior citizens are able to manage these
-conditions with regular visits to their primary care providers and by
-adherence to low-cost drug therapies such as the drugs discussed above,
-then seniors are less likely to incur potentially avoidable medical
-costs down the line, which can ultimately help safeguard their their
-financial security and well-being in retirement.
+[Hypertension](https://pubmed.ncbi.nlm.nih.gov/29386200/), [type 2
+diabetes](https://diabetesjournals.org/care/article/41/5/917/36518/Economic-Costs-of-Diabetes-in-the-U-S-in-2017),
+and [high cholesterol](https://pubmed.ncbi.nlm.nih.gov/27787352/) are
+clinical conditions that are frequently associated with individuals who
+incur healthcare expenditures at above average levels. Therefore, if
+senior citizens can manage these conditions with regular visits to their
+primary care provider(s) and by adherence to low-cost drug therapies
+such as the drugs listed above, then seniors are less likely to incur
+these potentially avoidable medical costs, ultimately helping them to
+safeguard their financial security and well-being in retirement.
 
 <img src="README_files/figure-gfm/chronic_cond_marriage_class-1.png" style="display: block; margin: auto;" />
+The visualization above displays estimates of the prevalence of these
+select chronic conditions for our baseline and comparison cohorts. With
+the available sample, there does not appear to be differences in the
+distributions of prevalence of these chronic conditions that is worth
+noting.
+
+Also, MEPS tracks additional chronic conditions that are known to lead
+to higher-than-average costs for the healthcare system when these
+conditions are not clinically managed.
+
+<img src="README_files/figure-gfm/all_chronic_cond_marriage_class-1.png" style="display: block; margin: auto;" />
+
+While once again, distributions of estimates of prevalence for all these
+major conditions do appear to be fairly consistent across our baseline
+and comparison cohorts, more analysis might be warranted in studying the
+lower prevalence of heart disease in the cohort of individuals age 65
+and up in same-gender marriages, which appears to look much smaller than
+the estimate of prevalence for the cohort of individuals age 65 and up
+not in same-gender marriages. Further studies of this finding would need
+to appropriately control for race, as Black individuals face
+[substantially higher morbidity and mortality risks associated with
+cardiovascular
+disease](https://www.ahajournals.org/doi/full/10.1161/CIRCOUTCOMES.121.007917).
 
 ## Family Size Can Impact Healthcare Outcomes for Seniors
 
-One feature that can drive the total cost of care at the individual
-level is family size. Larger families within the same dwelling unit can
-help take care of one another when sick, coordinate transportation to
-and from sites where healthcare is provided, manage childcare duties so
-that adults are able to arrange for healthcare services, and so on.
+One feature of a family unit that can drive the total cost of care at
+the individual level is family size. Larger families within the same
+dwelling unit can help take care of one another when sick, coordinate
+transportation to and from sites where healthcare is provided, manage
+childcare duties so that adults are able to arrange for healthcare
+services, and so on. On the contrary, saving for retirement is likely to
+be much more challenging when a couple is faced with the large number of
+additional expenditures associated with raising and taking care of
+children.
+
 Several studies have shown a linkage between medication adherence and
-family size, particularly among families in low-income socioeconomic
-strata.
-
-“Older Adults’ Social Relationships and Health Care Utilization: A
-Systematic Review” <https://pubmed.ncbi.nlm.nih.gov/29470115/>
-
-For a number of reasons not discussed further here, the family size of
-families that include individuals within same-sex marriages is likely to
-be smaller than that of their counterparts in marriages not regarded as
-same-sex. As such, it is worth exploring how family size can impact the
-total individual healthcare spend across age groups.
+family support, particularly among families in low-income socioeconomic
+strata. In one study of 367 randomly sampled adult rural hospital
+patients diagnosed with type 2 diabetes, researchers found [a
+medium-to-high level of medication adherence associated with strong
+levels of family
+support](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8693738/). Another
+meta-analysis of literature found [evidence of
+association](https://pubmed.ncbi.nlm.nih.gov/29470115/) between weaker
+social relationships and increased rates of hospital readmission and
+longer hospital stays.
 
 <img src="README_files/figure-gfm/exp_vs_famsize-1.png" style="display: block; margin: auto;" />
+
+Perhaps as expected, the estimate of average family size for the cohort
+of individuals in same-gender marriages age 18 - 64 is about one child
+less than the estimate of average family size for individuals age 18 -
+64 not in same-gender marriages. And while the difference in estimates
+of family size between the two elderly cohorts appear to have
+non-overlapping confidence intervals, suggesting that this difference
+might be statistically significant between these subpopulations,
+estimates of the measures themselves do not appear to be substantially
+different.
 
 # Conclusion
 
 Due to the lack of data currently available that describes the
 healthcare experiences specific to LGBTQ+ populations, we must continue
-to be creative about how we source information that helps build policy
-and products to better strengthen the lives of LGBTQ+ individuals who
-are currently enjoying retirement, as well as those who will be retiring
-soon.
-
-NONE OF THESE ARE STATISTICALLY RIGOROUS BUT VISUAL ANALYSIS ALLOWS US
-TO EXPLORE WHERE MORE EFFORT IN RESEARCH IS USEFUL:
-
-What we know: \* Marital status is an important predictor of health plan
-coverage status - in particular, an individual’s uninsured status. \*
-Race, ethnicity, and age are significant predictors of marital status.
-
-What we might explore further: \* Do individuals age 18 - 64 in
-same-gender marriages have an overall lower uninsured rate versus
-individuals in the age 18 - 64 not in same-gender marriages cohort?
-Future research of this question should consider controlling for age,
-race and ethnicity as they are likely to be significant confounder
-measures.
-
-Could payers offer a “Family Plan” much like your wireless carrier does?
-Why do “Family Plans” have to be spousal?
-
-While we’ve only just skimmed the surface of what MEPS has to offer,
-MEPS provides an excellent cross section of data collected in a
-well-designed survey framework that can aid key decision makers as they
-go about analyzing the impacts that Social Determinants of Health have
-on retirement-related outcomes.
+to be creative about sourcing information that can help build policy and
+insurance products to better prepare LGBTQ+ individuals for financial
+prosperity and well-being in retirement.
 
 Some examples of other potentially interesting variables in the context
 of examining retirement-related outcomes alongside the ones I’ve shown
@@ -918,19 +940,44 @@ in this paper include:
     ADRESP42        SAQ 12 MOS: DR SHOWED RESPECT 
     PROBPY42        FAMILY HAVING PROB PAYING MEDICAL BILLS 
 
-And while the particular method I’ve demonstrated in this paper for
-identifying LGBTQ+ individuals and experiences certainly does have its
-flaws, we have to do the best we can with the information we have – and
-publicly available data on the needs of LGBTQ+ individuals at or near
-retirement age is, at times, frustratingly scarce.
+So while we’ve only just skimmed the surface of what MEPS has to offer,
+MEPS provides a large and useful amount of data, collected annually for
+nearly three decades, through a rigorous survey framework. As we saw in
+this essay, survey data can impose limitations on the degree of
+certainty in our findings, but on the other hand, surveys like MEPS can
+still be used to aid key decision-makers in analyzing the impacts that
+social determinants of health have on retirement-related outcomes for
+all cross-sections of the US elderly population.
 
-Finally, this sort of work encourages discussions that broaden our
-understanding of how systemic disparities act with intersectionality
-among other groups and subpopulations. And while understanding the
-concept of intersectionality is one thing, being able to quantify the
-result of intersectional disparate outcomes, even if the data isn’t
-perfect, is entirely more useful.
+While isolating MEPS respondents based on same-gender marriage status is
+one way of highlighting any differences in key healthcare measures
+between this population and non-LGBTQ+ populations, perhaps a better way
+of understanding these differences is simply by adding
+[SOGI](https://eca.state.gov/files/bureau/sogi_terminology.pdf)
+questions and terminology to the standard MEPS questionnaire. The US
+Census Bureau took this very same action in July 2021, when it began
+[surveying respondents for information on sexual orientation and gender
+identity in its Household Pulse
+Survey](https://www.census.gov/library/stories/2021/08/household-pulse-survey-updates-sex-question-now-asks-sexual-orientation-and-gender-identity.html).
+This very act of broadening the survey questionnaire led to [findings
+from the US Census
+Bureau](https://www.pbs.org/newshour/economy/the-census-bureaus-first-ever-data-on-lgbtq-people-indicates-deep-disparities)
+that LGBTQ+-identifying individuals were more likely to “have lost
+employment, not have enough to eat, be at elevated risk of eviction or
+foreclosure, and face difficulty paying for basic household expenses” as
+compared to their non-LGBTQ+ counterparts.
+
+We also have seen how important of a predictor that an individual’s
+marital status can be for measures of certain risks that can lead to
+increased healthcare spend, such as measures of total inpatient
+length-of-stay, uninsured rates, rates of readmission, and emergency
+room utilization. And while there is likely a lot of correlation “noise”
+to be sorted out when analyzing the connection between marital status
+and health outcomes, particularly among potential confounding influences
+like race, age, and gender, it still might be the case that a consistent
+and clear path to legally-recognized marriage for all individuals in the
+US could have beneficial health-care related outcomes.
 
 # Appendix A: Data Tables
 
-<img src="tables/tbl1.png" style="display: block; margin: auto;" /><img src="tables/tbl2.png" style="display: block; margin: auto;" /><img src="tables/tbl3.png" style="display: block; margin: auto;" /><img src="tables/tbl4.png" style="display: block; margin: auto;" /><img src="tables/tbl5.png" style="display: block; margin: auto;" /><img src="tables/tbl5a.png" style="display: block; margin: auto;" /><img src="tables/tbl5b.png" style="display: block; margin: auto;" /><img src="tables/tbl6.png" style="display: block; margin: auto;" /><img src="tables/tbl7.png" style="display: block; margin: auto;" /><img src="tables/tbl8.png" style="display: block; margin: auto;" /><img src="tables/tbl9.png" style="display: block; margin: auto;" /><img src="tables/tbl10.png" style="display: block; margin: auto;" /><img src="tables/tbl11.png" style="display: block; margin: auto;" /><img src="tables/tbl12.png" style="display: block; margin: auto;" />
+<img src="tables/tbl1.png" style="display: block; margin: auto;" /><img src="tables/tbl2.png" style="display: block; margin: auto;" /><img src="tables/tbl3.png" style="display: block; margin: auto;" /><img src="tables/tbl4.png" style="display: block; margin: auto;" /><img src="tables/tbl5.png" style="display: block; margin: auto;" /><img src="tables/tbl5a.png" style="display: block; margin: auto;" /><img src="tables/tbl5b.png" style="display: block; margin: auto;" /><img src="tables/tbl6.png" style="display: block; margin: auto;" /><img src="tables/tbl7.png" style="display: block; margin: auto;" /><img src="tables/tbl8.png" style="display: block; margin: auto;" /><img src="tables/tbl9.png" style="display: block; margin: auto;" /><img src="tables/tbl10.png" style="display: block; margin: auto;" /><img src="tables/tbl11a.png" style="display: block; margin: auto;" /><img src="tables/tbl11b.png" style="display: block; margin: auto;" /><img src="tables/tbl12.png" style="display: block; margin: auto;" />
