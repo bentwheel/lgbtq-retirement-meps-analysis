@@ -221,14 +221,7 @@ Codebook](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_codebook.
 provided in order to showcase the methodology used to construct the
 same-gender marriage flag in the MEPS PUFs.
 
-<div class="figure" style="text-align: center">
-
-<img src="Example_Table.png" alt="Fig. 1: Example Records in the 2019 MEPS PUFs"  />
-<p class="caption">
-Fig. 1: Example Records in the 2019 MEPS PUFs
-</p>
-
-</div>
+<img src="Example_Table.png" style="display: block; margin: auto;" />
 
 There are many shortcomings to this approach, as this approach will fail
 to identify certain individual respondents who may identify as LGBTQ+,
@@ -296,14 +289,7 @@ the cohorts of interest (individuals in same-gender marriages, in age
 groups 18 - 64 and 65+) fail to meet the sample size requirement in any
 single year.
 
-<div class="figure" style="text-align: center">
-
-<img src="README_files/figure-gfm/count_individ_in_sample_unwt_nopool_plot-1.png" alt="Fig 2: Counts of Individuals in Sample Before Pooling Across Years"  />
-<p class="caption">
-Fig 2: Counts of Individuals in Sample Before Pooling Across Years
-</p>
-
-</div>
+<img src="README_files/figure-gfm/count_individ_in_sample_unwt_nopool_plot-1.png" style="display: block; margin: auto;" />
 
 Additionally, we should be concerned about the statistical validity of
 population-level estimates that are computed by applying weights to very
@@ -720,12 +706,12 @@ conclusion.
 
 Another important measure of hospital utilization in a population is the
 total number of days (or, sometimes, overnights) between admission and
-discharge that all individuals within the cohort of interest were stayed
-within hospital inpatient facilities. This measure is often also
-reported as “total hospital (in)patient-days.” This statistic, much like
-total ER utilization, is frequently reported by hospital organizations
-due to the fact that it is very predictive of the total cost of care
-delivered in inpatient hospital encounters.
+discharge that all individuals within the cohort of interest were
+admitted in within hospital inpatient facilities. This measure is often
+also reported as “total hospital (in)patient-days.” This statistic, much
+like total ER utilization, is frequently reported by hospital
+organizations due to the fact that it is very predictive of the total
+cost of care delivered in inpatient hospital encounters.
 
 Moreover, average length of stay is also highly predictive of hospital
 readmissions and is a component of one of the oldest and well-known
@@ -735,13 +721,13 @@ used to predict post-discharge mortality or unplanned readmission after
 discharge from an inpatient facility. Reducing readmissions are a key
 focus for the Center for Medicare and Medicaid Services, the federal
 agency that oversees or regulates Medicare and Medicaid administration,
-[published findings in
+which [published findings in
 2014](https://www.kff.org/wp-content/uploads/sites/2/2014/10/brennan.pdf)
 claiming that nearly one in five fee-for-service Medicare patients
 enrolled in Part A benefits return to the hospital within 30 days of
-being discharged. In this same study, CMS attributed these readmissions
-to cost the federal government \$26 billion per year, of which \$17
-billion was associated with potentially avoidable readmissions.
+being discharged. In this same study, CMS attributed \$26 billion per
+year to the cost of these readmissions, of which \$17 billion was
+associated with potentially avoidable readmissions.
 
 While it is possible to investigate readmission rates directly using
 MEPS data, the methodology is less simple and involves the use of
@@ -835,7 +821,7 @@ presented by the visualization above appear consistent with [the same
 measure reported by Kaiser Family
 Foundation](https://www.kff.org/health-costs/state-indicator/retail-rx-drugs-per-capita/).
 
-## Prevalence of Chronic Conditions
+### Prevalence of Chronic Conditions
 
 Senior citizens often make use of low-cost generic medications to manage
 their chronic health conditions such as diabetes, hyperlipidemia (high
@@ -861,6 +847,7 @@ these potentially avoidable medical costs, ultimately helping them to
 safeguard their financial security and well-being in retirement.
 
 <img src="README_files/figure-gfm/chronic_cond_marriage_class-1.png" style="display: block; margin: auto;" />
+
 The visualization above displays estimates of the prevalence of these
 select chronic conditions for our baseline and comparison cohorts. With
 the available sample, there does not appear to be differences in the
@@ -885,7 +872,7 @@ to appropriately control for race, as Black individuals face
 cardiovascular
 disease](https://www.ahajournals.org/doi/full/10.1161/CIRCOUTCOMES.121.007917).
 
-## Family Size Can Impact Healthcare Outcomes for Seniors
+### Average Family Size
 
 One feature of a family unit that can drive the total cost of care at
 the individual level is family size. Larger families within the same
