@@ -1,5 +1,5 @@
 ---
-title: "Healthcare Experiences of Elderly LGBTQ+ Individuals in the US: A Visual Analysis Using Medical Expenditure Panel Survey (MEPS) Data"
+title: "Healthcare Experiences of Medicare-Aged LGBTQ+ Individuals in the US: A Visual Analysis Using Medical Expenditure Panel Survey (MEPS) Data"
 
 author: C. Seth Lester, ASA, MAAA ([Seth.Lester@milliman.com](mailto:seth.lester@milliman.com)) <br>
 date: 6 July 2023
@@ -43,18 +43,18 @@ _The following paper is a submission in reply to the [Society of Actuaries' Call
 
 For some LGBTQ+-identifying subpopulations, the level of discrimination we face in society is rapidly decreasing; for others, such as transgender individuals, there are still impactful and endemic stigmas in play which act as a barrier to living full and rewarding lives. Barriers such as these have potentially inhibited the ability of many people who identify as LGBTQ+ from enjoying the same protections of our social safety net – such as healthcare and retirement security systems – that are enjoyed by non-LGBTQ+-identifying people. 
 
-It is difficult today for analysts to credibly estimate how retirement-related outcomes differ between LGBTQ+ and non-LGBTQ+ populations, or to know how to quantify the disparities of outcomes among intersectional subpopulations that exist today within the United States' LGBTQ+ population.  One key reason for this difficulty is the lack of available data that can help guide our policymaking apparatus towards better regulations and protections for members of our society who are more likely to be marginalized, stigmatized, or disadvantaged by systemic factors. This includes LGBTQ+ people, of course, but heavily intersects with people of color, women, religious minorities, immigrants, disabled individuals, and – key to this essay – the US' rapidly growing aging population.
+It is currently difficult to credibly estimate how retirement-related outcomes differ between LGBTQ+ and non-LGBTQ+ populations, or to know how to quantify the disparities of outcomes among intersectional subpopulations that exist today within the United States’ LGBTQ+ population. One key reason for this difficulty is the lack of available data that can help guide our policymaking apparatus towards better regulations and protections for members of our society who are more likely to be marginalized, stigmatized, or disadvantaged by systemic factors. This includes LGBTQ+ people, of course, but heavily intersects with people of color, women, religious minorities, foreign-born individuals, disabled individuals, and – key to this essay – the US’s rapidly aging population.
 
-In the healthcare space, there is ample energy surrounding the important work being done by organizations, both private and public, to better understand the impacts of what are known as Social Determinants of Health – “the conditions in the environments where people are born, live, learn, work, play, worship, and age that affect a wide range of health, functioning, and quality-of-life outcomes and risks” (as defined by the [US Dept. of Health and Human Services](https://health.gov/healthypeople/priority-areas/social-determinants-health)).
+In the healthcare space, there is ample energy devoted to the important work being done by organizations, both private and public, to better understand the impacts of what are known as Social Determinants of Health – “the conditions in the environments where people are born, live, learn, work, play, worship, and age that affect a wide range of health, functioning, and quality-of-life outcomes and risks” (as defined by the [US Dept. of Health and Human Services](https://health.gov/healthypeople/priority-areas/social-determinants-health)).
 
-Social Determinants of Health (SDoH) can provide [causal evidence](https://aspe.hhs.gov/reports/sdoh-evidence-review) for how certain subpopulations of our society disproportionately experience poor health outcomes. Consequently, population health professionals and actuaries alike have an interest in better understanding the relationships between SDoH and access to quality healthcare that is both affordable and can be sustainably provided by the care delivery system.
+Analyzing Social Determinants of Health (SDoH) can provide [causal evidence](https://aspe.hhs.gov/reports/sdoh-evidence-review) for how certain subpopulations of our society disproportionately experience poor health outcomes. Consequently, population health professionals and actuaries alike have an interest in better understanding the relationships between SDoH and access to quality healthcare that is both affordable and can be sustainably provided by the care delivery system.
 
 It is therefore reasonable to suspect that investigating differences in patient experiences between elderly LGBTQ+-identifying individuals and their non-LGBTQ+ elderly or non-elderly LGBTQ+ counterparts can give us better information about how the elderly LGBTQ+ population should plan and prepare for healthcare expenses in retirement.
 
 In order to carry out this preliminary investigation, I performed an analysis of the public use files (PUFs) made available by the [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS). The purpose of this essay is twofold, and the essay is divided into two primary sections:
 
 1. In [Data and Methodology](#data-and-methodology) I explain and document a consistent data manipulation approach for identifying certain cohorts who are likely to identify as LGBTQ+ within the MEPS public data files; and
-2. In [Visualizing Healthcare Experiences for LGBTQ+ Subpopulations](#visualizing-healthcare-experiences-for-lgbtq-subpopulations) I showcase a visual representation of preliminary findings around key healthcare experiences and outcomes between elderly LGBTQ+ cohorts and other cohorts – findings which describe healthcare outcomes commonly of interest to population health analyses, such as total pharmacy expenditure per individual, and average pharmacy utilization, average inpatient length-of-stay, and average hospital emergency room utilization utilization, to name a few.
+2. In [Visualizing Healthcare Experiences for LGBTQ+ Subpopulations](#visualizing-healthcare-experiences-for-lgbtq-subpopulations) I showcase a visual representation of preliminary findings around key healthcare experiences and outcomes between elderly LGBTQ+ cohorts and other cohorts – findings which describe healthcare outcomes commonly of interest to population health analyses, such as total pharmacy expenditure per individual, and average pharmacy utilization, average inpatient length-of-stay, and average hospital emergency department utilization utilization, to name a few.
 
 The primary goal of this essay is to motivate additional and more rigorous research into the specific healthcare outcomes-related challenges faced by current and future elderly LGBTQ+ individuals within the United States.
 
@@ -64,9 +64,9 @@ The primary goal of this essay is to motivate additional and more rigorous resea
 
 MEPS has been administered in its current form since 1996, and according the [Agency for Healthcare Research and Quality](https://www.ahrq.gov/) (AHRQ), the government agency at MEPS’s helm, MEPS is a collection of “data on the specific health services that Americans use, how frequently they use them, the cost of these services, and how they are paid for, as well as data on the cost, scope, and breadth of health insurance held by and available to U.S. workers” ([Survey Background, MEPS Homepage](https://meps.ahrq.gov/mepsweb/about_meps/survey_back.jsp)).
 
-Because MEPS data is drawn from survey respondents, it is subject to many of the usual strengths and limitations of survey data analysis. performing inferential analysis survey data populated by individual respondents, and therefore the public use data files that contain responses at the individual or family level is either self-reported or imputed. Therefore, there are some situations in which individuals using this data might want to perform additional data quality checks. For example, an analyst might want to compare, in aggregate, the results of two separate but related survey questions, such as the count of individual respondents that have a valid person ID (PID) value for spouse ID (SPOUID) against the count of individuals who indicated that they are currently married.
+Because MEPS data is drawn from survey respondents, any analysis of MEPS data is subject to many of the usual strengths and limitations of survey data analysis. One major weakness of using survey data to perform inferential analysis is that data from respondents is often self-reported or imputed and is not always accurate. Therefore, there are some situations in which it would be advisable for individuals using this data to perform additional data quality checks. For example, an analyst might want to compare, in aggregate, the results of two separate but related survey questions, such as the count of individual respondents that have a valid person ID (PID) value for spouse ID (SPOUID) against the count of individuals who indicated that they are currently married.
 
-Additionally, MEPS provides [statistical precision guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) about displaying and performing inferential statistical methods using the data, which include restrictions and guidance concerning minimum sample sizes of cohorts used in statistical methods, as well as standards establishing acceptable standard error thresholds of estimates calculated using statistical methods. I discuss this guidance further in a subsequent section of this essay.
+Additionally, MEPS provides [statistical precision guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) about applying and displaying the results of inferential statistical methods using the data, which include restrictions and guidance concerning minimum sample sizes of cohorts used in statistical methods, as well as standards establishing acceptable standard error thresholds of estimates calculated using statistical methods. I discuss this guidance further in a subsequent section of this essay.
 
 ## About the MEPS Public Use Files
 
@@ -74,7 +74,7 @@ MEPS is administered in two distinct components - the [Household Component](http
 
 The MEPS Household Component "fields questionnaires to individual household members to collect nationally representative data on demographic characteristics, health conditions, health status, use of medical care services, charges and payments, access to care, satisfaction with care, health insurance coverage, income, and employment" ([Household Component, Survey Background, MEPS Homepage](https://meps.ahrq.gov/mepsweb/survey_comp/household.jsp)).
 
-MEPS data files have been used in the past to generate a large number of findings within the academic disciplines of public health and health policy. Some specific examples of scientific literature containing an analysis of MEPS data relevant to the current strategic research initiatives of the [Society of Actuaries Research Institute](https://www.soa.org/programs/strategic-research-program/) are given below:
+MEPS data files have been used in the past to generate a large number of findings within the academic disciplines of public health and health policy. Some specific examples of scientific literature containing analyses of MEPS data relevant to the current strategic research initiatives of the [Society of Actuaries Research Institute](https://www.soa.org/programs/strategic-research-program/) are given below:
 
 * [Medical Expenditure Panel Survey: a valuable database for studying racial and ethnic disparities in prescription drug use](https://pubmed.ncbi.nlm.nih.gov/18794032/)
 * [Any Use and "Frequent Use" of Opioids among Elderly Adults in 2018-2019, by Socioeconomic Characteristics](https://pubmed.ncbi.nlm.nih.gov/35696517/)
@@ -82,7 +82,7 @@ MEPS data files have been used in the past to generate a large number of finding
 * [Comparison of the Total Number of People in the U.S. Civilian Noninstitutionalized Population Purchasing One or More Antidepressant or Antipsychotic Prescriptions by Select Sociodemographic Characteristics, 2013 and 2018](https://pubmed.ncbi.nlm.nih.gov/35696503/)
 * [Top Five Most Costly Conditions among Adults Age 18 and Older, 2012: Estimates for the U.S. Civilian Noninstitutionalized Population](https://pubmed.ncbi.nlm.nih.gov/28783295/)
 
-One piece of information that absent from the long list of data points sampled in the MEPS Household Component is whether individual respondents identify as LGBTQ+. This presents a major challenge for using MEPS public use files to investigate healthcare outcomes experienced by LGBTQ+ individuals in the US. However, a method for identifying some individuals who are very likely to identify as LGBTQ+ is described in further detail in the next section.
+One piece of information that is absent from the long list of data points sampled in the MEPS Household Component is whether individual respondents identify as any LGBTQ+ subpopulation. This presents a major challenge for using MEPS public use files to investigate healthcare outcomes experienced by LGBTQ+ individuals in the US. However, a method for identifying some individuals who are very likely to identify as LGBTQ+ is described in further detail in the next section.
 
 The R code that performs this analysis and prepares the this document, including all data tables and visualizations, is available [on Github](https://github.com/bentwheel/lgbtq-retirement-meps-analysis).
 
@@ -100,9 +100,9 @@ load(here::here("meps_lgbtq_data.rda"))
 
 ```
 
-Since the LGBTQ+-identifying population in the United States is a relatively small subset of the overall US population, MEPS data PUFs (Public Use Files) from surveys representative of years between 2014 and 2019 (see table below) have been pooled together to produce the data visualizations and tables within this essay. 
+Since the LGBTQ+-identifying population in the United States is a relatively small subset of the overall population, MEPS data PUFs from surveys representative of years between 2014 and 2019 (see table below) are pooled together to produce the data visualizations and tables within this essay.
 
-The purpose of pooling the MEPS PUFs across such long span of time is to build a cohort of elderly (age 65 and up) LGBTQ+ individuals that is also large enough in size to meet MEPS' [statistical precision guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) for performing statistical methods to generate population-level estimates of this cohort's demographic composition and measurable healthcare outcomes.
+The purpose of pooling the MEPS PUFs across such a long span of time is to build a cohort of elderly (age 65 and up) LGBTQ+ individuals that is large enough to comply with MEPS’s [statistical precision guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) for applying statistical methods to generate population-level estimates of this cohort’s demographic composition and measurable healthcare outcomes.
 
 All MEPS Full Year Consolidated data PUFs listed in the following table contain variables pertaining to survey administration, income, person-level conditions, health status, disability days, quality of care, employment, health insurance, and person-level medical care use and expenditures: 
 
@@ -137,7 +137,7 @@ However, this approach will succeed in identifying the following individual resp
 
 While this approach does fail to identify large subgroups within the broader LGBQT+ population in the United States, we can still use this approach to determine if there are substantial differences in the underlying demography, patient experiences, or incurred expenses between some LGBQT+ subpopulations and otherwise-similar non-LGBQT+ subpopulations within the US.
 
-In this essay, we will consider and even see some evidence supporting the possibility that marriage (or cohabitation, more generally) has a confounding influence on some of the population-level estimates of measurements of interest (e.g., annual healthcare expenditures, emergency room utilization, etc.).  Therefore, most data visualizations and data tables in this essay will present findings comparing key population-level estimates between married individuals in same-gender marriages against married individuals not in same-gender marriages in order to control for the potential confounding effect of marriage or cohabitation.
+In this essay, we will consider and even see some evidence supporting the possibility that marriage (or cohabitation, more generally) has a confounding influence on some of the population-level estimates of measurements of interest (e.g., annual healthcare expenditures, emergency department utilization, etc.).  Therefore, most data visualizations and data tables in this essay will present findings comparing key population-level estimates between married individuals in same-gender marriages against married individuals not in same-gender marriages in order to control for the potential confounding effect of marriage or cohabitation.
 
 ## MEPS Precision Guidelines for Population-Level Estimates
 
@@ -164,8 +164,8 @@ set_flextable_defaults(
   font.color = "#333333",
   table.layout = "autofit",
   border.color = "gray",
-  padding.top = 3, padding.bottom = 3,
-  padding.left = 4, padding.right = 4,
+#  padding.top = 3, padding.bottom = 3,
+#  padding.left = 4, padding.right = 4,
   digits = 0,
   decimal.mark = ".",
   big.mark = ",")
@@ -182,38 +182,38 @@ count_individ_in_sample_unwt_nopool.data <-
         FUN = svytotal, 
         design = fyc14_svydsn_nopool) %>% 
   mutate(MEPS_DATA_YEAR = 2014) %>% 
-  bind_rows(  svyby(~Individuals, 
+  bind_rows(svyby(~Individuals, 
         by = ~SGM_DSC + AGE_GRP_3 , 
         FUN = svytotal, 
-        design = fyc15_svydsn_nopool)) %>% 
-  mutate(MEPS_DATA_YEAR = if_else(is.na(MEPS_DATA_YEAR), 2015, MEPS_DATA_YEAR)) %>%
-  bind_rows(  svyby(~Individuals, 
+        design = fyc15_svydsn_nopool) %>% 
+          mutate(MEPS_DATA_YEAR = 2015)) %>%
+  bind_rows(svyby(~Individuals, 
         by = ~SGM_DSC + AGE_GRP_3 , 
         FUN = svytotal, 
-        design = fyc16_svydsn_nopool)) %>% 
-  mutate(MEPS_DATA_YEAR = if_else(is.na(MEPS_DATA_YEAR), 2016, MEPS_DATA_YEAR)) %>%
-  bind_rows(  svyby(~Individuals, 
+        design = fyc16_svydsn_nopool) %>% 
+          mutate(MEPS_DATA_YEAR = 2016)) %>%
+  bind_rows(svyby(~Individuals, 
         by = ~SGM_DSC + AGE_GRP_3 , 
         FUN = svytotal, 
-        design = fyc17_svydsn_nopool)) %>% 
-  mutate(MEPS_DATA_YEAR = if_else(is.na(MEPS_DATA_YEAR), 2017, MEPS_DATA_YEAR)) %>%
-  bind_rows(  svyby(~Individuals, 
+        design = fyc17_svydsn_nopool) %>% 
+          mutate(MEPS_DATA_YEAR = 2017)) %>%
+  bind_rows(svyby(~Individuals, 
         by = ~SGM_DSC + AGE_GRP_3 , 
         FUN = svytotal, 
-        design = fyc18_svydsn_nopool)) %>% 
-  mutate(MEPS_DATA_YEAR = if_else(is.na(MEPS_DATA_YEAR), 2018, MEPS_DATA_YEAR)) %>%
-  bind_rows(  svyby(~Individuals, 
+        design = fyc18_svydsn_nopool) %>% 
+          mutate(MEPS_DATA_YEAR = 2018)) %>%
+  bind_rows(svyby(~Individuals, 
         by = ~SGM_DSC + AGE_GRP_3 , 
         FUN = svytotal, 
-        design = fyc19_svydsn_nopool)) %>% 
-  mutate(MEPS_DATA_YEAR = if_else(is.na(MEPS_DATA_YEAR), 2019, MEPS_DATA_YEAR)) %>% 
+        design = fyc19_svydsn_nopool) %>% 
+          mutate(MEPS_DATA_YEAR = 2019)) %>% 
   mutate(MEPS_DATA_YEAR = forcats::fct_inorder(as.character(MEPS_DATA_YEAR)))
 
 # Add unweighted counts for comparison
 count_individ_in_sample_unwt_nopool.data <- fyc14_to_19_by_dufam_w_desc_weights %>% 
   filter(PERWTYYF > 0) %>% 
   group_by(SGM_DSC, AGE_GRP_3, MEPS_DATA_YEAR) %>% 
-  summarize(n = sum(Individuals)) %>% 
+  summarize(`Sample size` = sum(Individuals)) %>% 
   right_join(count_individ_in_sample_unwt_nopool.data,
              by=c("AGE_GRP_3", "SGM_DSC", "MEPS_DATA_YEAR")) %>% 
   mutate(rse = se/Individuals) %>% 
@@ -237,7 +237,7 @@ rownames(count_individ_in_sample_unwt_nopool.data) <- NULL
 count_individ_in_sample_unwt_nopool.plot <- count_individ_in_sample_unwt_nopool.data %>% 
   ggplot(mapping = aes(x = `MEPS Survey Year`,
                        fill = `Age Group`,
-                       y = `n`)) +
+                       y = `Sample size`)) +
   scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
   geom_hline(aes(yintercept = 60, linetype = "n = 60"), color= 'red') +
@@ -267,6 +267,10 @@ In the following table, we can see the population-level estimates for the total 
 
 # Then, we create the publication table object for displaying the underlying data:
 count_individ_in_sample_unwt_nopool.table <- count_individ_in_sample_unwt_nopool.data %>% 
+  mutate(`Pop-lvl. Estimate` = if_else(rse_flag == "†" | is.nan(rse), !!NA, `Pop-lvl. Estimate`),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, `Standard Error`),
+         `95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, `95% CI Lower Bound`),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, `95% CI Upper Bound`)) %>% 
   arrange(`Marriage Classification`, `Age Group`, `MEPS Survey Year`) %>% 
   select(-rse_flag, -rse) %>%  
   flextable() %>% 
@@ -306,7 +310,7 @@ count_individ_in_sample_wt_nopool.plot <- count_individ_in_sample_wt_nopool.data
                 position=position_dodge(.9)) +
   theme_bw(base_size = 9) +
   scale_y_continuous(labels = scales::comma) +
-  facet_wrap(~ `Marriage Classification`, ncol = 2, scales="free_y", labeller = label_wrap_gen(width = 36, multi_line = TRUE)) +
+  facet_wrap(~ `Marriage Classification`, ncol = 2, scales="free", labeller = label_wrap_gen(width = 36, multi_line = TRUE)) +
   labs(title=count_individ_in_sample_wt_nopool.title,
        subtitle=count_individ_in_sample_wt_nopool.subtitle,
        y = "Population-level Estimate of Total Count",
@@ -367,7 +371,7 @@ count_individ_in_sample_unwt_pool.data <- svyby(~Individuals,
 count_individ_in_sample_unwt_pool.data <- fyc14_to_19_by_dufam_w_desc_weights %>% 
   filter(PERWTYYF > 0) %>%
   group_by(SGM_DSC, AGE_GRP_3) %>% 
-  summarize(n = sum(Individuals)) %>% 
+  summarize(`Sample Size` = sum(Individuals)) %>% 
   right_join(count_individ_in_sample_unwt_pool.data,
              by=c("AGE_GRP_3", "SGM_DSC")) %>% 
   mutate(rse = se/Individuals) %>% 
@@ -387,6 +391,10 @@ rownames(count_individ_in_sample_unwt_pool.data) <- NULL
 
 # New pooled data table
 count_individ_in_sample_unwt_pool.table <- count_individ_in_sample_unwt_pool.data %>% 
+  mutate(`Pop-lvl. Estimate` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, `Pop-lvl. Estimate`),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, `Standard Error`),
+         `95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, `95% CI Lower Bound`),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, `95% CI Upper Bound`)) %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
   select(-rse_flag, -rse) %>%  
     flextable() %>% 
@@ -404,7 +412,7 @@ count_individ_in_sample_unwt_pool.table <- count_individ_in_sample_unwt_pool.dat
 count_individ_in_sample_unwt_pool.plot <- count_individ_in_sample_unwt_pool.data %>% 
   ggplot(mapping = aes(x = `Age Group`,
                        fill = `Age Group`,
-                       y = n)) +
+                       y = `Sample Size`)) +
   scale_fill_manual(values = custom_palette) +
   geom_bar(stat="identity", position="dodge") +
   geom_hline(aes(yintercept = 60, linetype = "n = 60"), color= 'red') +
@@ -432,13 +440,13 @@ Once pooling from 2014 - 2019 is completed, we can see that both age groups in t
 # Visualizations appear in several steps. 
 # First, the title:
 count_individ_in_sample_wt_pool.title <- "Weighted Population Estimates After Pooling Across Years"
-count_individ_in_sample_wt_pool.subtitle <- "By Survey Year, Marriage Classification, and Age Group"
+count_individ_in_sample_wt_pool.subtitle <- "By Marriage Classification and Age Group"
 
-# Underlying was already computed in the previous chunk
-count_individ_in_sample_wt_pool.data <- count_individ_in_sample_unwt_nopool.data 
+# Underlying data for our plot was already computed in the previous chunk's data object, so we'll simply copy that here.
+count_individ_in_sample_wt_pool.data <- count_individ_in_sample_unwt_pool.data 
 
 # Next we create the visualization based on the data table from previous chunk
-count_individ_in_sample_wt_pool.plot <- count_individ_in_sample_unwt_pool.data %>% 
+count_individ_in_sample_wt_pool.plot <- count_individ_in_sample_wt_pool.data %>% 
   ggplot(mapping = aes(x = `Age Group`,
                        fill = `Age Group`,
                        y = `Pop-lvl. Estimate`)) +
@@ -529,12 +537,12 @@ marriage_class_and_gender.data <- svyby(~SEX_DSC,
 # Then, we create the publication table object for displaying the underlying data:
 marriage_class_and_gender.table <- marriage_class_and_gender.data %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Upper Bound`, accuracy=0.01)),
+         `Population Estimate` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Population Estimate`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Standard Error`, accuracy=0.01))) %>% 
   select(-rse, -rse_flag) %>% 
-  mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
-         `Population Estimate` = scales::percent(`Population Estimate`, accuracy=0.01),
-         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
-      flextable() %>% 
+  flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
   theme_box() %>% 
@@ -629,11 +637,11 @@ marriage_class_and_plan_coverage.data <- svyby(~INSCOV_DSC,
 # Then, we create the publication table object for displaying the underlying data:
 marriage_class_and_plan_coverage.table <- marriage_class_and_plan_coverage.data %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Upper Bound`, accuracy=0.01)),
+         `Population Estimate` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Population Estimate`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Standard Error`, accuracy=0.01))) %>% 
   select(-rse, -rse_flag) %>% 
-  mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
-         `Population Estimate` = scales::percent(`Population Estimate`, accuracy=0.01),
-         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
   flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
@@ -722,12 +730,12 @@ marriage_class_and_race_ethnicity.data <- svyby(~RACETHX_DSC,
 # Then, we create the publication table object for displaying the underlying data:
 marriage_class_and_race_ethnicity.table <- marriage_class_and_race_ethnicity.data %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Upper Bound`, accuracy=0.01)),
+         `Population Estimate` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Population Estimate`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Standard Error`, accuracy=0.01))) %>% 
   select(-rse, -rse_flag) %>% 
-  mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
-         `Population Estimate` = scales::percent(`Population Estimate`, accuracy=0.01),
-         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
-      flextable() %>% 
+  flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
   theme_box() %>% 
@@ -812,11 +820,11 @@ marriage_class_and_ethnicity.data <- svyby(~HISPANX_DSC,
 # Then, we create the publication table object for displaying the underlying data:
 marriage_class_and_ethnicity.table <- marriage_class_and_ethnicity.data %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Upper Bound`, accuracy=0.01)),
+         `Population Estimate` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Population Estimate`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Standard Error`, accuracy=0.01))) %>% 
   select(-rse, -rse_flag) %>% 
-  mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
-         `Population Estimate` = scales::percent(`Population Estimate`, accuracy=0.01),
-         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
   flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
@@ -896,11 +904,11 @@ marriage_class_and_race_black.data <- svyby(~RACEBX_DSC,
 # Then, we create the publication table object for displaying the underlying data:
 marriage_class_and_race_black.table <- marriage_class_and_race_black.data %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Upper Bound`, accuracy=0.01)),
+         `Population Estimate` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Population Estimate`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Standard Error`, accuracy=0.01))) %>% 
   select(-rse, -rse_flag) %>% 
-  mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
-         `Population Estimate` = scales::percent(`Population Estimate`, accuracy=0.01),
-         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
   flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
@@ -987,11 +995,11 @@ marriage_class_and_income.data <- svyby(~POVLEV_DSC,
 # Then, we create the publication table object for displaying the underlying data:
 marriage_class_and_income.table <- marriage_class_and_income.data %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Upper Bound`, accuracy=0.01)),
+         `Population Estimate` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Population Estimate`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Standard Error`, accuracy=0.01))) %>% 
   select(-rse, -rse_flag) %>% 
-  mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
-         `Population Estimate` = scales::percent(`Population Estimate`, accuracy=0.01),
-         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
   flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
@@ -1038,24 +1046,24 @@ The preceding visual comparisons of demographic measures between our baseline an
 
 It is also the case that LGBTQ+ individuals can possess unique healthcare needs or face different barriers to access to healthcare, both of which can move the needle on the costs of healthcare. This is particularly true for individuals in retirement because non-working, elderly individuals generally have less access to financial resources and are more likely to face one or more highly-prevalent chronic conditions such as heart disease, diabetes, or asthma, which can lead to high-cost encounters if not properly managed.
 
-### Emergency Room Utilization
+### Emergency Department Utilization
 
-Emergency Room utilization is a key statistic of interest because as hospital admissions that start with the ER tend to be more costly for health plans than ordinary, non-emergency inpatient hospital admissions. Hospital organizations routinely report total ER visits on both a total aggregate basis as well as a same-facility basis. For example, total ER utilization is listed in the most recent (as of this writing) [quarterly earnings report](https://investor.hcahealthcare.com/news/news-details/2023/HCA-Healthcare-Reports-First-Quarter-2023-Results/default.aspx) from [HCA Healthcare](https://hcahealthcare.com/about/), a publicly-traded hospital organization with more than 182 hospitals and 2,300+ care delivery sites in the US and UK.
+Emergency department utilization is a key statistic of interest because as hospital admissions that start with the ED tend to be more costly for health plans than ordinary, non-emergency inpatient hospital admissions. Hospital organizations routinely report total ED visits on both a total aggregate basis as well as a same-facility basis. For example, total ED utilization is listed in the most recent (as of this writing) [quarterly earnings report](https://investor.hcahealthcare.com/news/news-details/2023/HCA-Healthcare-Reports-First-Quarter-2023-Results/default.aspx) from [HCA Healthcare](https://hcahealthcare.com/about/), a publicly-traded hospital organization with more than 182 hospitals and 2,300+ care delivery sites in the US and UK.
 
-Due to the relative rarity of hospital emergency room admission, ER admits are typically expressed in terms of per 1,000 patients/members for a given time period. The visualization below uses MEPS data pooled across 2014 - 2019 to build a statistical representation of ER utilization over a period of one year. Results are consistent with [annual ER utilization reports from Kaiser Family Foundation](https://www.kff.org/other/state-indicator/emergency-room-visits-by-ownership/).
+Due to the relative rarity of hospital emergency department admission, ED admits are typically expressed in terms of per 1,000 patients/members for a given time period. The visualization below uses MEPS data pooled across 2014 - 2019 to build a statistical representation of ED utilization over a period of one year. Results are consistent with [annual emergency room utilization reports from Kaiser Family Foundation](https://www.kff.org/other/state-indicator/emergency-room-visits-by-ownership/).
 
 
-```{r er_util_marriage_class}
+```{r ed_util_marriage_class}
 
 # Visualizations appear in several steps. 
 
 # First, the title:
-er_util_marriage_class.title <- "Average Annual Emergency Room Admissions Per 1,000"
-er_util_marriage_class.subtitle <-  "By Same-Gender Marriage Status and Age Group"
+ed_util_marriage_class.title <- "Average Annual Emergency Department Admissions Per 1,000"
+ed_util_marriage_class.subtitle <-  "By Same-Gender Marriage Status and Age Group"
 
 # Next, we compute the data table for the underlying visualizations using the Survey package 
 
-er_util_marriage_class.data <- svyby(~ERTOTYY,
+ed_util_marriage_class.data <- svyby(~ERTOTYY,
         by = ~SGM_DSC + AGE_GRP_3,
         FUN = svymean,
         design = fyc14_to_19_by_dufam_final_svydsn ) %>% 
@@ -1082,7 +1090,7 @@ er_util_marriage_class.data <- svyby(~ERTOTYY,
   filter(`Age Group` != "Under 18")
 
 # Then, we create the publication table object for displaying the underlying data:
-er_util_marriage_class.table <- er_util_marriage_class.data %>% 
+ed_util_marriage_class.table <- ed_util_marriage_class.data %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
   select(-rse, -rse_flag) %>% 
    mutate(`95% CI Lower Bound` = scales::comma(`95% CI Lower Bound`, accuracy=0.01),
@@ -1094,13 +1102,13 @@ er_util_marriage_class.table <- er_util_marriage_class.data %>%
   colformat_double() %>% 
   theme_box() %>% 
   merge_v(j = ~ `Marriage Classification` + `Age Group`) %>% 
-  add_header_lines(paste0("Data Table for '", er_util_marriage_class.title, " ", er_util_marriage_class.subtitle, "'")) %>% 
+  add_header_lines(paste0("Data Table for '", ed_util_marriage_class.title, " ", ed_util_marriage_class.subtitle, "'")) %>% 
   add_footer_lines(paste0("From MEPS Precision Standards Guidelines:\n",
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
-er_util_marriage_class.plot <- er_util_marriage_class.data %>% 
+ed_util_marriage_class.plot <- ed_util_marriage_class.data %>% 
   filter(rse_flag != "†") %>% 
   ggplot(mapping = aes(x = `Age Group`,
                        y = `Annual ER Admits Per 1,000`)) +
@@ -1110,30 +1118,30 @@ er_util_marriage_class.plot <- er_util_marriage_class.data %>%
   theme_bw(base_size = 9) +
   scale_y_continuous(labels = scales::comma) +
   facet_wrap(~ `Marriage Classification`, ncol = 3, scales="fixed", labeller = label_wrap_gen(width = 27, multi_line = TRUE)) +
-  labs(title=er_util_marriage_class.title,
-       subtitle=er_util_marriage_class.subtitle,
+  labs(title=ed_util_marriage_class.title,
+       subtitle=ed_util_marriage_class.subtitle,
        x = "Age Group",
-       fill = "Annual ER Admits Per 1,000",
+       fill = "Annual ED Admits Per 1,000",
        y = "Annual ER Admits Per 1,000",
        caption = "MEPS 2014 - 2019 Pooled Full Year Consolidated Data Files\n(https://meps.ahrq.gov/)") +
   theme(legend.position = "bottom") +
   guides(fill = guide_legend(nrow = 3))
 
 # Next, we render the visualization
-er_util_marriage_class.plot
+ed_util_marriage_class.plot
 
 
 ```
 
-In this visualization, I chose once again to include a panel containing unmarried individuals in order to showcase how marital status could be predictive of hospital emergency room utilization. Additionally, it appears as if more investigation could be warranted regarding the relatively low ER utilization rate in the cohort of individuals 65 and over in same-gender marriages; though there is no overlap in the confidence interval boundaries for this estimate and the equivalent estimates of other cohorts over age 65, it would be important to control (at least) for gender and racial confounders before drawing any conclusion.
+In this visualization, I chose once again to include a panel containing unmarried individuals in order to showcase how marital status could be predictive of hospital emergency department utilization. Additionally, it appears as if more investigation could be warranted regarding the relatively low ED utilization rate in the cohort of individuals 65 and over in same-gender marriages; though there is no overlap in the confidence interval boundaries for this estimate and the equivalent estimates of other cohorts over age 65, it would be important to control (at least) for gender and racial confounders before drawing any conclusion.
 
 ### Average Inpatient Length of Stay
 
-Another important measure of hospital utilization in a population is the total number of days (or, sometimes, overnights) between admission and discharge that all individuals within the cohort of interest were admitted in within hospital inpatient facilities. This measure is often also reported as "total hospital (in)patient-days." This statistic, much like total ER utilization, is frequently reported by hospital organizations due to the fact that it is very predictive of the total cost of care delivered in inpatient hospital encounters. 
+Another important measure of hospital utilization in a population is the total number of days (or, sometimes, overnights) between admission and discharge that all individuals within the cohort of interest were admitted in within hospital inpatient facilities. This measure is often also reported as "total hospital (in)patient-days." This statistic, much like total ED utilization, is frequently reported by hospital organizations due to the fact that it is very predictive of the total cost of care delivered in inpatient hospital encounters. 
 
 Moreover, average length of stay is also highly predictive of hospital readmissions and is a component of one of the oldest and well-known indices, [the LACE index](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2845681/), which is used to predict post-discharge mortality or unplanned readmission after discharge from an inpatient facility. Reducing readmissions are a key focus for the Center for Medicare and Medicaid Services, the federal agency that oversees or regulates Medicare and Medicaid administration, which [published findings in 2014](https://www.kff.org/wp-content/uploads/sites/2/2014/10/brennan.pdf) claiming that nearly one in five fee-for-service Medicare patients enrolled in Part A benefits return to the hospital within 30 days of being discharged. In this same study, CMS attributed $26 billion per year to the cost of these readmissions, of which \$17 billion was associated with potentially avoidable readmissions.
 
-While it is possible to investigate readmission rates directly using MEPS data, the methodology is less simple and involves the use of [additional data files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-213D). Therefore, I have chosen to examine only total length of stay within our baseline and comparison cohorts. Similarly to ER utilization, total hospital length of stay is most usually expressed per 1,000 patients/members over a time period. The visualization below uses MEPS data pooled across 2014 - 2019 to build a statistical representation of total length of stay over a period of one year. Results are consistent with [annual inpatient-days per 1,000](https://www.kff.org/other/state-indicator/inpatient-days-by-ownership/) reported annually by Kaiser Family Foundation.
+While it is possible to investigate readmission rates directly using MEPS data, the methodology is less simple and involves the use of [additional data files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-213D). Therefore, I have chosen to examine only total length of stay within our baseline and comparison cohorts. Similarly to ED utilization, total hospital length of stay is most usually expressed per 1,000 patients/members over a time period. The visualization below uses MEPS data pooled across 2014 - 2019 to build a statistical representation of total length of stay over a period of one year. Results are consistent with [annual inpatient-days per 1,000](https://www.kff.org/other/state-indicator/inpatient-days-by-ownership/) reported annually by Kaiser Family Foundation.
 
 
 ```{r inpatient_los_marriage_class}
@@ -1141,7 +1149,7 @@ While it is possible to investigate readmission rates directly using MEPS data, 
 # Visualizations appear in several steps. 
 
 # First, the title:
-inpatient_los_marriage_class.title <- "Total Annual Hospital Inpatient Length of Stay, Per 1,000"
+inpatient_los_marriage_class.title <- "Total Annual Inpatient Days, Per 1,000"
 inpatient_los_marriage_class.subtitle <-  "By Same-Gender Marriage Status and Age Group"
 
 # Next, we compute the data table for the underlying visualizations using the Survey package 
@@ -1692,7 +1700,7 @@ So while we’ve only just skimmed the surface of what MEPS has to offer, MEPS p
 
 While isolating MEPS respondents based on same-gender marriage status is one way of highlighting any differences in key healthcare measures between this population and non-LGBTQ+ populations, perhaps a better way of understanding these differences is simply by adding [SOGI](https://eca.state.gov/files/bureau/sogi_terminology.pdf) questions and terminology to the standard MEPS questionnaire. The US Census Bureau took this very same action in July 2021, when it began [surveying respondents for information on sexual orientation and gender identity in its Household Pulse Survey](https://www.census.gov/library/stories/2021/08/household-pulse-survey-updates-sex-question-now-asks-sexual-orientation-and-gender-identity.html). This very act of broadening the survey questionnaire led to [findings from the US Census Bureau](https://www.pbs.org/newshour/economy/the-census-bureaus-first-ever-data-on-lgbtq-people-indicates-deep-disparities) that LGBTQ+-identifying individuals were more likely to "have lost employment, not have enough to eat, be at elevated risk of eviction or foreclosure, and face difficulty paying for basic household expenses" as compared to their non-LGBTQ+ counterparts.
 
-We also have seen how important of a predictor that an individual's marital status can be for measures of certain risks that can lead to increased healthcare spend, such as measures of total inpatient length-of-stay, uninsured rates, rates of readmission, and emergency room utilization. And while there is likely a lot of correlation "noise" to be sorted out when analyzing the connection between marital status and health outcomes, particularly among potential confounding influences like race, age, and gender, it still might be the case that a consistent and clear path to legally-recognized marriage for all individuals in the US could have beneficial health-care related outcomes.
+We also have seen how important of a predictor that an individual's marital status can be for measures of certain risks that can lead to increased healthcare spend, such as measures of total inpatient length-of-stay, uninsured rates, rates of readmission, and emergency department utilization. And while there is likely a lot of correlation "noise" to be sorted out when analyzing the connection between marital status and health outcomes, particularly among potential confounding influences like race, age, and gender, it still might be the case that a consistent and clear path to legally-recognized marriage for all individuals in the US could have beneficial health-care related outcomes.
 
 # Appendix A: Data Tables
 
@@ -1707,7 +1715,7 @@ knitr::include_graphics(marriage_class_and_race_ethnicity.table %>% save_as_imag
 knitr::include_graphics(marriage_class_and_ethnicity.table %>% save_as_image(here::here("./tables/tbl5a.png")))
 knitr::include_graphics(marriage_class_and_race_black.table %>% save_as_image(here::here("./tables/tbl5b.png")))
 knitr::include_graphics(marriage_class_and_income.table %>% save_as_image(here::here("./tables/tbl6.png")))
-knitr::include_graphics(er_util_marriage_class.table %>% save_as_image(here::here("./tables/tbl7.png")))
+knitr::include_graphics(ed_util_marriage_class.table %>% save_as_image(here::here("./tables/tbl7.png")))
 knitr::include_graphics(inpatient_los_marriage_class.table %>% save_as_image(here::here("./tables/tbl8.png")))
 knitr::include_graphics(exp_marriage_class.table %>% save_as_image(here::here("./tables/tbl9.png")))
 knitr::include_graphics(rx_util_marriage_class.table %>% save_as_image(here::here("./tables/tbl10.png")))

@@ -17,20 +17,20 @@ if(!require(here)) { install.packages("here"); library(here) }
 # https://github.com/HHS-AHRQ/MEPS/tree/master/R#all-data-years-using-the-meps-package
 if(!require(MEPS)) { devtools::install_github("e-mitchell/meps_r_pkg/MEPS"); library(MEPS) }
 
-# Set options to deal with lonely PSUs. A PSU is a Primary Sampling Unit. Primary Sampling Units are divided among several sampling strata. The MEPS survey design package provides appropriate sampling weights for each strata in order for each sampling unit to be reweighted in proportion to the POI (Population of Interest - in this case ,the entire US).
+# Set options to deal with lonely PSUs. A PSU is a Primary Sampling Unit. Primary Sampling Units are divided among several sampling strata. The MEPS survey design package provides appropriate sampling weights for each strata in order for each sampling unit to be re-weighted in proportion to the POI (Population of Interest - in this case, the entire US).
 
-# In some cases, our analysis might necessitate drilling down to very small subpopulations, which will whittle down the membership of some strata to 1 or fewer members. In this case, we might encounter some strata with a single member - a "lonely PSU" - at which point the Survey package will error out when computing the sample variance to determine the standard error for a particular statistic (mean, total sum, etc.) in our analyses. Setting this option will adjust the data in the single-PSU stratum so that it is centered at the entire sample mean instead of the particular stratum mean, which tends to be a more conservative computation of the variance and has the effect of contributing to a wider standard error estimate for any statistic of interest in the analysis.
+# In some cases, our analysis might necessitate drilling down to very small subpopulations, which will whittle down the membership of some strata to 1 or fewer members. In this case, we might encounter some strata with a single member - a "lonely PSU" - at which point the Survey package will error out when computing the sample variance to determine the standard error for a particular statistic (mean, total sum, etc.). Setting this option will adjust the data in the single-PSU stratum so that it is centered at the entire sample mean instead of the particular stratum mean, which tends to be a more conservative computation of the variance and has the effect of contributing to a wider standard error estimate for any statistic of interest in the analysis.
 
-# In short, the following line will conservatively recenter certain data points so that a standard error for statistics of interest (mean, total sum, etc.) are computable for all strata - even those containing a single PSU, with the tradeoff of a larger (and more conservative) magnitude of standard error.
+# In short, the following line will conservatively re-center certain data points so that a standard error for statistics of interest (mean, total sum, etc.) is computable for all strata - even those containing a single PSU, with the tradeoff of a larger (and more conservative) magnitude of standard error.
 
-# An excellent article that goes into more detail about this process (and expresses some concern about the magnitude of overconservatism that R's survey package employs in recentering the lonely PSU mean) can be read here:
+# An excellent article that goes into more detail about this process (and expresses some concern about the magnitude of overconservatism that R's survey package employs in re-centering the lonely PSU mean) can be read here:
 # https://www.practicalsignificance.com/posts/bugs-with-singleton-strata/
 
 options(survey.lonely.psu='adjust')
 
 # The following lines of code make use of the custom MEPS R package developed by the MEPS staff. This package is not on CRAN and must be downloaded via Github using the "devtools" package, which is done in the "Initial_Setup" chunk of code in the 'README.Rmd' markdown file.
 
-# Due to the desire to have statistically meaningful results on display in later sections of this analysis, I have decided to pull MEPS data files spanning the full years 2014 through 2019. Ideally I would have also pulled 2020, but since this project consists of an analysis of differences in healthcare spending patterns between demographic groups, and since these same spending patterns are likely to have been influenced by varying degrees regional differences in public attitudes/lockdowns/"pent-up" utilization patterns/etc. during the height of the pandemic, 2020 year data was not included.
+# Due to the desire to have statistically meaningful results on display in later sections of this analysis, I have decided to pull MEPS data files spanning the full years 2014 through 2019.
 
 # Download the 2019 Full Year Consolidated Data File
 # https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-216
@@ -58,7 +58,7 @@ fyc14 = MEPS::read_MEPS(year = 2014, type = "FYC")
 
 # From the MEPS website at https://meps.ahrq.gov/mepsweb/data_stats/download_data_files.jsp:
 
-# "The pooled linkage file contains the standardized variance strata and PSU variables for a pooled analysis of multiple years of MEPS data. The pooled replicates file contains 128 half sample indicators needed to calculate standard errors using balanced repeated replication (BRR) method either for a single year analysis or a pooled analysis of multiple years of MEPS data."
+# "The pooled linkage file contains the standardized variance strata and PSU variables for a pooled analysis of multiple years of MEPS data."
 linkage = MEPS::read_MEPS(type = "Pooled linkage")
 
 # Next, we will define some custom functions. These functions will be explained in context in subsequent documentation below at the time they are invoked, but I have provided a brief description now.
@@ -78,7 +78,7 @@ check_family_size <- function(df) {
      filter(FAMRFPYR == 1))$FAMSZEYR
 }
 
-# This function takes as input a DUIDFAMY group data table and returns a data table that is the result of an inner join of the input data table onto itself, merging Person ID (PID) on the left-hand input table by equality to Spouse Person ID (SPOUIDYY) on the right-hand input table, and also merging on marriage status (left-hand and right-hand) by equality (to ensure that the analysis contains only married, cohabiting individuals). The output data table contains three fields: the PIDs of the married individuals that meet the inner join conditions, their genders, and a logical variable flag that is 1 if their genders are the same.
+# This function takes as input a DUIDFAMY group data table and returns a data table. The output data table contains three fields: the PIDs of the married individuals that meet the inner join conditions, their genders, and a logical variable flag that is 1 if their genders are the same.
 identify_same_gender_spouses <- function(df) {
   df %>% 
     select(PID, SEX, SPOUIDYY, MARRYYYX) %>% 
@@ -97,7 +97,7 @@ count_married_individuals <- function(df) {
     nrow()
 }
 
-# This function takes as input a DUIDFAMY group data table and returns a count of the number of married individuals within that DUIDFAMY who are in a same-gender marriage.
+# This function takes as input a DUIDFAMY group data table and returns a count of the number of married individuals within that DUIDFAMY who are in a same-gender marriage (SGM).
 count_married_individuals_in_sgm <- function(df) {
   count <- df %>% 
     filter(same_gender_lgl == T) %>% 
@@ -129,12 +129,12 @@ fyc19_by_dufam  <- fyc19 %>%
          PROBPYYY=PROBPY42,
          DIABDX=DIABDX_M18) %>% 
   mutate(MEPS_DATA_YEAR = 2019) %>% 
-  # 3. Per section 3.5.2 of the MEPS FYC 2019 documentation manual linked above, a family consists of two or more persons living together in the same household who are related by blood, marriage, or adoption. As we want to use same-gender marriage as a loose proxy means for identifying same-gender individuals, we're going to first make sure we isolate our cohort of individuals to those who are part of a family unit, as defined by MEPS, which will include almost all married, cohabiting survey respondents. This requires that we perform the following steps:
+  # 3. Per section 3.5.2 of the MEPS FYC 2019 documentation manual linked above, filter records to only families (2+ persons living together related by blood/marriage/adoption)
   #     a. Restrict records to FAMWT19F (now renamed to FAMWTYYF) to positive nonzero weights only.
   filter(FAMWTYYF > 0) %>%
   #     b. Concatenate DUID (Dwelling Unit ID) and FAMIDYR (eligible members of eligible annualized families within a single Dwelling Unit ID) into a single variable known as DUIDFAMY.
   mutate(DUIDFAMY = stringr::str_c(DUID, FAMIDYR)) %>% 
-  # 4. Next we will group by this new variable and use the "nest" function to create a dataset of datasets, so that the resulting dataset will contain a single unique DUIDFAMY value in one column and the second column will consist of a table of all the individual PSUs which are members of that combination of Dwelling Unit ID and Family ID
+  # 4. Next we will iteratively nest the data so the DUIDFAMY value in one column and the second column will consist of a table of all the individual PSUs belonging to that DUIDFAMY.
   group_by(MEPS_DATA_YEAR, DUIDFAMY) %>%  
   tidyr::nest()
 
@@ -418,23 +418,23 @@ fyc14_to_19_by_dufam_w_desc <-  fyc14_to_19_by_dufam_flattened %>%
   # Finally we will define some categorical variables for labeling visualizations
   mutate(AGE_GRP_2 = if_else(AGEYYX >= 65, "65 and over", "0 - 64")) %>% 
   mutate(AGE_GRP_3 = case_when(AGEYYX < 18 ~ "Under 18",
-                               AGEYYX >= 18 & AGEYYX < 65 ~ "18 - 64",
+                               AGEYYX < 65 ~ "18 - 64",
                                AGEYYX >= 65 ~ "65 and over",
                                T ~ as.character(AGEYYX))) %>%
   mutate(AGE_GRP_5 = case_when(AGEYYX < 5 ~ "Under 5",
-                               AGEYYX >= 5 & AGEYYX <= 17 ~ "5 - 17",
-                               AGEYYX >= 18 & AGEYYX <= 44 ~ "18 - 44",
-                               AGEYYX >= 45 & AGEYYX <= 64 ~ "45 - 64",
+                               AGEYYX <= 17 ~ "5 - 17",
+                               AGEYYX <= 44 ~ "18 - 44",
+                               AGEYYX <= 64 ~ "45 - 64",
                                AGEYYX >= 65 ~ "65 and over",
                                T ~ as.character(AGEYYX))) %>%
   mutate(AGE_GRP_9 = case_when(AGEYYX < 5 ~ "Under 5",
-                               AGEYYX >= 5 & AGEYYX <= 17 ~ "5 - 17",
-                               AGEYYX >= 18 & AGEYYX <= 29 ~ "18 - 29",
-                               AGEYYX >= 30 & AGEYYX <= 39 ~ "30 - 39",
-                               AGEYYX >= 40 & AGEYYX <= 49 ~ "40 - 49",
-                               AGEYYX >= 50 & AGEYYX <= 59 ~ "50 - 59",
-                               AGEYYX >= 60 & AGEYYX <= 69 ~ "60 - 69",
-                               AGEYYX >= 70 & AGEYYX <= 79 ~ "70 - 79",
+                               AGEYYX <= 17 ~ "5 - 17",
+                               AGEYYX <= 29 ~ "18 - 29",
+                               AGEYYX <= 39 ~ "30 - 39",
+                               AGEYYX <= 49 ~ "40 - 49",
+                               AGEYYX <= 59 ~ "50 - 59",
+                               AGEYYX <= 69 ~ "60 - 69",
+                               AGEYYX <= 79 ~ "70 - 79",
                                AGEYYX >= 80 ~ "80 and over",
                                T ~ as.character(AGEYYX))) %>%
   arrange(AGEYYX) %>% 
@@ -472,7 +472,7 @@ fyc14_to_19_by_dufam_w_desc <-  fyc14_to_19_by_dufam_flattened %>%
                                  RACEV1X == 2 ~ "Black – No other race reported",
                                  RACEV1X == 3 ~ "American Indian/Alaska Native – No other race reported",
                                  RACEV1X == 4 ~ "Asian – No other race reported",
-                                 RACEV1X == 5 ~ "Native Hawaiian/Pacific Islande (NOT USED)",
+                                 RACEV1X == 5 ~ "Native Hawaiian/Pacific Islander (NOT USED)",
                                  RACEV1X == 6 ~ "Multiple races reported",
                                  T ~ as.character(RACEV1X))) %>% 
   arrange(RACEV1X) %>% 
@@ -544,8 +544,8 @@ fyc14_to_19_by_dufam_w_desc <-  fyc14_to_19_by_dufam_flattened %>%
                                     FAMSZEYR >= 7 ~ "7+ persons")) %>% 
   arrange(FAMSZEYR) %>% 
   mutate(FAMSZEYR_GRP_4 = forcats::fct_inorder(FAMSZEYR_GRP_4)) %>% 
-  # Divide survey weights by two and store in a new "pooled weight" column so that we can still refer to specific-year-only data if we would like to do so for any particular analysis. Directions to adjust the analytic weight variable (PERWTYYF) by division by 6 (the number of pooled years, 2014 - 2019) are in section 4.0 of the Pooled Linkage file documentation, here:
-  # https://meps.ahrq.gov/data_stats/download_data/pufs/h036/h36u20doc.shtml#2
+  # Divide survey weights by six and store in a new "pooled weight" column so that we can still refer to specific-year-only data if we would like to do so for any particular analysis. Directions to adjust the analytic weight variable (PERWTYYF) by division by 6 (the number of pooled years, 2014 - 2019) are in section 4.0 of the Pooled Linkage file documentation, here:
+  # https://meps.ahrq.gov/data_stats/download_data/pufs/h036/h36u20doc.shtml#40Other
   mutate(POOLWTYY = PERWTYYF / 6)
 
 rm(fyc14_to_19_by_dufam_flattened)

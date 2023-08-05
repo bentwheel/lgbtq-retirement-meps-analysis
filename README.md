@@ -1,5 +1,5 @@
-Healthcare Experiences of Elderly LGBTQ+ Individuals in the US: A Visual
-Analysis Using Medical Expenditure Panel Survey (MEPS) Data
+Healthcare Experiences of Medicare-Aged LGBTQ+ Individuals in the US: A
+Visual Analysis Using Medical Expenditure Panel Survey (MEPS) Data
 ================
 C. Seth Lester, ASA, MAAA
 ([Seth.Lester@milliman.com](mailto:seth.lester@milliman.com)) <br>
@@ -23,20 +23,20 @@ people who identify as LGBTQ+ from enjoying the same protections of our
 social safety net – such as healthcare and retirement security systems –
 that are enjoyed by non-LGBTQ+-identifying people.
 
-It is difficult today for analysts to credibly estimate how
-retirement-related outcomes differ between LGBTQ+ and non-LGBTQ+
-populations, or to know how to quantify the disparities of outcomes
-among intersectional subpopulations that exist today within the United
-States’ LGBTQ+ population. One key reason for this difficulty is the
-lack of available data that can help guide our policymaking apparatus
-towards better regulations and protections for members of our society
-who are more likely to be marginalized, stigmatized, or disadvantaged by
-systemic factors. This includes LGBTQ+ people, of course, but heavily
-intersects with people of color, women, religious minorities,
-immigrants, disabled individuals, and – key to this essay – the US’
-rapidly growing aging population.
+It is currently difficult to credibly estimate how retirement-related
+outcomes differ between LGBTQ+ and non-LGBTQ+ populations, or to know
+how to quantify the disparities of outcomes among intersectional
+subpopulations that exist today within the United States’ LGBTQ+
+population. One key reason for this difficulty is the lack of available
+data that can help guide our policymaking apparatus towards better
+regulations and protections for members of our society who are more
+likely to be marginalized, stigmatized, or disadvantaged by systemic
+factors. This includes LGBTQ+ people, of course, but heavily intersects
+with people of color, women, religious minorities, foreign-born
+individuals, disabled individuals, and – key to this essay – the US’s
+rapidly aging population.
 
-In the healthcare space, there is ample energy surrounding the important
+In the healthcare space, there is ample energy devoted to the important
 work being done by organizations, both private and public, to better
 understand the impacts of what are known as Social Determinants of
 Health – “the conditions in the environments where people are born,
@@ -45,7 +45,7 @@ health, functioning, and quality-of-life outcomes and risks” (as defined
 by the [US Dept. of Health and Human
 Services](https://health.gov/healthypeople/priority-areas/social-determinants-health)).
 
-Social Determinants of Health (SDoH) can provide [causal
+Analyzing Social Determinants of Health (SDoH) can provide [causal
 evidence](https://aspe.hhs.gov/reports/sdoh-evidence-review) for how
 certain subpopulations of our society disproportionately experience poor
 health outcomes. Consequently, population health professionals and
@@ -77,7 +77,7 @@ primary sections:
     outcomes commonly of interest to population health analyses, such as
     total pharmacy expenditure per individual, and average pharmacy
     utilization, average inpatient length-of-stay, and average hospital
-    emergency room utilization utilization, to name a few.
+    emergency department utilization utilization, to name a few.
 
 The primary goal of this essay is to motivate additional and more
 rigorous research into the specific healthcare outcomes-related
@@ -97,27 +97,27 @@ well as data on the cost, scope, and breadth of health insurance held by
 and available to U.S. workers” ([Survey Background, MEPS
 Homepage](https://meps.ahrq.gov/mepsweb/about_meps/survey_back.jsp)).
 
-Because MEPS data is drawn from survey respondents, it is subject to
-many of the usual strengths and limitations of survey data analysis.
-performing inferential analysis survey data populated by individual
-respondents, and therefore the public use data files that contain
-responses at the individual or family level is either self-reported or
-imputed. Therefore, there are some situations in which individuals using
-this data might want to perform additional data quality checks. For
-example, an analyst might want to compare, in aggregate, the results of
-two separate but related survey questions, such as the count of
-individual respondents that have a valid person ID (PID) value for
-spouse ID (SPOUID) against the count of individuals who indicated that
-they are currently married.
+Because MEPS data is drawn from survey respondents, any analysis of MEPS
+data is subject to many of the usual strengths and limitations of survey
+data analysis. One major weakness of using survey data to perform
+inferential analysis is that data from respondents is often
+self-reported or imputed and is not always accurate. Therefore, there
+are some situations in which it would be advisable for individuals using
+this data to perform additional data quality checks. For example, an
+analyst might want to compare, in aggregate, the results of two separate
+but related survey questions, such as the count of individual
+respondents that have a valid person ID (PID) value for spouse ID
+(SPOUID) against the count of individuals who indicated that they are
+currently married.
 
 Additionally, MEPS provides [statistical precision
 guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml)
-about displaying and performing inferential statistical methods using
-the data, which include restrictions and guidance concerning minimum
-sample sizes of cohorts used in statistical methods, as well as
-standards establishing acceptable standard error thresholds of estimates
-calculated using statistical methods. I discuss this guidance further in
-a subsequent section of this essay.
+about applying and displaying the results of inferential statistical
+methods using the data, which include restrictions and guidance
+concerning minimum sample sizes of cohorts used in statistical methods,
+as well as standards establishing acceptable standard error thresholds
+of estimates calculated using statistical methods. I discuss this
+guidance further in a subsequent section of this essay.
 
 ## About the MEPS Public Use Files
 
@@ -141,8 +141,8 @@ Homepage](https://meps.ahrq.gov/mepsweb/survey_comp/household.jsp)).
 
 MEPS data files have been used in the past to generate a large number of
 findings within the academic disciplines of public health and health
-policy. Some specific examples of scientific literature containing an
-analysis of MEPS data relevant to the current strategic research
+policy. Some specific examples of scientific literature containing
+analyses of MEPS data relevant to the current strategic research
 initiatives of the [Society of Actuaries Research
 Institute](https://www.soa.org/programs/strategic-research-program/) are
 given below:
@@ -165,31 +165,31 @@ given below:
   Estimates for the U.S. Civilian Noninstitutionalized
   Population](https://pubmed.ncbi.nlm.nih.gov/28783295/)
 
-One piece of information that absent from the long list of data points
-sampled in the MEPS Household Component is whether individual
-respondents identify as LGBTQ+. This presents a major challenge for
-using MEPS public use files to investigate healthcare outcomes
-experienced by LGBTQ+ individuals in the US. However, a method for
-identifying some individuals who are very likely to identify as LGBTQ+
-is described in further detail in the next section.
+One piece of information that is absent from the long list of data
+points sampled in the MEPS Household Component is whether individual
+respondents identify as any LGBTQ+ subpopulation. This presents a major
+challenge for using MEPS public use files to investigate healthcare
+outcomes experienced by LGBTQ+ individuals in the US. However, a method
+for identifying some individuals who are very likely to identify as
+LGBTQ+ is described in further detail in the next section.
 
 The R code that performs this analysis and prepares the this document,
 including all data tables and visualizations, is available [on
 Github](https://github.com/bentwheel/lgbtq-retirement-meps-analysis).
 
 Since the LGBTQ+-identifying population in the United States is a
-relatively small subset of the overall US population, MEPS data PUFs
-(Public Use Files) from surveys representative of years between 2014 and
-2019 (see table below) have been pooled together to produce the data
-visualizations and tables within this essay.
+relatively small subset of the overall population, MEPS data PUFs from
+surveys representative of years between 2014 and 2019 (see table below)
+are pooled together to produce the data visualizations and tables within
+this essay.
 
-The purpose of pooling the MEPS PUFs across such long span of time is to
-build a cohort of elderly (age 65 and up) LGBTQ+ individuals that is
-also large enough in size to meet MEPS’ [statistical precision
+The purpose of pooling the MEPS PUFs across such a long span of time is
+to build a cohort of elderly (age 65 and up) LGBTQ+ individuals that is
+large enough to comply with MEPS’s [statistical precision
 guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml)
-for performing statistical methods to generate population-level
-estimates of this cohort’s demographic composition and measurable
-healthcare outcomes.
+for applying statistical methods to generate population-level estimates
+of this cohort’s demographic composition and measurable healthcare
+outcomes.
 
 All MEPS Full Year Consolidated data PUFs listed in the following table
 contain variables pertaining to survey administration, income,
@@ -250,12 +250,12 @@ In this essay, we will consider and even see some evidence supporting
 the possibility that marriage (or cohabitation, more generally) has a
 confounding influence on some of the population-level estimates of
 measurements of interest (e.g., annual healthcare expenditures,
-emergency room utilization, etc.). Therefore, most data visualizations
-and data tables in this essay will present findings comparing key
-population-level estimates between married individuals in same-gender
-marriages against married individuals not in same-gender marriages in
-order to control for the potential confounding effect of marriage or
-cohabitation.
+emergency department utilization, etc.). Therefore, most data
+visualizations and data tables in this essay will present findings
+comparing key population-level estimates between married individuals in
+same-gender marriages against married individuals not in same-gender
+marriages in order to control for the potential confounding effect of
+marriage or cohabitation.
 
 ## MEPS Precision Guidelines for Population-Level Estimates
 
@@ -667,13 +667,13 @@ and are more likely to face one or more highly-prevalent chronic
 conditions such as heart disease, diabetes, or asthma, which can lead to
 high-cost encounters if not properly managed.
 
-### Emergency Room Utilization
+### Emergency Department Utilization
 
-Emergency Room utilization is a key statistic of interest because as
-hospital admissions that start with the ER tend to be more costly for
+Emergency department utilization is a key statistic of interest because
+as hospital admissions that start with the ED tend to be more costly for
 health plans than ordinary, non-emergency inpatient hospital admissions.
-Hospital organizations routinely report total ER visits on both a total
-aggregate basis as well as a same-facility basis. For example, total ER
+Hospital organizations routinely report total ED visits on both a total
+aggregate basis as well as a same-facility basis. For example, total ED
 utilization is listed in the most recent (as of this writing) [quarterly
 earnings
 report](https://investor.hcahealthcare.com/news/news-details/2023/HCA-Healthcare-Reports-First-Quarter-2023-Results/default.aspx)
@@ -681,21 +681,21 @@ from [HCA Healthcare](https://hcahealthcare.com/about/), a
 publicly-traded hospital organization with more than 182 hospitals and
 2,300+ care delivery sites in the US and UK.
 
-Due to the relative rarity of hospital emergency room admission, ER
-admits are typically expressed in terms of per 1,000 patients/members
+Due to the relative rarity of hospital emergency department admission,
+ED admits are typically expressed in terms of per 1,000 patients/members
 for a given time period. The visualization below uses MEPS data pooled
-across 2014 - 2019 to build a statistical representation of ER
+across 2014 - 2019 to build a statistical representation of ED
 utilization over a period of one year. Results are consistent with
-[annual ER utilization reports from Kaiser Family
+[annual emergency room utilization reports from Kaiser Family
 Foundation](https://www.kff.org/other/state-indicator/emergency-room-visits-by-ownership/).
 
-<img src="README_files/figure-gfm/er_util_marriage_class-1.png" style="display: block; margin: auto;" />
+<img src="README_files/figure-gfm/ed_util_marriage_class-1.png" style="display: block; margin: auto;" />
 
 In this visualization, I chose once again to include a panel containing
 unmarried individuals in order to showcase how marital status could be
-predictive of hospital emergency room utilization. Additionally, it
-appears as if more investigation could be warranted regarding the
-relatively low ER utilization rate in the cohort of individuals 65 and
+predictive of hospital emergency department utilization. Additionally,
+it appears as if more investigation could be warranted regarding the
+relatively low ED utilization rate in the cohort of individuals 65 and
 over in same-gender marriages; though there is no overlap in the
 confidence interval boundaries for this estimate and the equivalent
 estimates of other cohorts over age 65, it would be important to control
@@ -709,7 +709,7 @@ total number of days (or, sometimes, overnights) between admission and
 discharge that all individuals within the cohort of interest were
 admitted in within hospital inpatient facilities. This measure is often
 also reported as “total hospital (in)patient-days.” This statistic, much
-like total ER utilization, is frequently reported by hospital
+like total ED utilization, is frequently reported by hospital
 organizations due to the fact that it is very predictive of the total
 cost of care delivered in inpatient hospital encounters.
 
@@ -734,7 +734,7 @@ MEPS data, the methodology is less simple and involves the use of
 [additional data
 files](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_detail.jsp?cboPufNumber=HC-213D).
 Therefore, I have chosen to examine only total length of stay within our
-baseline and comparison cohorts. Similarly to ER utilization, total
+baseline and comparison cohorts. Similarly to ED utilization, total
 hospital length of stay is most usually expressed per 1,000
 patients/members over a time period. The visualization below uses MEPS
 data pooled across 2014 - 2019 to build a statistical representation of
@@ -958,12 +958,13 @@ We also have seen how important of a predictor that an individual’s
 marital status can be for measures of certain risks that can lead to
 increased healthcare spend, such as measures of total inpatient
 length-of-stay, uninsured rates, rates of readmission, and emergency
-room utilization. And while there is likely a lot of correlation “noise”
-to be sorted out when analyzing the connection between marital status
-and health outcomes, particularly among potential confounding influences
-like race, age, and gender, it still might be the case that a consistent
-and clear path to legally-recognized marriage for all individuals in the
-US could have beneficial health-care related outcomes.
+department utilization. And while there is likely a lot of correlation
+“noise” to be sorted out when analyzing the connection between marital
+status and health outcomes, particularly among potential confounding
+influences like race, age, and gender, it still might be the case that a
+consistent and clear path to legally-recognized marriage for all
+individuals in the US could have beneficial health-care related
+outcomes.
 
 # Appendix A: Data Tables
 
