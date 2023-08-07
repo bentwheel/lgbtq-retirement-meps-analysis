@@ -54,10 +54,11 @@ relationships between SDoH and access to quality healthcare that is both
 affordable and can be sustainably provided by the care delivery system.
 
 It is therefore reasonable to suspect that investigating differences in
-patient experiences between elderly LGBTQ+-identifying individuals and
-their non-LGBTQ+ elderly or non-elderly LGBTQ+ counterparts can give us
-better information about how the elderly LGBTQ+ population should plan
-and prepare for healthcare expenses in retirement.
+patient experiences between Medicare-aged LGBTQ+-identifying individuals
+and their non-LGBTQ+ Medicare-aged or non-Medicare-aged LGBTQ+
+counterparts can give us better information about how the Medicare-aged
+LGBTQ+ population should plan and prepare for healthcare expenses in
+retirement.
 
 In order to carry out this preliminary investigation, I performed an
 analysis of the public use files (PUFs) made available by the [Medical
@@ -72,7 +73,7 @@ primary sections:
 2.  In [Visualizing Healthcare Experiences for LGBTQ+
     Subpopulations](#visualizing-healthcare-experiences-for-lgbtq-subpopulations)
     I showcase a visual representation of preliminary findings around
-    key healthcare experiences and outcomes between elderly LGBTQ+
+    key healthcare experiences and outcomes between Medicare-aged LGBTQ+
     cohorts and other cohorts – findings which describe healthcare
     outcomes commonly of interest to population health analyses, such as
     total pharmacy expenditure per individual, and average pharmacy
@@ -81,8 +82,8 @@ primary sections:
 
 The primary goal of this essay is to motivate additional and more
 rigorous research into the specific healthcare outcomes-related
-challenges faced by current and future elderly LGBTQ+ individuals within
-the United States.
+challenges faced by current and future Medicare-aged LGBTQ+ individuals
+within the United States.
 
 # Data and Methodology
 
@@ -184,8 +185,8 @@ are pooled together to produce the data visualizations and tables within
 this essay.
 
 The purpose of pooling the MEPS PUFs across such a long span of time is
-to build a cohort of elderly (age 65 and up) LGBTQ+ individuals that is
-large enough to comply with MEPS’s [statistical precision
+to build a cohort of Medicare-aged (age 65 and up) LGBTQ+ individuals
+that is large enough to comply with MEPS’s [statistical precision
 guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml)
 for applying statistical methods to generate population-level estimates
 of this cohort’s demographic composition and measurable healthcare
@@ -469,9 +470,9 @@ population-level estimate for the same statistic.
 Prior to performing any analysis of healthcare outcomes experienced by
 LGBTQ+ subpopulations, it’s important to first to understand any key
 differences in the demographic compositions of our comparison cohort
-(elderly LGBTQ+ individuals) and our three baseline cohorts ( (1)
-non-LGBTQ+, non-elderly individuals, (2) non-LGBTQ+, elderly
-individuals, and (3) non-elderly LGBTQ+ individuals). Meaningful
+(Medicare-aged LGBTQ+ individuals) and our three baseline cohorts ( (1)
+non-LGBTQ+, non-Medicare-aged individuals, (2) non-LGBTQ+, Medicare-aged
+individuals, and (3) non-Medicare-aged LGBTQ+ individuals). Meaningful
 differences in demographic composition between these cohorts can act as
 potential confounding factors when analyzing differences in healthcare
 outcomes between these cohorts.
@@ -617,7 +618,7 @@ programs, and other benefits. The HHS federal poverty level is based on
 the US Census
 Bureau](https://aspe.hhs.gov/topics/poverty-economic-mobility/poverty-guidelines/frequently-asked-questions-related-poverty-guidelines-poverty)
 each year, which are determined at the household level based on family
-size, number of children, and in some cases, the presence of elderly
+size, number of children, and in some cases, the presence of older
 individuals. Therefore, an individual’s total family income as a
 percentage of FPL is calculated with a value for FPL which can vary
 across individuals based on these factors.
@@ -640,11 +641,12 @@ confidence intervals) for estimates of total proportions earning less
 than 100% of FPL between the cohort of individuals age 18 - 64 in
 same-gender marriages and the cohort of individuals age 18 - 64 not in
 same-gender marriages. The same comparison is not available for the
-cohorts consisting of elderly individuals due to a lack of statistical
-credibility for the cohort of individuals in same-gender marriages age
-65 and up. This difference could be further investigated using a broader
-survey that contains these data elements and is administered to a larger
-number of respondents, such as the American Community Survey.
+cohorts consisting of Medicare-aged individuals due to a lack of
+statistical credibility for the cohort of individuals in same-gender
+marriages age 65 and up. This difference could be further investigated
+using a broader survey that contains these data elements and is
+administered to a larger number of respondents, such as the American
+Community Survey.
 
 ## Exploring Healthcare Outcomes for LGBTQ+ Subpopulations
 
@@ -662,10 +664,10 @@ It is also the case that LGBTQ+ individuals can possess unique
 healthcare needs or face different barriers to access to healthcare,
 both of which can move the needle on the costs of healthcare. This is
 particularly true for individuals in retirement because non-working,
-elderly individuals generally have less access to financial resources
-and are more likely to face one or more highly-prevalent chronic
-conditions such as heart disease, diabetes, or asthma, which can lead to
-high-cost encounters if not properly managed.
+older individuals generally have less access to financial resources and
+are more likely to face one or more highly-prevalent chronic conditions
+such as heart disease, diabetes, or asthma, which can lead to high-cost
+encounters if not properly managed.
 
 ### Emergency Department Utilization
 
@@ -790,8 +792,8 @@ as RX (pharmacy) spend alone.
 <img src="README_files/figure-gfm/exp_marriage_class-1.png" style="display: block; margin: auto;" />
 
 This visualization has two key insights. First, that total pharmacy
-spend appears to be higher for elderly individuals. And second, that
-there appears to be a difference in both total healthcare spend and
+spend appears to be higher for Medicare-aged individuals. And second,
+that there appears to be a difference in both total healthcare spend and
 total pharmacy spend between the cohort of individuals age 18 - 64 in
 same-gender marriages and the cohort of individuals age 18 - 64 not in
 same-gender marriages. Additional analysis of this difference should
@@ -902,7 +904,7 @@ Perhaps as expected, the estimate of average family size for the cohort
 of individuals in same-gender marriages age 18 - 64 is about one child
 less than the estimate of average family size for individuals age 18 -
 64 not in same-gender marriages. And while the difference in estimates
-of family size between the two elderly cohorts appear to have
+of family size between the two Medicare-aged cohorts appear to have
 non-overlapping confidence intervals, suggesting that this difference
 might be statistically significant between these subpopulations,
 estimates of the measures themselves do not appear to be substantially
@@ -934,7 +936,7 @@ this essay, survey data can impose limitations on the degree of
 certainty in our findings, but on the other hand, surveys like MEPS can
 still be used to aid key decision-makers in analyzing the impacts that
 social determinants of health have on retirement-related outcomes for
-all cross-sections of the US elderly population.
+all cross-sections of the US’ aging population.
 
 While isolating MEPS respondents based on same-gender marriage status is
 one way of highlighting any differences in key healthcare measures
