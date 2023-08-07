@@ -759,7 +759,7 @@ respectively, for unmarried than for married patients.”
 study](https://journals.sagepub.com/doi/10.1177/2151459319898648) of
 just under 2,000 patients admitted to a hospital inpatient facility for
 orthopedic trauma found that “single and widowed patients experienced
-1.36 and 1.3 times longer length of hospital stay thantheir married
+1.36 and 1.3 times longer length of hospital stay than their married
 counterparts, respectively.”
 
 Estimates of total length of stay for the cohort of individuals age 65

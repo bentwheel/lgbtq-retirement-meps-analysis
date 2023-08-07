@@ -1058,7 +1058,7 @@ Due to the relative rarity of hospital emergency department admission, ED admits
 # Visualizations appear in several steps. 
 
 # First, the title:
-ed_util_marriage_class.title <- "Average Annual Emergency Department Admissions Per 1,000"
+ed_util_marriage_class.title <- "Annual Emergency Department Admissions Per 1,000"
 ed_util_marriage_class.subtitle <-  "By Same-Gender Marriage Status and Age Group"
 
 # Next, we compute the data table for the underlying visualizations using the Survey package 
@@ -1183,11 +1183,11 @@ inpatient_los_marriage_class.data <- svyby(~IPNGTDYY,
 # Then, we create the publication table object for displaying the underlying data:
 inpatient_los_marriage_class.table <- inpatient_los_marriage_class.data %>% 
   arrange(`Marriage Classification`, `Age Group`) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::comma(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::comma(`95% CI Upper Bound`, accuracy=0.01)),
+         `Population Estimate` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::comma(`Annual Inpatient-Days Per 1,000`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::comma(`Standard Error`, accuracy=0.01))) %>% 
   select(-rse, -rse_flag) %>% 
-   mutate(`95% CI Lower Bound` = scales::comma(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::comma(`95% CI Upper Bound`, accuracy=0.01),
-         `Annual Inpatient-Days Per 1,000` = scales::comma(`Annual Inpatient-Days Per 1,000`, accuracy=0.01),
-         `Standard Error` = scales::comma(`Standard Error`, accuracy=0.01)) %>% 
   flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
@@ -1226,7 +1226,7 @@ inpatient_los_marriage_class.plot
 
 I again chose to include the panel containing estimates of total length of stay for unmarried individuals to once again highlight the fact that marital status is well-known in population health academic literature to be predictive of measures of length of stay in hospital inpatient facilities. [A study over 40 thousand adult hospital patients in 1988 - 1991](https://pubmed.ncbi.nlm.nih.gov/7503606/) found that, after controlling for illness severity, age, gender, race, and diagnosis type, "hospital charges and length of stay were 5% and 8% higher (P < .001), respectively, for unmarried than for married patients."
 
-[A more recent study](https://journals.sagepub.com/doi/10.1177/2151459319898648) of just under 2,000 patients admitted to a hospital inpatient facility for orthopedic trauma found that "single and widowed patients experienced 1.36 and 1.3 times longer length of hospital stay thantheir married counterparts, respectively."
+[A more recent study](https://journals.sagepub.com/doi/10.1177/2151459319898648) of just under 2,000 patients admitted to a hospital inpatient facility for orthopedic trauma found that "single and widowed patients experienced 1.36 and 1.3 times longer length of hospital stay than their married counterparts, respectively."
 
 Estimates of total length of stay for the cohort of individuals age 65 and over in same-gender marriages has a RSE that exceeds the MEPS-required threshold of 0.5 so it is suppressed from the data visualization above. (Please refer to the associated data table in [Appendix A](#appendix-a-data-tables) for additional information on this and all other visualizations in this essay.)
 
@@ -1379,8 +1379,6 @@ rx_util_marriage_class.table <- rx_util_marriage_class.data %>%
   add_footer_lines(paste0("From MEPS Precision Standards Guidelines:\n",
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))  
- 
-
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
 rx_util_marriage_class.plot <- rx_util_marriage_class.data %>% 
@@ -1458,11 +1456,11 @@ chronic_cond_marriage_class.data <- svyby(~DIABDX_DSC + CHOLDX_DSC + HIBPDX_DSC,
 # Then, we create the publication table object for displaying the underlying data:
 chronic_cond_marriage_class.table <- chronic_cond_marriage_class.data %>% 
   arrange(`Marriage Classification`, `Age Group`, `Chronic Condition Status`) %>% 
-  select(-rse, -rse_flag) %>% 
-   mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
-         `Prevalence` = scales::percent(`Prevalence`, accuracy=0.01),
-         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Upper Bound`, accuracy=0.01)),
+         `Prevalence` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Prevalence`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Standard Error`, accuracy=0.01))) %>% 
+  select(-rse, -rse_flag) %>%
   flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
@@ -1549,11 +1547,11 @@ all_chronic_cond_marriage_class.data <- svyby(~CHOLDX_DSC + HIBPDX_DSC + HDDX_DS
 # Then, we create the publication table object for displaying the underlying data:
 all_chronic_cond_marriage_class.table <- all_chronic_cond_marriage_class.data %>% 
   arrange(`Marriage Classification`, `Age Group`, `Chronic Condition Status`) %>% 
-  select(-rse, -rse_flag) %>% 
-   mutate(`95% CI Lower Bound` = scales::percent(`95% CI Lower Bound`, accuracy=0.01),
-         `95% CI Upper Bound` = scales::percent(`95% CI Upper Bound`, accuracy=0.01),
-         `Prevalence` = scales::percent(`Prevalence`, accuracy=0.01),
-         `Standard Error` = scales::percent(`Standard Error`, accuracy=0.01)) %>% 
+  mutate(`95% CI Lower Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Lower Bound`, accuracy=0.01)),
+         `95% CI Upper Bound` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`95% CI Upper Bound`, accuracy=0.01)),
+         `Prevalence` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Prevalence`, accuracy=0.01)),
+         `Standard Error` =  if_else(rse_flag == "†" | is.nan(rse), !!NA, scales::percent(`Standard Error`, accuracy=0.01))) %>% 
+  select(-rse, -rse_flag) %>%
   flextable() %>% 
   bold(part = "header", bold = TRUE) %>% 
   colformat_double() %>% 
@@ -1652,7 +1650,6 @@ exp_vs_famsize.table <- exp_vs_famsize.data %>%
   add_footer_lines(paste0("From MEPS Precision Standards Guidelines:\n",
                           "* \"Estimate can be reported but flagged with an * to indicate that its precision is questionable.\"\n", 
                           "† \"Estimate should not be reported or displayed in tables due to extremely large sampling error.\" These rows are generally not reflected in accompanying data visualizations."))  
-  
 
 
 # Next we create the visualization based on the data table, removing any lines with RSE > .5
