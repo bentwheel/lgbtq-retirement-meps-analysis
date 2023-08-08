@@ -216,8 +216,8 @@ essay, we will make the simplifying assumption that individuals in
 same-gender marriages are members of the US subpopulation identifying as
 LGBTQ+.
 
-Below is an image consisting of several examples of actual records and
-fields in the [2019 MEPS Full Year Consolidated PUF
+Below are several examples of actual records and fields in the [2019
+MEPS Full Year Consolidated PUF
 Codebook](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_codebook.jsp?PUFId=H216)
 provided in order to showcase the methodology used to construct the
 same-gender marriage flag in the MEPS PUFs.
@@ -228,35 +228,38 @@ There are many shortcomings to this approach, as this approach will fail
 to identify certain individual respondents who may identify as LGBTQ+,
 such as:
 
-- Any male-identifying individual who is married to a female-identifying
-  individual, in cases where at least one of the spouses identifies as
-  LGBTQ+ (e.g., individuals who identify as transgender); and,
-- All unmarried persons who identify as LGBQT+.
+- Any individual who may identify as LGBTQ+ but is married to someone of
+  a different gender (e.g., individuals who identify as transgender or
+  bisexual and are married to an individual who is not the same gender);
+  and,
+- All unmarried persons who identify as LGBTQ+.
 
-However, this approach will succeed in identifying the following
-individual respondents:
+However, this approach will succeed in identifying any
+LGBTQ+-identifying individual married to any other LGBTQ+-identifying
+individual, in cases where both spouses identify as the same binary
+gender.
 
-- Any LGBTQ+-identifying individual married to a any other
-  LGBTQ+-identifying individual, in cases where both spouses identify as
-  the same binary gender.
-
-While this approach does fail to identify large subgroups within the
-broader LGBQT+ population in the United States, we can still use this
-approach to determine if there are substantial differences in the
-underlying demography, patient experiences, or incurred expenses between
-some LGBQT+ subpopulations and otherwise-similar non-LGBQT+
-subpopulations within the US.
+While this approach fails to identify some subgroups within the broader
+LGBTQ+ population in the United States, we can still use this approach
+to determine if there are substantial differences in the underlying
+demography, patient experiences, or incurred expenses between
+subpopulations in same-gender marriages and otherwise-similar
+subpopulations not in same-gender marriages within the US. Ultimately,
+although these cohorts do not fully represent LGBTQ+- and
+non-LGBTQ+-identifying subpopulations, we might find them to be useful
+proxies given the lack of publicly available data concerning individuals
+who explicitly identify as LGBTQ+.
 
 In this essay, we will consider and even see some evidence supporting
 the possibility that marriage (or cohabitation, more generally) has a
 confounding influence on some of the population-level estimates of
 measurements of interest (e.g., annual healthcare expenditures,
-emergency department utilization, etc.). Therefore, most data
-visualizations and data tables in this essay will present findings
-comparing key population-level estimates between married individuals in
-same-gender marriages against married individuals not in same-gender
-marriages in order to control for the potential confounding effect of
-marriage or cohabitation.
+emergency room utilization, etc.). Therefore, most data visualizations
+and data tables in this essay will present findings comparing key
+population-level estimates between married individuals in same-gender
+marriages against married individuals not identified as being in
+same-gender marriages in order to control for the potential of
+confounding effects from marriage.
 
 ## MEPS Precision Guidelines for Population-Level Estimates
 
@@ -269,15 +272,15 @@ following two restrictions:
 1.  The underlying sample data associated with the subpopulation from
     which the estimates are derived should consist of at least 60
     sampling units. The sampling units can be families or individuals,
-    but in our case is composed of individual respondents.
-2.  The relative standard error (RSE) corresponding to any estimate of a
-    statistic of interest must absolutely not exceed 0.5. If so, it
-    should not be displayed in data tables or visualizations of
-    findings. Furthermore, if the RSE of the corresponding
-    population-level estimate exceeds 0.3, it must be called out in any
-    charts or tables as potentially spurious. Relative standard error
-    can be computed as $$ RSE = \frac{Std. Err}{Estimate} $$ and is
-    displayed as a percentage in the data tables in [Appendix
+    but in our case are individual respondents.
+2.  If the relative standard error (RSE) corresponding to an estimate of
+    a statistic of interest exceeds 0.5, it should not be displayed in
+    data tables or visualizations of findings. Furthermore, if the RSE
+    of the corresponding population-level estimate exceeds 0.3, it must
+    be called out in any charts or tables as questionable. Relative
+    standard error can be computed as
+    $$ RSE = \frac{Std. Err}{Estimate} $$ and is displayed as a
+    percentage in the data tables in [Appendix
     A](#appendix-a-data-tables) for all population-level estimates
     computed in this essay.
 
@@ -296,7 +299,7 @@ Additionally, we should be concerned about the statistical validity of
 population-level estimates that are computed by applying weights to very
 small cross-sectional subsets of the MEPS respondent data, especially
 when the subpopulation of interest (in our case, LGBTQ+ individuals over
-age 65) was sampled across and will be ultimately weighted by
+age 65) was sampled across, and will be ultimately weighted by,
 demographic strata that have little to do with the demographic subsets
 we are attempting to study in this essay.
 
@@ -306,10 +309,10 @@ In the following table, we can see the population-level estimates for
 the total number of married individuals within the United States, broken
 out by MEPS survey year, which have been calculated based on the
 individual respondents in each group and their associated weighting.
-Furthermore, person- and stratum-level variances are also used to
-compute a measure of the estimate’s precision, which is expressed as a
-standard error measurement, relative standard error (RSE), and the lower
-and upper bounds of the 95% confidence interval.
+Furthermore, stratum-level variances are also used to compute a measure
+of the estimate’s precision, which is expressed as a standard error
+measurement, relative standard error (RSE), and the lower and upper
+bounds of the 95% confidence interval.
 
 <img src="tables/tbl1.png" style="display: block; margin: auto;" />
 
@@ -329,10 +332,9 @@ interest for the entire US population. The error bars accompanying each
 solid bar represent the upper and lower bounds of the 95% confidence
 interval around the corresponding population-level estimate.
 
-In lay terms, you can imagine each solid bar as representing the “true”
-population measure. Because this chart is presenting an *estimate* of
-the population measure based on survey data, you should interpret the
-bar to be a good (but not exact) guess at the “true” population-level
+In other words, each solid bar represents an *estimate* of the
+population measure based on survey data; that is the bar is intended to
+represent a good (but not exact) guess at the “true” population-level
 measure of interest.
 
 The error bars can be interpreted as expressing the level of variability
@@ -340,8 +342,9 @@ around that guess. In other words, we are confident at a 95% level that
 the “true” population-level measure of interest, if we were able to
 survey the entire US population, falls somewhere in between the top and
 bottom of the associated error bar. As in most cases, estimates with
-larger underlying sample sizes (e.g., non-LGBTQ+ married individuals age
-18 - 64) will tend to be expressed with much less variability.
+larger underlying sample sizes (e.g., the cohort of individuals aged 18
+– 64 not in same-gender marriages) will tend to be expressed with much
+less variability than estimates with smaller underlying sample sizes.
 
 In many cases, the estimates of population-level statistics will appear
 to show meaningful differences between cohorts in this essay’s
@@ -349,16 +352,19 @@ visualizations. It is important to also contextualize these statistical
 estimates by using the error bars. As you view the data visualizations
 that follow, you should make use of the error bars to question the
 degree of belief to which our estimates reflect “true” population-level
-differences between cohorts.
+differences between cohorts. For example, if the solid bars for two
+populations show different estimates, but the error bars overlap, a
+healthy degree of skepticism should be used when drawing conclusions
+about potential differences.
 
 Finally, as you inspect the data visualizations in this essay, please
-refer to the accompanying data table for the respective visualizations
-in [Appendix A](#appendix-a-data-tables) for additional information
-about the estimates or their variability and statistical validity.
-Throughout the course of this essay, I will take every opportunity to
+refer to the corresponding data table in [Appendix
+A](#appendix-a-data-tables) for additional information about the
+estimates or their variability and statistical validity. Throughout the
+course of this essay, I will take several opportunities to
 cross-reference population-level estimates derived from MEPS data
-against available 3rd-party data sources in order to provide some level
-of external validation.
+against available third-party data sources in order to provide some
+level of external validation.
 
 ## A Validation Example: Estimating the Number of Same-Gender Marriages in the US
 
@@ -373,33 +379,34 @@ Let us take for example the data from 2016, which represents the US
 population one year after the landmark Supreme Court decision in
 *Obergefell v. Hodges* that effectively legalized same-gender marriages
 across the US. Despite the relative recency of this SCOTUS decision,
-several US states legally recognized same-gender marriages at the time.
+several US states legally recognized same-gender marriages at the time,
+so the 2014 and 2015 PUFs do contain individuals in same-gender
+marriages even though same-gender marriages were not legally recognized
+nationwide until after the *Obergefell* decision.
 
 In the visualization and accompanying data table above, we see that the
 population-level estimate of the number of individuals ages 18 - 64 in
 same-gender marriages in the US is centered at 982,877 with a 95%
 confidence interval spanning from 666,223 to 1,299,532. The
 corresponding estimate for individuals in same-gender marriages ages 65
-and up is 167,152, and is marked as potentially spurious due to a high
-RSE (relative standard error), largely as a result of small sample
-cardinality for this particular subpopulation.
-
-One external source we can use to externally validate this estimate is
-the [American Community
-Survey](https://www.census.gov/programs-surveys/acs) for the same year
-(2016), which places an [estimated count of individuals living in
+and up is 167,152, and is marked as potentially unreliable due to a high
+RSE, largely as a result of small sample cardinality for this particular
+subpopulation. One external source we can use to validate this estimate
+of total same-gender marriages in the US in 2016 is the [American
+Community Survey](https://www.census.gov/programs-surveys/acs) for the
+same year, which places an [estimated count of individuals living in
 “Same-Sex Married Couple
 Households”](https://www.census.gov/content/dam/Census/library/publications/2021/demo/p70-167.pdf)
 (p. 22) at around 1,000,000 individuals, which is consistent with our
-estimate (and associated statistical variability) of the same statistic.
+estimate.
 
 Finally, note that, in some years, the representative sample is so small
 for same-gender married individuals over age 65 that the computed lower
 bound of the 95% confidence interval extends into negative territory,
-which is nonsensical. Avoiding this kind of nonsensical presentation of
-statistical variability around an estimate derived from MEPS data is the
-primary reasoning given by MEPS for imposing the RSE restriction in
-their statistical precision guidelines.
+which is nonsensical. Avoiding the presentation of estimates that are
+too imprecise to provide any useful information is the primary reasoning
+given by MEPS for imposing the RSE restriction in their statistical
+precision guidelines.
 
 Displaying nonsensical error bars that extend into negative territory on
 the preceding visualization of population-level estimates is done for
@@ -411,19 +418,21 @@ tables by the symbol “†”).
 
 ## Population-level Estimates After Pooling MEPS Data Years
 
-Since our aim is to compare the experiences or healthcare expenses
-between LGBQT+ subpopulations and non-LGBQT+ subpopulations with a focus
-on individuals age 65 and up, we will not be able to meet the basic MEPS
-precision guidelines described above without pooling across multiple
-years. This is due to the fact that any single-year MEPS file lacks the
-required number of respondents (*n* \>= 60) who are age 65 and up and in
-same-gender marriages.
+Since our aim is to compare the healthcare experiences or expenses
+between LGBTQ+ subpopulations in same-gender marriages and non-LGBTQ+
+subpopulations with a focus on individuals age 65 and up, we will not be
+able to meet the basic MEPS precision guidelines described above without
+pooling data across multiple years. This is because any single-year MEPS
+files lack the required number of respondents (*n* \>= 60) who are age
+65 and up and in same-gender marriages.
 
 MEPS prescribes a methodology for pooling across multiple data years
 within [the documentation for the Pooled Linkage
 PUF](https://meps.ahrq.gov/data_stats/download_data/pufs/h036/h36u20doc.shtml).
 This PUF contains survey weights and variances at the sampling unit and
-demographic stratum level that enables pooling across multiple years.
+demographic stratum level to enable pooling across multiple years.
+Sample sizes after pooling across 2014 - 2019 are shown in the figures
+below.
 
 <img src="README_files/figure-gfm/count_individ_in_sample_unwt_pool-1.png" style="display: block; margin: auto;" />
 
@@ -432,7 +441,7 @@ groups in the same-gender marriage subpopulation meet the minimum sample
 size of 60 required by the MEPS statistical precision guidelines (*n* =
 435 for the 18 - 64 age band, *n* = 62 for the over 65 age band).
 However, with just barely over 60 respondents in the latter group, we
-are likely to encounter a good deal of variability around estimates of
+will encounter a good deal of variability around estimates of
 measurements for this cohort.
 
 <img src="README_files/figure-gfm/count_individ_in_sample_wt_pool-1.png" style="display: block; margin: auto;" />
@@ -445,23 +454,13 @@ same-gender marriages within the US, arrived at by adding the estimated
 totals for each subgroup (900,950 for the “18 to 64” age band, plus
 150,093 for the “65 and over” age band).
 
-To determine the 95% confidence interval around this estimate, we can
-simply take the square root of the sum of squared confidence interval
-radii given for each subgroup’s estimate,
-$\sqrt{ (1.95996 * 90,969)^2 + (1.95996 * 39,229)^2 }$, to arrive at a
-the 95% confidence interval radius for our combined estimate of the
-total number of same-gender marriages within the US. Thus, the 95%
-confidence interval around this estimate spans from 856,875 to
-1,245,211.
-
-Once again, we can compare these estimates to the [findings from the
-American Community Survey for
+Once again, we can compare these estimates to the findings from the
+[findings from the American Community Survey for
 2019](https://www.census.gov/content/dam/Census/library/publications/2021/acs/acsbr-005.pdf)
 which reports the total estimated count of same-sex married individuals
-at 1,136,220 (two times the number of same-sex married couples
-*households* reported in Table 1, on page 2), which falls relatively
-close to the center of the 95% confidence interval around our
-population-level estimate for the same statistic.
+at 1,136,220 (two times the number of same-sex married couple
+*households* reported in Table 1, on page 2), which is relatively
+similar to our MEPS-derived estimate of the same quantity.
 
 # Visualizing Healthcare Experiences for LGBTQ+ Subpopulations
 
