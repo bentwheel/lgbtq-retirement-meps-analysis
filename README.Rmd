@@ -41,9 +41,9 @@ _The following paper is a submission in reply to the [Society of Actuaries' Call
 
 # Background and Purpose
 
-For some LGBTQ+-identifying subpopulations, the level of discrimination we face in society is rapidly decreasing; for others, such as transgender individuals, there are still impactful and endemic stigmas in play which act as a barrier to living full and rewarding lives. Barriers such as these have potentially inhibited the ability of many people who identify as LGBTQ+ from enjoying the same protections of our social safety net – such as healthcare and retirement security systems – that are enjoyed by non-LGBTQ+-identifying people. 
+The level of discrimination that some LGBTQ+-identifying subpopulations face in society is rapidly decreasing; for others, such as transgender individuals, there are still impactful and endemic stigmas in play which act as a barrier to living full and rewarding lives. Barriers such as these have potentially inhibited the ability of many people who identify as LGBTQ+ from enjoying the same protections of our social safety net – such as healthcare and retirement security systems – that are enjoyed by non-LGBTQ+-identifying people.
 
-It is currently difficult to credibly estimate how retirement-related outcomes differ between LGBTQ+ and non-LGBTQ+ populations, or to know how to quantify the disparities of outcomes among intersectional subpopulations that exist today within the United States’ LGBTQ+ population. One key reason for this difficulty is the lack of available data that can help guide our policymaking apparatus towards better regulations and protections for members of our society who are more likely to be marginalized, stigmatized, or disadvantaged by systemic factors. This includes LGBTQ+ people, of course, but heavily intersects with people of color, women, religious minorities, foreign-born individuals, disabled individuals, and – key to this essay – the US’s rapidly aging population.
+It is currently difficult to credibly estimate how retirement-related outcomes differ between LGBTQ+ and non-LGBTQ+ populations, or to know how to quantify the disparities of outcomes among intersectional subpopulations that exist today within the United States’ LGBTQ+ population. One key reason for this difficulty is the lack of available data that can help guide our policymaking apparatus towards better regulations and protections for members of our society who are more likely to be marginalized, stigmatized, or disadvantaged by systemic factors. This includes LGBTQ+ people, of course, but heavily intersects with people of color, women, religious minorities, foreign-born individuals, disabled individuals, and – key to this paper – the US’s rapidly aging population.
 
 In the healthcare space, there is ample energy devoted to the important work being done by organizations, both private and public, to better understand the impacts of what are known as Social Determinants of Health – “the conditions in the environments where people are born, live, learn, work, play, worship, and age that affect a wide range of health, functioning, and quality-of-life outcomes and risks” (as defined by the [US Dept. of Health and Human Services](https://health.gov/healthypeople/priority-areas/social-determinants-health)).
 
@@ -51,12 +51,14 @@ Analyzing Social Determinants of Health (SDoH) can provide [causal evidence](htt
 
 It is therefore reasonable to suspect that investigating differences in patient experiences between Medicare-aged LGBTQ+-identifying individuals and their non-LGBTQ+ Medicare-aged or non-Medicare-aged LGBTQ+ counterparts can give us better information about how the Medicare-aged LGBTQ+ population should plan and prepare for healthcare expenses in retirement.
 
-In order to carry out this preliminary investigation, I performed an analysis of the public use files (PUFs) made available by the [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS). The purpose of this essay is twofold, and the essay is divided into two primary sections:
+In order to carry out this preliminary investigation, I performed an analysis of the public use files (PUFs) made available by the [Medical Expenditure Panel Survey](https://meps.ahrq.gov/mepsweb/) (MEPS). The purpose of this paper is twofold, and the paper is divided into two primary sections:
 
-1. In [Data and Methodology](#data-and-methodology) I explain and document a consistent data manipulation approach for identifying certain cohorts who are likely to identify as LGBTQ+ within the MEPS public data files; and
-2. In [Visualizing Healthcare Experiences for LGBTQ+ Subpopulations](#visualizing-healthcare-experiences-for-lgbtq-subpopulations) I showcase a visual representation of preliminary findings around key healthcare experiences and outcomes between Medicare-aged LGBTQ+ cohorts and other cohorts – findings which describe healthcare outcomes commonly of interest to population health analyses, such as total pharmacy expenditure per individual, and average pharmacy utilization, average inpatient length-of-stay, and average hospital emergency department utilization utilization, to name a few.
 
-The primary goal of this essay is to motivate additional and more rigorous research into the specific healthcare outcomes-related challenges faced by current and future Medicare-aged LGBTQ+ individuals within the United States.
+1.	In [Data and Methodology](#data-and-methodology) I explain and document a consistent data manipulation approach for identifying certain cohorts who are likely to identify as LGBTQ+ within the MEPS public data files; and
+2.	In [Visualizing Healthcare Experiences for LGBTQ+ Subpopulations](#visualizing-healthcare-experiences-for-lgbtq-subpopulations) I showcase a visual representation of preliminary findings around key healthcare experiences and outcomes between Medicare-aged LGBTQ+ cohorts and other relevant cohorts – findings which describe healthcare outcomes commonly of interest to population health analyses, such as total pharmacy expenditure per individual, and average pharmacy utilization, average inpatient length-of-stay, and average hospital emergency department utilization utilization, to name a few.
+
+
+The primary goal of this paper is to motivate additional and more rigorous research into the specific healthcare outcomes-related challenges faced by current and future Medicare-aged LGBTQ+ individuals within the United States.
 
 # Data and Methodology
 
@@ -66,21 +68,22 @@ MEPS has been administered in its current form since 1996, and according the [Ag
 
 Because MEPS data is drawn from survey respondents, any analysis of MEPS data is subject to many of the usual strengths and limitations of survey data analysis. One major weakness of using survey data to perform inferential analysis is that data from respondents is often self-reported or imputed and is not always accurate. Therefore, there are some situations in which it would be advisable for individuals using this data to perform additional data quality checks. For example, an analyst might want to compare, in aggregate, the results of two separate but related survey questions, such as the count of individual respondents that have a valid person ID (PID) value for spouse ID (SPOUID) against the count of individuals who indicated that they are currently married.
 
-Additionally, MEPS provides [statistical precision guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) about applying and displaying the results of inferential statistical methods using the data, which include restrictions and guidance concerning minimum sample sizes of cohorts used in statistical methods, as well as standards establishing acceptable standard error thresholds of estimates calculated using statistical methods. I discuss this guidance further in a subsequent section of this essay.
+Additionally, MEPS provides [statistical precision guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) about applying and displaying the results of inferential statistical methods using the data, which include restrictions and guidance concerning minimum sample sizes of cohorts used in statistical methods, as well as standards establishing acceptable standard error thresholds of estimates calculated using statistical methods. I discuss this guidance further in a subsequent section of this paper.
 
 ## About the MEPS Public Use Files
 
-MEPS is administered in two distinct components - the [Household Component](https://meps.ahrq.gov/mepsweb/survey_comp/household.jsp), which was used to generate the preliminary findings in this essay, and the [Insurance Component](https://meps.ahrq.gov/mepsweb/survey_comp/Insurance.jsp), which is not publicly available for download and must be accessed in a [Federal Statistical Research Data Center](https://www.census.gov/content/census/en/about/adrm/fsrdc/locations.html). Data from this component was not used for this essay. 
+MEPS is administered in two distinct components - the [Household Component](https://meps.ahrq.gov/mepsweb/survey_comp/household.jsp), which was used to generate the preliminary findings in this paper, and the [Insurance Component](https://meps.ahrq.gov/mepsweb/survey_comp/Insurance.jsp), which is not publicly available for download and must be accessed in a [Federal Statistical Research Data Center](https://www.census.gov/content/census/en/about/adrm/fsrdc/locations.html). Data from this component was not used in this analysis.
 
-The MEPS Household Component "fields questionnaires to individual household members to collect nationally representative data on demographic characteristics, health conditions, health status, use of medical care services, charges and payments, access to care, satisfaction with care, health insurance coverage, income, and employment" ([Household Component, Survey Background, MEPS Homepage](https://meps.ahrq.gov/mepsweb/survey_comp/household.jsp)).
+The MEPS Household Component “fields questionnaires to individual household members to collect nationally representative data on demographic characteristics, health conditions, health status, use of medical care services, charges and payments, access to care, satisfaction with care, health insurance coverage, income, and employment” ([Household Component, Survey Background, MEPS Homepage](https://meps.ahrq.gov/mepsweb/survey_comp/household.jsp)).
 
-MEPS data files have been used in the past to generate a large number of findings within the academic disciplines of public health and health policy. Some specific examples of scientific literature containing analyses of MEPS data relevant to the current strategic research initiatives of the [Society of Actuaries Research Institute](https://www.soa.org/programs/strategic-research-program/) are given below:
+MEPS data files have been used in the past to generate many findings within the academic disciplines of public health and health policy. Some specific examples of scientific literature containing analyses of MEPS data relevant to the current strategic research initiatives of the [Society of Actuaries Research Institute](https://www.soa.org/programs/strategic-research-program/) are given below:
 
 * [Medical Expenditure Panel Survey: a valuable database for studying racial and ethnic disparities in prescription drug use](https://pubmed.ncbi.nlm.nih.gov/18794032/)
 * [Any Use and "Frequent Use" of Opioids among Elderly Adults in 2018-2019, by Socioeconomic Characteristics](https://pubmed.ncbi.nlm.nih.gov/35696517/)
 * [Healthcare Expenditures for Treatment of Mental Disorders: Estimates for Adults Ages 18 and Older, U.S. Civilian Noninstitutionalized Population, 2019](https://pubmed.ncbi.nlm.nih.gov/35696514/)
 * [Comparison of the Total Number of People in the U.S. Civilian Noninstitutionalized Population Purchasing One or More Antidepressant or Antipsychotic Prescriptions by Select Sociodemographic Characteristics, 2013 and 2018](https://pubmed.ncbi.nlm.nih.gov/35696503/)
 * [Top Five Most Costly Conditions among Adults Age 18 and Older, 2012: Estimates for the U.S. Civilian Noninstitutionalized Population](https://pubmed.ncbi.nlm.nih.gov/28783295/)
+
 
 One piece of information that is absent from the long list of data points sampled in the MEPS Household Component is whether individual respondents identify as any LGBTQ+ subpopulation. This presents a major challenge for using MEPS public use files to investigate healthcare outcomes experienced by LGBTQ+ individuals in the US. However, a method for identifying some individuals who are very likely to identify as LGBTQ+ is described in further detail in the next section.
 
@@ -100,11 +103,11 @@ load(here::here("meps_lgbtq_data.rda"))
 
 ```
 
-Since the LGBTQ+-identifying population in the United States is a relatively small subset of the overall population, MEPS data PUFs from surveys representative of years between 2014 and 2019 (see table below) are pooled together to produce the data visualizations and tables within this essay.
+Since the LGBTQ+-identifying population in the United States is a relatively small subset of the overall population, MEPS data PUFs from surveys representative of years between 2014 and 2019 (see table below) are pooled together to produce the data visualizations and tables within this paper.
 
-The purpose of pooling the MEPS PUFs across such a long span of time is to build a cohort of Medicare-aged (age 65 and up) LGBTQ+ individuals that is large enough to comply with MEPS’s [statistical precision guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) for applying statistical methods to generate population-level estimates of this cohort’s demographic composition and measurable healthcare outcomes.
+The purpose of pooling the MEPS PUFs across such a long span of time is to build a cohort of Medicare-aged (i.e., aged 65 and up) LGBTQ+ individuals that is large enough to comply with MEPS’s [statistical precision guidelines](https://meps.ahrq.gov/survey_comp/precision_guidelines.shtml) for applying statistical methods to generate population-level estimates of this cohort’s demographic composition and measurable healthcare outcomes.
 
-All MEPS Full Year Consolidated data PUFs listed in the following table contain variables pertaining to survey administration, income, person-level conditions, health status, disability days, quality of care, employment, health insurance, and person-level medical care use and expenditures: 
+All MEPS Full Year Consolidated data PUFs listed in the following table contain variables pertaining to survey administration, income, person-level conditions, health status, disability days, quality of care, employment, health insurance, and person-level medical care use and expenditures:
 
 | Data File    | Description   |
 | :-------- | :------- |
@@ -118,7 +121,7 @@ All MEPS Full Year Consolidated data PUFs listed in the following table contain 
 
 ## Identifying Individuals in Same-Gender Marriages in the MEPS Public Use Files
 
-As stated earlier, there is no LGBTQ+ indicator in the MEPS survey questionnaires that are administered to respondents. Therefore, in this essay, we will make the simplifying assumption that individuals in same-gender marriages are members of the US subpopulation identifying as LGBTQ+.
+As stated earlier, there is no LGBTQ+ indicator in the MEPS survey questionnaires that are administered to respondents. Therefore, in this paper, we will make the simplifying assumption that individuals in same-gender marriages are members of the US subpopulation identifying as LGBTQ+.
 
 Below are several examples of actual records and fields in the [2019 MEPS Full Year Consolidated PUF Codebook](https://meps.ahrq.gov/mepsweb/data_stats/download_data_files_codebook.jsp?PUFId=H216) provided in order to showcase the methodology used to construct the same-gender marriage flag in the MEPS PUFs.
 
@@ -131,11 +134,11 @@ There are many shortcomings to this approach, as this approach will fail to iden
 * Any individual who may identify as LGBTQ+ but is married to someone of a different gender (e.g., individuals who identify as transgender or bisexual and are married to an individual who is not the same gender); and,
 * All unmarried persons who identify as LGBTQ+.
 
-However, this approach will succeed in identifying any LGBTQ+-identifying individual married to any other LGBTQ+-identifying individual, in cases where both spouses identify as the same binary gender.
+However, this approach will succeed in identifying any LGBTQ+-identifying individual married to any other LGBTQ+-identifying individual, in cases where both spouses have the same gender marker.
 
-While this approach fails to identify some subgroups within the broader LGBTQ+ population in the United States, we can still use this approach to determine if there are substantial differences in the underlying demography, patient experiences, or incurred expenses between subpopulations in same-gender marriages and otherwise-similar subpopulations not in same-gender marriages within the US. Ultimately, although these cohorts do not fully represent LGBTQ+- and non-LGBTQ+-identifying subpopulations, we might find them to be useful proxies given the lack of publicly available data concerning individuals who explicitly identify as LGBTQ+.
+While this approach fails to identify some subgroups within the broader LGBTQ+ population in the United States, we can still use this approach to determine if there are substantial differences in the underlying demography, patient experiences, or incurred expenses between subpopulations in same-gender marriages and otherwise-similar subpopulations not in same-gender marriages within the US. Although these cohorts do not fully represent LGBTQ+- and non-LGBTQ+-identifying subpopulations, we might find them to be useful proxies given the lack of publicly available data concerning individuals who explicitly identify as LGBTQ+.
 
-In this essay, we will consider and even see some evidence supporting the possibility that marriage (or cohabitation, more generally) has a confounding influence on some of the population-level estimates of measurements of interest (e.g., annual healthcare expenditures, emergency room utilization, etc.). Therefore, most data visualizations and data tables in this essay will present findings comparing key population-level estimates between married individuals in same-gender marriages against married individuals not identified as being in same-gender marriages in order to control for the potential of confounding effects from marriage.
+In this paper, we will consider and even see some evidence supporting the possibility that marriage (or perhaps cohabitation, more generally) has a confounding influence on some of the population-level estimates of measurements of interest (e.g., annual healthcare expenditures, emergency room utilization, etc.). Therefore, most data visualizations and data tables in this paper will present findings comparing key population-level estimates between married individuals in same-gender marriages against married individuals not identified as being in same-gender marriages in order to control for the potential of confounding effects from marriage.
 
 ## MEPS Precision Guidelines for Population-Level Estimates
 
@@ -475,7 +478,7 @@ Once again, we can compare these estimates to the findings from the [findings fr
 
 ## Exploring the Demographic Composition of LGBTQ+ Subpopulations
 
-Prior to performing any analysis of healthcare outcomes experienced by LGBTQ+ subpopulations, it's important to first to understand any key differences in the demographic compositions of our comparison cohort (Medicare-aged LGBTQ+ individuals) and our three baseline cohorts ( (1) non-LGBTQ+, non-Medicare-aged individuals, (2) non-LGBTQ+, Medicare-aged individuals, and (3) non-Medicare-aged LGBTQ+ individuals). Meaningful differences in demographic composition between these cohorts can act as potential confounding factors when analyzing differences in healthcare outcomes between these cohorts.
+Prior to performing any analysis of healthcare outcomes experienced by LGBTQ+ subpopulations, it’s important to first understand any key differences in the demographic compositions of our comparison cohort (Medicare-aged LGBTQ+ individuals) and our three baseline cohorts ( (1) non-LGBTQ+, non-Medicare-aged individuals, (2) non-LGBTQ+, Medicare-aged individuals, and (3) non-Medicare-aged LGBTQ+ individuals). Meaningful differences in demographic composition between these cohorts can act as potential confounding factors when analyzing differences in healthcare outcomes between these cohorts.
 
 ### Gender
 
@@ -562,12 +565,12 @@ marriage_class_and_gender.plot
 
 ```
 
-Despite the larger degree of uncertainty around estimates of gender proportions in the cohort of individuals in same-gender marriages, gender composition appears to be similar. 
+Despite the larger degree of uncertainty around estimates of gender proportions in the cohort of individuals in same-gender marriages, gender composition appears to be similar. We are not able to definitively claim any differences between gender proportions in same-gender marriages (in the panel on the right) and their counterpart cohorts not in same-gender marriages (on the left). This is because the estimates of proportions on the left all fall within the error bars surrounding the corresponding estimates depicted on the right.
 
 In an official blog post, a data scientist with Facebook [described an analysis of age difference in same-gender vs. opposite-gender couples](https://m.facebook.com/nt/screen/?params=%7B%22note_id%22%3A10158928005158415%7D&path=%2Fnotes%2Fnote%2F&refsrc=deprecated&_rdr) using anonymized Facebook member data. The findings include:
 
-* Opposite-gender couples have an average age difference of 2.4 years, with the male being older than the female. 
-* The average age gap is wider for same-gender couples than it is for opposite-gender couples, and that this age gap widens even further for older couples.
+* Internationally, across opposite-gender couples, the male partner is 2.4 years than the female partner, on average.
+* The average age gap is wider for same-gender couples than it is for opposite-gender couples, and this age gap widens even further for older couples.
 
 These findings are echoed by a more recent publication, [Age Differences Among Coresidential Partners](https://www.census.gov/library/working-papers/2023/demo/SEHSD-WP2023-10.html), published by the US Census Bureau using 2021 American Community Survey data.
 
@@ -575,9 +578,9 @@ These findings are echoed by a more recent publication, [Age Differences Among C
 
 In the MEPS datasets, the three levels in the health plan coverage variable are defined as follows:
 
-* **Any Private** includes individuals who have both Medicare and any other private comprehensive plan, such as a Medicare Supplement (aka "Medigap") plan. This category also includes individuals over age 65 exclusively on a private plan, which includes Medicare Advantage and TRICARE beneficiaries.
-* **Public only** includes individuals on traditional "fee-for-service" Part B plans who do not have private supplemental coverage, Medicaid beneficiaries, dual-eligible individuals, and individuals enrolled in other public and state-sponsored plans (such as CHIP).
-* **Uninsured** includes any individual not enrolled in a health plan.
+* **Any Private** includes individuals who have both Medicare and any other private comprehensive plan, such as a Medicare Supplement (aka “Medigap”) plan, a commercial employer-sponsored plan, or an ACA plan underwritten on an individual or family basis. This category also includes individuals over age 65 exclusively on a private plan, which includes Medicare Advantage and TRICARE beneficiaries.
+* **Public only** includes individuals who do not have any other private supplemental coverage who are covered by traditional “fee-for-service” Original Medicare plans, Medicaid plans, or other public and state-sponsored plans (such as CHIP).
+* **Uninsured** includes any individual with no private or public coverage.
 
 ```{r marriage_class_and_plan_coverage}
 
@@ -755,12 +758,12 @@ marriage_class_and_race_ethnicity.plot
 
 ```
 
-Distributions of proportions of responses to race and ethnicity questions appear to be relatively comparable across all cohorts. Any differences between cohorts observed here appear to be in line with the usual expected differences we would expect. Marital status is known to be predicted by age, race, and ethnicity factors as follows:
+Distributions of proportions of race and ethnicity status appear to be relatively comparable across all cohorts, where comparison subsets are available for comparison. Many of the race and ethnicity breakouts in the same-gender marriage cohort are suppressed from the graph due to large RSE values associated with these estimates, as required by the MEPS statistical precision. Any differences between cohorts observed here appear to be in line with the usual expected differences we would expect. Marital status is known to be predicted by age, race, and ethnicity factors as follows:
 
-* **Across all race and ethnicity groups, fewer individuals in the US are marrying.** In 2022, [the US Census Bureau published findings](https://www.census.gov/newsroom/press-releases/2022/americas-families-and-living-arrangements.html) that 34% of individuals age 15 and up (the youngest age at which one can marry in some US states) have never been married. This is an increase from 23% observed in 1950.
-* **Across all age groups, Black individuals have lower rates of marriage than other racial and ethic groups.** The growing Black marriage divide is a well-studied topic in sociology and demography journals and is thought to be caused by a number of factors, primarily "labor market disparities and other structural disadvantages that Black people face, especially Black men" (["The Growing Racial and Ethnic Divide in U.S. Marriage Patterns"](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4850739/)).
+*	**Across all race and ethnicity groups, fewer individuals in the US are marrying now versus in the past.** In 2022, [the US Census Bureau published findings](https://www.census.gov/newsroom/press-releases/2022/americas-families-and-living-arrangements.html) that 34% of individuals age 15 and up (the youngest age at which one can marry in some US states) have never been married. This is an increase from 23% observed in 1950. [Marriage rates in the US have persistently declined over time and are at an all-time low today](https://www.pewresearch.org/social-trends/2021/10/05/rising-share-of-u-s-adults-are-living-without-a-spouse-or-partner/).
+*	**Across all age groups, Black individuals have lower rates of marriage than other racial and ethnic groups.** The growing gap in marriage rates is a well-studied topic in sociology and demography journals and is thought to be caused by a number of factors, primarily “labor market disparities and other structural disadvantages that black people face, especially black men” (["The Growing Racial and Ethnic Divide in U.S. Marriage Patterns"](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4850739/)).
 
-Breaking estimates of proportional distribution of race and ethnicity proportions out along so many lines can cause estimates of statistical precision to become very high, especially in groups where estimates are computed on smaller samples. Therefore, it is helpful to break out key racial and ethnic identifiers in less granular subsets.
+Breaking estimates of the distribution of race and ethnicity proportions out along so many lines can cause estimates of statistical precision to become very high, especially in groups where estimates are computed on smaller samples. Therefore, it is helpful to break out key racial and ethnic identifiers in less granular subsets.
 
 ```{r marriage_class_and_ethnicity}
 
@@ -1118,7 +1121,7 @@ ed_util_marriage_class.plot
 
 In this visualization, I chose once again to include a panel containing unmarried individuals in order to showcase how marital status could be predictive of hospital emergency department utilization. Additionally, it appears as if more investigation could be warranted regarding the relatively low ED utilization rate in the cohort of individuals 65 and over in same-gender marriages; though there is no overlap in the confidence interval boundaries for this estimate and the equivalent estimates of other cohorts over age 65, it would be important to control (at least) for gender and racial confounders before drawing any conclusion.
 
-### Average Inpatient Length of Stay
+### Total Impatient Days
 
 Another important measure of hospital utilization in a population is the total number of days (or, sometimes, overnights) between admission and discharge that all individuals within the cohort of interest were admitted in within hospital inpatient facilities. This measure is often also reported as "total hospital (in)patient-days." This statistic, much like total ED utilization, is frequently reported by hospital organizations due to the fact that it is very predictive of the total cost of care delivered in inpatient hospital encounters. 
 
@@ -1401,7 +1404,7 @@ Senior citizens often make use of low-cost generic medications to manage their c
 # Visualizations appear in several steps. 
 
 # First, the title:
-chronic_cond_marriage_class.title <- "Average Prevalence of Diabetes, Hyperlipidemia, and Hypertension"
+chronic_cond_marriage_class.title <- "Prevalence of Diabetes, High Blood Pressure, and High Cholesterol"
 chronic_cond_marriage_class.subtitle <-  "By Same-Gender Marriage Status and Age Group"
 
 # Next, we compute the data table for the underlying visualizations using the Survey package 
@@ -1490,7 +1493,7 @@ Also, MEPS tracks additional chronic conditions that are known to lead to higher
 # Visualizations appear in several steps. 
 
 # First, the title:
-all_chronic_cond_marriage_class.title <- "Average Prevalence of Major Chronic Conditions"
+all_chronic_cond_marriage_class.title <- "Prevalence of MEPS Priority Chronic Conditions"
 all_chronic_cond_marriage_class.subtitle <-  "By Same-Gender Marriage Status and Age Group"
 
 # Next, we compute the data table for the underlying visualizations using the Survey package 
