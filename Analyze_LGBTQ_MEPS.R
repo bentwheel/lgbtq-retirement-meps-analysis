@@ -497,35 +497,35 @@ fyc14_to_19_by_dufam_w_desc <-  fyc14_to_19_by_dufam_flattened %>%
   mutate(POVLEV_DSC = forcats::fct_inorder(POVLEV_DSC, ordered=T)) %>%   
   mutate(HAS_EXP = if_else(TOTEXPYY > 0, "Had Healthcare Expenses", "Did Not Have Healthcare Expenses")) %>% 
   mutate(HAS_EXP = forcats::fct_inorder(HAS_EXP)) %>%   
-  mutate(HDDX_DSC = case_when(CHDDX == 1 | ANGIDX == 1 | MIDX == 1 | OHRTDX == 1 ~ "Diagnosed with Heart Disease", 
-                                T ~ "Not Diagnosed with Heart Disease, or Unknown/Inapplicable")) %>% 
+  mutate(HDDX_DSC = case_when(CHDDX == 1 | ANGIDX == 1 | MIDX == 1 | OHRTDX == 1 ~ "Diagnosed with heart disease", 
+                                T ~ "Not diagnosed with heart disease, or Unknown/Inapplicable")) %>% 
   mutate(HDDX_DSC = forcats::fct_inorder(HDDX_DSC)) %>%   
-  mutate(DIABDX_DSC = case_when(DIABDX == 1 ~ "Diagnosed with Diabetes", 
-                                DIABDX == 2 ~ "Not Diagnosed with Diabetes", 
+  mutate(DIABDX_DSC = case_when(DIABDX == 1 ~ "Diagnosed with diabetes", 
+                                DIABDX == 2 ~ "Not diagnosed with diabetes", 
                                 T ~ "Unknown or Inapplicable")) %>% 
   mutate(DIABDX_DSC = forcats::fct_inorder(DIABDX_DSC)) %>%   
-  mutate(STRKDX_DSC = case_when(STRKDX == 1 ~ "Diagnosed with having had a Stroke", 
-                                STRKDX == 2 ~ "Not Diagnosed with having had a Stroke", 
+  mutate(STRKDX_DSC = case_when(STRKDX == 1 ~ "Diagnosed with having had a stroke", 
+                                STRKDX == 2 ~ "Not diagnosed with having had a stroke", 
                                 T ~ "Unknown or Inapplicable")) %>% 
   mutate(STRKDX_DSC = forcats::fct_inorder(STRKDX_DSC)) %>%   
-  mutate(HIBPDX_DSC = case_when(HIBPDX == 1 ~ "Diagnosed with High Blood Pressure", 
-                                HIBPDX == 2 ~ "Not Diagnosed with High Blood Pressure", 
+  mutate(HIBPDX_DSC = case_when(HIBPDX == 1 ~ "Diagnosed with high blood pressure", 
+                                HIBPDX == 2 ~ "Not diagnosed with high blood pressure", 
                                 T ~ "Unknown or Inapplicable")) %>% 
   mutate(HIBPDX_DSC = forcats::fct_inorder(HIBPDX_DSC)) %>%   
-  mutate(CHOLDX_DSC = case_when(CHOLDX == 1 ~ "Diagnosed with High Cholesterol", 
-                                CHOLDX == 2 ~ "Not Diagnosed with High Cholesterol", 
+  mutate(CHOLDX_DSC = case_when(CHOLDX == 1 ~ "Diagnosed with high cholesterol", 
+                                CHOLDX == 2 ~ "Not diagnosed with high cholesterol", 
                                 T ~ "Unknown or Inapplicable")) %>% 
   mutate(CHOLDX_DSC = forcats::fct_inorder(CHOLDX_DSC)) %>%   
-  mutate(ASTHDX_DSC = case_when(ASTHDX == 1 ~ "Diagnosed with Asthma", 
-                                ASTHDX == 2 ~ "Not Diagnosed with Asthma", 
+  mutate(ASTHDX_DSC = case_when(ASTHDX == 1 ~ "Diagnosed with asthma", 
+                                ASTHDX == 2 ~ "Not diagnosed with asthma", 
                                 T ~ "Unknown or Inapplicable")) %>% 
   mutate(ASTHDX_DSC = forcats::fct_inorder(ASTHDX_DSC)) %>% 
-  mutate(ARTHDX_DSC = case_when(ARTHDX == 1 ~ "Diagnosed with Arthritis", 
-                                ARTHDX == 2 ~ "Not Diagnosed with Arthritis", 
+  mutate(ARTHDX_DSC = case_when(ARTHDX == 1 ~ "Diagnosed with arthritis", 
+                                ARTHDX == 2 ~ "Not diagnosed with arthritis", 
                                 T ~ "Unknown or Inapplicable")) %>% 
   mutate(ARTHDX_DSC = forcats::fct_inorder(ARTHDX_DSC)) %>% 
-  mutate(CANCERDX_DSC = case_when(CANCERDX == 1 ~ "Diagnosed with Cancer", 
-                                  CANCERDX == 2 ~ "Not Diagnosed with Cancer", 
+  mutate(CANCERDX_DSC = case_when(CANCERDX == 1 ~ "Diagnosed with cancer", 
+                                  CANCERDX == 2 ~ "Not diagnosed with cancer", 
                                 T ~ "Unknown or Inapplicable")) %>% 
   mutate(CANCERDX_DSC = forcats::fct_inorder(CANCERDX_DSC)) %>% 
   mutate(ATLEASTONE_CHRONIC_DSC = case_when((CHDDX == 1 | ANGIDX == 1 | MIDX == 1 | OHRTDX == 1 | DIABDX == 1 | HIBPDX == 1 | CHOLDX == 1 | ASTHDX == 1 | ARTHDX == 1 | CANCERDX == 1 | STRKDX == 1) ~ "Diagnosed with one or more of these conditions", 
@@ -552,7 +552,7 @@ rm(fyc14_to_19_by_dufam_flattened)
 
 # Join to Pooled Linkages file - this file ensures we are not "double counting" in our weighting in a way that would botch our standard error calculations from panel participants sampled across multiple years. More info on the linkage process can be found at the following URL, in section "3.0 Linking Instructions":
 linkage_sub <- linkage %>% 
-  select(DUPERSID, PANEL, STRA9620, PSU9620)
+  select(DUPERSID, PANEL, STRA9621, PSU9621)
 
 rm(linkage)
 
@@ -563,8 +563,8 @@ rm(fyc14_to_19_by_dufam_w_desc)
 
 # Define the survey design - here we are using the pooled weights which were divided by two, and pooled ID/STRATA variables that were joined into our dataset, from the previous steps.
 fyc14_to_19_by_dufam_final_svydsn <- 
-  svydesign(id = ~PSU9620,
-            strata = ~STRA9620,
+  svydesign(id = ~PSU9621,
+            strata = ~STRA9621,
             weights = ~POOLWTYY,
             data = fyc14_to_19_by_dufam_w_desc_weights,
             nest = TRUE)
