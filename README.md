@@ -1,4 +1,5 @@
-Healthcare Experiences of Medicare-Aged LGBTQ+ Individuals in the US
+Healthcare Experiences of Medicare-Aged LGBTQ+ Individuals in the US: A
+Visual Analysis Using Medical Expenditure Panel Survey Data
 ================
 C. Seth Lester, ASA, MAAA
 ([Seth.Lester@milliman.com](mailto:seth.lester@milliman.com)) <br>

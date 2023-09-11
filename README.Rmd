@@ -1,6 +1,6 @@
 ---
-title: "Healthcare Experiences of Medicare-Aged LGBTQ+ Individuals in the US"
-subtitle: "A Visual Analysis Using Medical Expenditure Panel Survey Data"
+title: "Healthcare Experiences of Medicare-Aged LGBTQ+ Individuals in the US: A Visual Analysis Using Medical Expenditure Panel Survey Data"
+
 author: C. Seth Lester, ASA, MAAA ([Seth.Lester@milliman.com](mailto:seth.lester@milliman.com)) <br>
 date: 10 September 2023 (final version)
 output: github_document
@@ -53,7 +53,6 @@ This paper is divided into two primary sections:
 
 1.	In [Data and Methodology](#data-and-methodology) a consistent data preprocessing approach for identifying certain cohorts who are likely to identify as LGBTQ+ within the MEPS public data files is thoroughly explained; and
 2.	In [Visualizing Healthcare Experiences for LGBTQ+ Subpopulations](#visualizing-healthcare-experiences-for-lgbtq-subpopulations) a visual representation of preliminary findings around key healthcare experiences and outcomes between Medicare-aged LGBTQ+ cohorts and other relevant cohorts is showcased. These findings describe healthcare outcomes commonly of interest to population health analyses, such as total pharmacy expenditure per individual, and average pharmacy utilization, average inpatient length-of-stay, and average hospital emergency department utilization utilization, to name a few.
-
 
 The R code that performs this analysis and prepares the this document, including all data tables and visualizations, is available [on Github](https://github.com/bentwheel/lgbtq-retirement-meps-analysis).
 
